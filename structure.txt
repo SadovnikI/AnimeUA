@@ -1,0 +1,105 @@
+Auntification	
+	Admin page
+		upload video 
+		delete video
+		video statistik(video view)
+		statistics...
+	User
+		achievements
+			points
+		history
+		watch later
+		leave
+	vip user
+		auto skip (opening/ending)
+		add free
+		customize profile
+		bot additional functions acess
+		1 hour early access
+		personal series compilations(shareable)
+	guest
+		standart 
+			
+
+
+
+MAINWEBSITE
+main
+	head
+		all main pages of website , login 
+		
+	body
+		search bar(with filters(year/genre/film/series/status/sorting////))
+		popular choices
+		updates
+		achievements block
+		add baner
+
+	footer
+		contact info
+
+
+catalog
+	head
+		all main pages of website , login
+	
+	body
+		all series catalog + additional filters
+		achievements block
+		add baner
+
+	footer
+		contact info
+
+top
+	head
+		all main pages of website , login
+
+
+	body
+		bars with top categories(top 100 / Chousen / compilation)
+		achievements block
+		add baner
+
+video page
+	head
+		all main pages of website , login
+	body
+		choose seria
+		choose voice acting
+		player
+		download
+		share
+		comments
+		achievements block
+		add baner
+
+
+	footer
+		contact info
+
+
+community
+	link on telegram community
+
+
+
+player
+	name + number
+	change seria (left/right)
+	play
+	stop
+	volume
+	fullscreen
+	skip 10 sec(press key)
+	achievement support
+	spead change
+	quality change
+	opening skip
+	
+
+
+telegram bot
+	notifications for vip users about chosen series
+
+ 						 
