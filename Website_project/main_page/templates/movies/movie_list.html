@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for movie in movie_list %}
+    <div>
+        <img src="media/{{ movie.poster }}" width="225" height="250">
+        <br>
+        <div>{{ movie.title }}</div>
+        <br>
+        <div>{{ movie.tagline }}</div>
+        <br>
+        <div>{{ movie.description }}</div>
+    </div>
+{% endfor %}
+</body>
+</html>
