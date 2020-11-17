@@ -6,5 +6,5 @@ from .models import Movie
 
 class MovieView(View):
     def get(self, request):
-        movies = Movie.objects.all()
-        return render(request, r"movies\movie_list.html", {"movie_list": movies})
+        movie = Movie.objects.all()
+        return render(request, r"movies\movie_list.html", {"movie": movie})

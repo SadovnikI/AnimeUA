@@ -1,6 +1,6 @@
 from django.contrib import admin
 # Register your models here.
-from .models import Category, Genre, Movie, MovieShots, Actor, Rating, RatingStar, Reviews
+from .models import Category, Genre, Movie, MovieShots, Actor, Rating, RatingStar, Reviews, Bucket, Bucket_key
 
 admin.site.register(Category)
 admin.site.register(Genre)
@@ -10,3 +10,5 @@ admin.site.register(Actor)
 admin.site.register(Rating)
 admin.site.register(RatingStar)
 admin.site.register(Reviews)
+admin.site.register(Bucket)
+admin.site.register(Bucket_key)

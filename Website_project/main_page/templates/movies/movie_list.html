@@ -5,16 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-{% for movie in movie_list %}
-    <div>
-        <img src="media/{{ movie.poster }}" width="225" height="250">
-        <br>
-        <div>{{ movie.title }}</div>
-        <br>
-        <div>{{ movie.tagline }}</div>
-        <br>
-        <div>{{ movie.description }}</div>
-    </div>
-{% endfor %}
+    <form method=POST enctype=multipart/form-data action="upload">
+    <input type=file name=myfile>
+    <input type=submit>
+    </form>
 </body>
 </html>
