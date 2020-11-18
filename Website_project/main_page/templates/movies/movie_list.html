@@ -5,9 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    <form method=POST enctype=multipart/form-data action="upload">
-    <input type=file name=myfile>
-    <input type=submit>
-    </form>
+{% for movie in movie_list %}
+    <div><video width="300" height="300" controls><source src="{{ movie }}"></video></div>
+{% endfor %}
 </body>
 </html>

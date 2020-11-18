@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'Website_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Project_db',
+        'USER': 'root',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -122,6 +126,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# ==============Bucket=================
+AWS_ACCESS_KEY_ID = 'AKIAVK5MRPWLEKRQ3MUX'
+AWS_SECRET_ACCESS_KEY = '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'
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'projectvideobacket'
+AWS_S3_REGION_NAME = 'eu-central-1'
+# ==============Bucket=================

@@ -23,16 +23,16 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
-class Bucket_key(models.Model):
+class VideoName(models.Model):
     name = models.CharField("Name", max_length=160)
-    bucket_id = models.CharField("Bucket id", max_length=160)
+    video = models.FileField("Video", default=None)
 
     def __str__(self):
         return f"{self.name}"
 
     class Meta:
-        verbose_name = "Bucket key"
-        verbose_name_plural = "Bucket keys"
+        verbose_name = "Video name"
+        verbose_name_plural = "Video names"
 
 
 class Bucket(models.Model):
@@ -57,8 +57,8 @@ class Movie(models.Model):
     url = models.SlugField(max_length=130, unique=True)
     rating = models.FloatField("Rating", max_length=10)
 
-    bucket_id = models.ForeignKey(Bucket, verbose_name="Bucket", on_delete=models.SET_NULL, null=True)
-    key_id = models.ManyToManyField(Bucket_key, verbose_name="Bucket_key")
+    bucket_name = models.ForeignKey(Bucket, verbose_name="Bucket", on_delete=models.SET_NULL, null=True)
+    video_name = models.ManyToManyField(VideoName, verbose_name="Video name")
 
     def __str__(self):
         return self.title
