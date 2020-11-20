@@ -2,7 +2,6 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import './responsive-player.css'
 
-
 const ResponsivePlayer = () => {
     
 

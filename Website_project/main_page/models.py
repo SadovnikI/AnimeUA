@@ -57,7 +57,6 @@ class Video(models.Model):
     name = models.CharField("Name", max_length=160)
     bucket_id = models.ForeignKey(Bucket, on_delete=models.SET_NULL, null=True)
     video = models.FileField("Video", default=None)
-    serial = models.ForeignKey(Serial, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.name}"
