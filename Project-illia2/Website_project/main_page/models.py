@@ -85,3 +85,25 @@ class Movie(models.Model):
         verbose_name = "Movie"
         verbose_name_plural = "Movies"
 
+
+class ShadowUrsls(models.Model):
+    title = models.CharField("Title", max_length=400)
+
+class ShadowMovie(models.Model):
+    title = models.CharField("Title", max_length=100)
+    description = models.TextField("Description")
+    poster = models.ImageField("Poster", upload_to="actors/")
+    year = models.PositiveSmallIntegerField("Release date", default=2020)
+    country = models.CharField("Country", max_length=30)
+    genres = models.ManyToManyField(Genre, verbose_name="Genres")
+    category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.SET_NULL, null=True)
+    url = models.SlugField(max_length=130, unique=True)
+    rating = models.FloatField("Rating", max_length=10)
+    seriaurls = models.ManyToManyField(ShadowUrsls, verbose_name="ShadowUrsl")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Serial"
+        verbose_name_plural = "Serials"
