@@ -1,26 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django import forms
-
-
-# class ChoiceArrayField(ArrayField):
-#     def formfield(self, **kwargs):
-#         defaults = {
-#             'form_class': forms.MultipleChoiceField,
-#             'choices': self.base_field.choices,
-#         }
-#         defaults.update(kwargs)
-#         # Skip our parent's formfield implementation completely as we don't
-#         # care for it.
-#         # pylint:disable=bad-super-call
-#         return super(ArrayField, self).formfield(**defaults)
-#
-#
-# FUNCTION_CHOICES = (
-#     ('0', 'Planning'),
-#     ('1', 'Operation'),
-#     ('2', 'Reporting'),
-# )
 
 
 class Bucket(models.Model):
