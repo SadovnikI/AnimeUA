@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'movies',
     'django_better_admin_arrayfield',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [

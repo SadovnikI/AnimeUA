@@ -35,7 +35,7 @@ class Movie(models.Model):
     url = models.SlugField(max_length=130, unique=True, default=None)
     rating = models.FloatField("Rating", max_length=10, default=None)
 
-    video_urls = ArrayField(models.CharField(max_length=100, default=None), default=None)
+    video_urls = ArrayField(models.FileField(default=None), default=None)
 
     def __str__(self):
         return self.title
