@@ -1,10 +1,16 @@
 from django.contrib import admin
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
-from .models import Movie, Genre, Category, Video, Bucket
+from .models import Movie, Genre, Category
 
-admin.site.register(Movie)
+
+class MyModelAdmin(admin.ModelAdmin, DynamicArrayMixin):
+    admin.site.register(Movie)
+
+
 admin.site.register(Genre)
 admin.site.register(Category)
-admin.site.register(Video)
-admin.site.register(Bucket)
+
+
+
 
