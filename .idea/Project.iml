@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/src/venv" />
       <excludeFolder url="file://$MODULE_DIR$/backend/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.7 (Project-Roma)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.7 (Project)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@types/react-router-dom" level="application" />
   </component>
