@@ -26,7 +26,7 @@ class MovieDetailView(APIView):
             shadow.genres.add(genre)
 
         serializer = ShadowMovieSerializer(shadow)
-        return Response({"movie_data": serializer.data})
+        return Response(serializer.data)
 
 
 class MovieListView(ListAPIView):

@@ -19,7 +19,7 @@ export default class HomePage extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <p>POSOSU</p>
+                        <p>PO</p>
                     </Route>
                     <Route path="/create" component={CreateRoomPage}/>
                 </Switch>

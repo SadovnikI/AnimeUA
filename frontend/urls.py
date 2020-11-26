@@ -3,5 +3,6 @@ from .views import index
 
 urlpatterns = [
     path('', index),
-    path('create', index),
+    path('<film>', index),
+    path('<film>/<seria>', index),
 ]
