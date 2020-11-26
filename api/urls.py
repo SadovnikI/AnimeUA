@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import RoomView
+from api.views import MovieListView, MovieDetailView
+
 
 urlpatterns = [
-    path('room', RoomView.as_view()),
+    path('', MovieListView.as_view()),
+    path('<pk>', MovieDetailView.as_view()),
 ]

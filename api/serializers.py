@@ -1,9 +1,32 @@
 from rest_framework import serializers
-from .models import Room
+from backend.models import Category, Genre, Movie, ShadowMovie
 
 
-class RoomSerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Room
-        fields = ('id', 'code', 'host', 'guest_can_pause',
-                  'votes_to_skip', 'created_at')
+        fields = '__all__'
+        model = Category
+
+
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+        model = Genre
+
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ['id', 'title', 'poster', 'rating', 'url']
+
+
+class ShadowMovieSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+    genres = GenreSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = ShadowMovie
+        fields = [
+            'title', 'description', 'poster', 'year', 'country',
+            'genres', 'category', 'url', 'rating', 'video_urls'
+        ]
