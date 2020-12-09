@@ -1,6 +1,10 @@
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.contrib.auth.models import User
+from random import randint
+
+from django.utils import timezone
 
 
 class Bucket(models.Model):
@@ -85,13 +89,18 @@ class ShadowMovie(models.Model):
         return self.title
 
 
+#
+# class SiteUser(AbstractBaseUser):
+#     avatar = models.FileField("Avatar", default=f"avatars/{randint(1, 4)}.jpg", blank=True)
+#     USERNAME_FIELD = 'avatar'
+
+
 class Comment(models.Model):
     user_id = models.ForeignKey(User, verbose_name="User id", on_delete=models.SET_NULL, null=True, default=None)
     video_id = models.ForeignKey(Video, verbose_name="Video id", on_delete=models.SET_NULL, null=True, default=None)
-    reply_user_id = models.ForeignKey('self', verbose_name="Reply user id", on_delete=models.SET_NULL, null=True,
-                                      default=None, blank=True)
-
     text = models.TextField('Text', default=None)
+    date = models.DateTimeField('Date', default=timezone.now)
+    movie_id = models.ForeignKey(Movie, verbose_name="Movie id", on_delete=models.SET_NULL, null=True, default=None)
 
     def __str__(self):
         return self.text

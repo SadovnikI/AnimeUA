@@ -9,67 +9,82 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import List from "./MovieList";
 import AnimeInfo from "./AnimInfo";
-class EpisodeDetail extends React.Component{
-    state={
+
+import Comments from "./CommentSection";
+import {Card, Comment, Form, Header} from "semantic-ui-react";
+
+class EpisodeDetail extends React.Component {
+    state = {
+        comments: [],
+        isFetching: true,
         movie: {}
     }
+
     componentDidMount() {
-    const movieID=this.props.match.params.movieID;
+        const movieID = this.props.match.params.movieID;
 
         axios.get(`http://127.0.0.1:8000/api/${movieID}`)
-            .then(res=> {
+            .then(res => {
                 this.setState({
                     movie: res.data
                 });
             })
 
+        axios.get(`http://127.0.0.1:8000/api/comment/${movieID}`)
+            .then(res => {
+                this.setState({
+                    comments: res.data,
+
+                });
+            })
 
     }
 
-    render(){
-        const movieID=this.props.match.params.movieID;
+    render() {
+        const movieID = this.props.match.params.movieID;
         let Episode = String(this.state.movie.video_urls).split(",");
         var rows = [];
-        var episodeID=this.props.match.params.episodeID;
-        if(Episode.length>1){
-        for (let i = 0; i <Episode.length ; i++) {
-            if (episodeID==i){
-            rows.push(
-                <Button href={`/home/${movieID}/${i}`} variant="outlined" color="primary" size="small">
-                       Episode {i+1}
-                      </Button>
-
-                );}
-            else{
-            rows.push(
-
-                <Button href={`/home/${movieID}/${i}`} variant="outlined"  size="small">
-                       Episode {i+1}
-                      </Button>
-
-                );}
-        }
+        var episodeID = this.props.match.params.episodeID;
+        if (Episode.length > 1) {
+            for (let i = 0; i < Episode.length; i++) {
+                if (episodeID == i) {
+                    rows.push(
+                        <Button href={`/home/${movieID}/${i}`} variant="outlined" color="primary" size="small">
+                            Episode {i + 1}
+                        </Button>
+                    );
+                } else {
+                    rows.push(
+                        <Button href={`/home/${movieID}/${i}`} variant="outlined" size="small">
+                            Episode {i + 1}
+                        </Button>
+                    );
+                }
+            }
         }
 
 
-
-
-        return(
+        return (
             <React.Fragment>
 
                 <List/>
                 <AnimeInfo post={this.state.movie}/>
 
-                <Grid container  justify="center" margin-top={'60px'}>
+                <Grid container justify="center" margin-top={'60px'}>
 
-                     <video height={'340px'}  src={Episode[episodeID]} controls/>
+                    <video height={'340px'} src={Episode[episodeID]} controls/>
 
-                 </Grid>
-                <Grid container  justify="center">
-                {rows}
                 </Grid>
+                <Grid container justify="center">
+                    {rows}
+                </Grid>
+                <Grid><Comments comments={this.state.comments}/></Grid>
+
+
+
             </React.Fragment>
         )
     }
 }
+
 export default EpisodeDetail;

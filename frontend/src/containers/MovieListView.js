@@ -41,7 +41,7 @@ class MovieList extends React.Component{
 
         <Grid   container spacing={2}>
             {this.state.movies.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
+              <FeaturedPost  post={post}  />
             ))}
           </Grid>
 

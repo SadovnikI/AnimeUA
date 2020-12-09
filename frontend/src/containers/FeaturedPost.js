@@ -50,7 +50,11 @@ export default function FeaturedPost(props) {
             <CardContent>
               <Typography  component="h3" variant="h6">
                 {post.title}
+
               </Typography>
+
+              {post.url}
+
 
             </CardContent>
           </div>

@@ -44,7 +44,7 @@ export class Register extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to="/home"/>;
     }
     const { username, email, password, password2 } = this.state;
     return (
@@ -144,6 +144,7 @@ export class Register extends Component {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+
 });
 
 export default connect(mapStateToProps, { register, createMessage })(Register);

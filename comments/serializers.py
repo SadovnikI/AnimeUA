@@ -9,20 +9,13 @@ class UserNameSerializer(serializers.ModelSerializer):
         fields = ['username']
 
 
-class SubComment(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ['id']
-
-
 class CommentSerializer(serializers.ModelSerializer):
 
-    reply_user_id = SubComment()
     user_id = UserNameSerializer()
 
     class Meta:
         model = Comment
-        fields = ('id', 'user_id', 'video_id', 'text', 'reply_user_id')
+        fields = ('id', 'user_id', 'video_id', 'text', 'date')
 
 
 

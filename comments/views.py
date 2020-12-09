@@ -7,7 +7,7 @@ from comments.serializers import CommentSerializer
 
 class CommentView(APIView):
     def get(self, request, pk):
-        queryset = Comment.objects.filter(video_id=pk)
+        queryset = Comment.objects.filter(movie_id=pk)
 
         serializer = CommentSerializer(queryset, many=True)
         return Response(serializer.data)
