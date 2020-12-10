@@ -1,10 +1,11 @@
-from django.shortcuts import render
-
 # Create your views here.
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from rest_framework.views import APIView
+
+from backend.models import UserCabinet
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CabinetSerializer
 
 
 # Register API
@@ -15,9 +16,9 @@ class RegisterAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        # insert validation here
-
         user = serializer.save()
+        UserCabinet.objects.create(id=user.id, user=user)
+
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
@@ -48,3 +49,11 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class CabinetAPI(APIView):
+    def get(self, request, pk):
+        queryset = UserCabinet.objects.filter(id=pk)
+
+        serializer = CabinetSerializer(queryset, many=True)
+        return Response(serializer.data)

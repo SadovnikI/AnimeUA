@@ -4,6 +4,9 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from random import randint
 
+from django.core.files.storage import FileSystemStorage
+
+
 from django.utils import timezone
 
 
@@ -89,10 +92,12 @@ class ShadowMovie(models.Model):
         return self.title
 
 
-#
-# class SiteUser(AbstractBaseUser):
-#     avatar = models.FileField("Avatar", default=f"avatars/{randint(1, 4)}.jpg", blank=True)
-#     USERNAME_FIELD = 'avatar'
+class UserCabinet(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField("Avatar", default=f"avatars/{randint(1, 4)}.jpg")
+
+    def __str__(self):
+        return self.user.username + " Cabinet"
 
 
 class Comment(models.Model):
