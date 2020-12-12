@@ -19,8 +19,7 @@ class MovieDetailView(APIView):
 
         shadow = ShadowMovie(id=1, title=movie.title, description=movie.description, poster=movie.poster,
                              year=movie.year, country=movie.country, category=movie.category,
-                             url=movie.url, rating=movie.rating, video_urls=link_array, genres = genre_array)
-
+                             url=movie.url, rating=movie.rating, video_urls=link_array, genres=genre_array)
 
         serializer = ShadowMovieSerializer(shadow)
         return Response(serializer.data)

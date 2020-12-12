@@ -47,9 +47,22 @@ class LoginSerializer(serializers.Serializer):
         raise serializers.ValidationError("Incorrect Credentials")
 
 
+class ModifyUserSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    username = serializers.CharField()
+    password = serializers.CharField()
+    # avatar = serializers.FileField()
+
+    def update(self, instance, validated_data):
+        instance.id = validated_data.get('id', instance.id)
+        instance.username = validated_data.get('username', instance.username)
+        instance.password = validated_data.get('password', instance.password)
+        # instance.avatar = validated_data.get('avatar', instance.avatar)
+
+        return instance
+
 
 class CommentSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Comment
         fields = ('id', 'user_id', 'video_id', 'text', 'date', 'movie_id')

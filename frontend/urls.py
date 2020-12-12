@@ -7,5 +7,5 @@ urlpatterns = [
     path('home/<film>/<seria>', index),
     path('register', index),
     path('login', index),
-
+    path('cabinet/<user>', index),
 ]

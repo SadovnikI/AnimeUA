@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 
 from backend.models import Comment, Movie, Video
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CommentSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CommentSerializer, ModifyUserSerializer
 
 from rest_framework.views import APIView
 
@@ -44,7 +44,6 @@ class CommentAPI(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
 
         serializer.is_valid(raise_exception=True)
-        print(serializer.data)
 
         comment = Comment(movie_id=Movie.objects.get(id=serializer.data['movie_id']),
                           user_id=User.objects.get(id=serializer.data['user_id']),
@@ -88,3 +87,21 @@ class CabinetAPI(APIView):
 
         serializer = CabinetSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class ModifyUserAPI(generics.GenericAPIView):
+    serializer_class = ModifyUserSerializer
+
+    def put(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = User.objects.filter(id=serializer.data['id'])
+        user.update(username=serializer.data['username'])
+
+        user = User.objects.get(id=serializer.data['id'])
+        user.set_password(serializer.data['password'])
+        user.save()
+        # UserCabinet.objects.filter(id=serializer.data['id']).update(avatar=serializer.data['avatar'])
+
+        return Response('200OK')

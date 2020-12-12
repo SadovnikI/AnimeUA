@@ -6,18 +6,12 @@ from backend.models import Comment
 class UserNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username','id']
-
+        fields = ['username', 'id']
 
 
 class CommentSerializer(serializers.ModelSerializer):
-
     user_id = UserNameSerializer()
 
     class Meta:
         model = Comment
         fields = ('id', 'user_id', 'video_id', 'text', 'date')
-
-
-
-

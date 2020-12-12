@@ -11,6 +11,7 @@ import List from "./containers/MovieList";
 import Register from "./components/accounts/Register";
 import Login from "./components/accounts/Login";
 import PrivateRoute from "./components/common/PrivateRoute";
+import UserCabinet from "./components/cabinet/UserCabinet";
 
 
 const BaseRouter=() =>(
@@ -20,7 +21,7 @@ const BaseRouter=() =>(
         <Route exact path='/login' component={Login}/>
         <Route exact path='/home/:movieID' component={MovieDetail}/>
         <Route exact path='/home/:movieID/:episodeID' component={EpisodeDetail} />
-
+        <Route exact path='/cabinet/:userID' component={UserCabinet} />
     </div>
 );
 export default BaseRouter;
