@@ -2,10 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-# User Serializer
-from backend.models import Comment
-
-from backend.models import UserCabinet
+from accounts.models import UserCabinet
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -61,8 +58,3 @@ class ModifyUserSerializer(serializers.Serializer):
 
         return instance
 
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = ('id', 'user_id', 'video_id', 'text', 'date', 'movie_id')

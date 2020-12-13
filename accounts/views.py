@@ -1,21 +1,14 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
-
-# Create your views here.
-
 
 from rest_framework import generics, permissions
 
 from rest_framework.response import Response
 from knox.models import AuthToken
 
-from backend.models import Comment, Movie, Video
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CommentSerializer, ModifyUserSerializer
-
+from .models import UserCabinet
 from rest_framework.views import APIView
 
-from backend.models import UserCabinet
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CabinetSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CabinetSerializer, ModifyUserSerializer
 
 
 # Register API
@@ -35,24 +28,6 @@ class RegisterAPI(generics.GenericAPIView):
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
         })
-
-
-class CommentAPI(generics.GenericAPIView):
-    serializer_class = CommentSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
-
-        serializer.is_valid(raise_exception=True)
-
-        comment = Comment(movie_id=Movie.objects.get(id=serializer.data['movie_id']),
-                          user_id=User.objects.get(id=serializer.data['user_id']),
-                          text=serializer.data['text'],
-                          date=serializer.data['date'],
-                          video_id=Video.objects.get(id=serializer.data['video_id'], ))
-        comment.save()
-        comment_serializer = CommentSerializer(comment)
-        return Response(comment_serializer.data)
 
 
 # Login API

@@ -3,24 +3,22 @@ import {TextField, Button, Grid, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import Header from "../../containers/Header";
-
-import InputBase from '@material-ui/core/InputBase';
+import SettingsIcon from '@material-ui/icons/Settings';
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 
 export default class UserCabinet extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            roomCode: "",
-            error: "",
             user: [],
         }
     }
 
     componentDidMount() {
-        const userID = this.props.match.params.userID;
-
-        axios.get(`http://127.0.0.1:8000/api/cabinet/${userID}`)
+        const user_id = this.props.match.params.userID;
+        axios.get(`http://127.0.0.1:8000/api/cabinet/${user_id}`)
             .then(res => {
                 this.setState({
                     user: res.data
@@ -28,6 +26,9 @@ export default class UserCabinet extends Component {
             })
     }
 
+    static propTypes = {
+        auth: PropTypes.object.isRequired,
+    };
 
     render() {
         return (
@@ -52,33 +53,37 @@ export default class UserCabinet extends Component {
                         padding: '5%'
                     }}>
                         {this.state.user.map(user => (
-                            <Button component="label" style={{
-                                borderRadius: '100%',
-                            }}><img src={user.avatar} alt="avatar" width="130px" height="130"/>
-                                <input
-                                    type="file"
-                                    hidden
-                                />
-                            </Button>
+                            <img src={user.avatar} alt="avatar" width="130px" height="130"/>
                         ))}
                         <Grid container style={{
                             width: '130px',
                             height: '130px',
                             marginLeft: '15px'
                         }}>
-                            <Typography style={{margin: 'auto'}}>
+                            <Typography style={{
+                                margin: 'auto',
+                                fontSize: '30px'
+                            }}>
                                 {this.state.user.map(user => (
-                                           user.user.username))}
+                                    user.user.username))}
                             </Typography>
-                            {/*<form noValidate>*/}
-                            {/*    <InputBase*/}
-                            {/*        style={{*/}
-                            {/*            margin:theme.spacing(1),*/}
-                            {/*        }}*/}
-                            {/*        defaultValue="Naked input"*/}
-                            {/*        inputProps={{'aria-label': 'naked'}}*/}
-                            {/*    />*/}
-                            {/*</form>*/}
+                        </Grid>
+                        <Grid style={{
+                            marginLeft: 'auto',
+                            marginTop: '10px'
+                        }}>
+                            <Button fullWidth={true} variant="outlined" href={'/settings'}
+                                    style={{
+                                        maxWidth: '40px',
+                                        maxHeight: '40px',
+                                        minWidth: '40px',
+                                        minHeight: '40px',
+                                    }}>
+                                <SettingsIcon style={{
+                                    width: '30px',
+                                    height: '30px',
+                                }}/>
+                            </Button>
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>

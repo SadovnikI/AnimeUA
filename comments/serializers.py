@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from backend.models import Comment
+
+from comments.models import Comment
 
 
 class UserNameSerializer(serializers.ModelSerializer):
@@ -14,4 +15,4 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'user_id', 'video_id', 'text', 'date')
+        fields = ('id', 'user_id', 'video_id', 'text', 'date', 'movie_id')

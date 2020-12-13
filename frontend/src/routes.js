@@ -22,6 +22,7 @@ const BaseRouter=() =>(
         <Route exact path='/home/:movieID' component={MovieDetail}/>
         <Route exact path='/home/:movieID/:episodeID' component={EpisodeDetail} />
         <Route exact path='/cabinet/:userID' component={UserCabinet} />
+        <Route exact path='/cabinet/settings' component={UserCabinet} />
     </div>
 );
 export default BaseRouter;

@@ -41,7 +41,7 @@ export default function FeaturedPost(props) {
 
     return (
         <Grid item xs={6} md={4}>
-            <CardActionArea component="a" href={`home/${post.id}/1`}>
+            <CardActionArea component="a" href={`home/${post.url}/1`}>
                 <Card className={classes.root}>
                     <CardMedia
                         className={classes.cover}

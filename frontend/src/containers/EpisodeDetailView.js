@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addcomment} from "../actions/auth";
 import {createMessage} from "../actions/messages";
+import {useAutocomplete} from "@material-ui/lab";
 
 
 class EpisodeDetail extends React.Component {
@@ -18,23 +19,21 @@ class EpisodeDetail extends React.Component {
         comments: [],
         isFetching: true,
         movie: {},
-        video_id:1,
+        video_id: 1,
         text: '',
-        cabinet:[],
-
-
+        cabinet: [],
     }
 
     static propTypes = {
         addcomment: PropTypes.func.isRequired,
         isAuthenticated: PropTypes.bool,
-
         auth: PropTypes.object.isRequired,
+
     };
+
     componentDidMount() {
         const movieID = this.props.match.params.movieID;
-        const {user}=this.props.auth;
-
+        const {user} = this.props.auth;
         axios.get(`http://127.0.0.1:8000/api/${movieID}`)
             .then(res => {
                 this.setState({
@@ -55,12 +54,13 @@ class EpisodeDetail extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { text } = this.state;
-        const movie_id=this.props.match.params.movieID;
-        const video_id=this.state.video_id;//this.props.match.params.episodeID;
-        const {user}=this.props.auth;
-        const date= new Date;
-        const user_id=user.id;
+        const {text} = this.state;
+        const movie_id = this.props.match.params.movieID;
+        const video_id = this.state.video_id;//this.props.match.params.episodeID;
+        const {user} = this.props.auth;
+        const date = new Date;
+        const user_id = user.id;
+
         {
             const newComment = {
                 user_id,
@@ -75,7 +75,9 @@ class EpisodeDetail extends React.Component {
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
+
     render() {
+
         const {text} = this.state;
         const movieID = this.props.match.params.movieID;
         let Episode = String(this.state.movie.video_urls).split(",");
@@ -98,71 +100,73 @@ class EpisodeDetail extends React.Component {
                 }
             }
         }
-const {user}=this.props.auth;
+        const {user} = this.props.auth;
+
+
         return (
             <React.Fragment>
                 <List/>
 
-                <AnimeInfo rows ={rows} comments={this.state.comments} episodeurl={Episode[episodeID-1]} post={this.state.movie}/>
+                <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                           post={this.state.movie}/>
 
 
+                {this.props.auth.isAuthenticated ? <>
+                    <Container component="main" maxWidth="sm">
 
-
-                {this.props.auth.isAuthenticated?<>
-                <Container component="main" maxWidth="sm">
-
-                <CssBaseline/>
-                <div className="col-md-6 m-auto">
-                    <div className="card card-body mt-5">
-                        <h2 className="text-center">Leave comment</h2>
-                        <form onSubmit={this.onSubmit}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <textarea style={{ display: 'block',
-                                                      width: '100%',
-                                                      padding: '0 20px',
-                                                      marginBottom: '10px',
-                                                      background: '#E9EFF6',
-                                                      lineHeight: '40px',
-                                                      borderWidth: '0',
-                                                      borderRadius: '20px',
-                                                      fontFamily: 'Roboto',
-                                    resize: 'none',
+                        <CssBaseline/>
+                        <div className="col-md-6 m-auto">
+                            <div className="card card-body mt-5">
+                                <h2 className="text-center">Leave comment</h2>
+                                <form onSubmit={this.onSubmit}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                    <textarea style={{
+                                        display: 'block',
+                                        width: '100%',
+                                        padding: '0 20px',
+                                        marginBottom: '10px',
+                                        background: '#E9EFF6',
+                                        lineHeight: '40px',
+                                        borderWidth: '0',
+                                        borderRadius: '20px',
+                                        fontFamily: 'Roboto',
+                                        resize: 'none',
                                     }} placeholder="Comment..." rows="3"
-                                        name="text"
+                                              name="text"
 
-                                        required
+                                              required
 
-                                        id="text"
+                                              id="text"
 
-                                        autoFocus
-                                        onChange={this.onChange}
-                                        value={text}
+                                              autoFocus
+                                              onChange={this.onChange}
+                                              value={text}
                                     />
-                                    {
+                                            {
 
-                                    }
-                                </Grid>
-                                <div className="form-group">
-                                    <Button style={{margin: 'theme.spacing(1)',}}
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        color="secondary"
+                                            }
+                                        </Grid>
+                                        <div className="form-group">
+                                            <Button style={{margin: 'theme.spacing(1)',}}
+                                                    type="submit"
+                                                    fullWidth
+                                                    variant="contained"
+                                                    color="secondary"
 
 
-                                    >
-                                        Send
-                                    </Button>
-                                </div>
+                                            >
+                                                Send
+                                            </Button>
+                                        </div>
 
-                            </Grid>
+                                    </Grid>
 
-                        </form>
-                    </div>
-                </div>
-            </Container>
-                </>:<p style={{textAlign:'center'}} >Register to leave coments</p>}
+                                </form>
+                            </div>
+                        </div>
+                    </Container>
+                </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
             </React.Fragment>
         )
     }
