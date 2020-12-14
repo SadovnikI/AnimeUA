@@ -12,6 +12,7 @@ import Register from "./components/accounts/Register";
 import Login from "./components/accounts/Login";
 import PrivateRoute from "./components/common/PrivateRoute";
 import UserCabinet from "./components/cabinet/UserCabinet";
+import UserSettings from "./components/cabinet/UserSettings";
 
 
 const BaseRouter=() =>(
@@ -22,7 +23,7 @@ const BaseRouter=() =>(
         <Route exact path='/home/:movieID' component={MovieDetail}/>
         <Route exact path='/home/:movieID/:episodeID' component={EpisodeDetail} />
         <Route exact path='/cabinet/:userID' component={UserCabinet} />
-        <Route exact path='/cabinet/settings' component={UserCabinet} />
+        <Route exact path='/cabinet/settings/:userID' component={UserSettings} />
     </div>
 );
 export default BaseRouter;
