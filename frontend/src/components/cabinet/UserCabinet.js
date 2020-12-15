@@ -46,11 +46,10 @@ export default class UserCabinet extends Component {
                           align: 'center',
                           margin: 'auto',
                           width: '70%',
-                          borderRadius: "7px"
+                          borderRadius: "7px",
+                          background: 'white',
                       }}>
-                    <Header style={{
-                        background: '#FBCEB5',
-                    }}/>
+                    <Header />
                     <Grid item xs={12} style={{
                         display: 'flex',
                         padding: '5%',

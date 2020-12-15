@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'moment';
+
 import {
     List,
     ListItem,
@@ -11,7 +12,6 @@ import {
     Avatar,
     Typography
 } from "@material-ui/core";
-import Faker from "faker";
 import Box from "@material-ui/core/Box";
 import axios from "axios";
 import Avatars from "./Avatar";
