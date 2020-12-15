@@ -70,6 +70,7 @@ class ShadowMovie(models.Model):
     url = models.SlugField(max_length=130, unique=True, default=None)
     rating = models.FloatField("Rating", max_length=10, default=None)
     video_urls = ArrayField(models.CharField(max_length=200, default=None), default=None)
-    movie_id=models.IntegerField("Movie id", default=0)
+    movie_id = models.IntegerField("Movie id", default=0)
+
     def __str__(self):
         return self.title

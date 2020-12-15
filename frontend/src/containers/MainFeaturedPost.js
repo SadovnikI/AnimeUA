@@ -9,8 +9,6 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: 'relative',
-    backgroundColor: theme.palette.grey[800],
-    color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
     backgroundImage: 'url(https://source.unsplash.com/random)',
     backgroundSize: 'cover',
@@ -24,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     left: 0,
     backgroundColor: 'rgba(0,0,0,.3)',
+    borderRadius: '10px',
   },
   mainFeaturedPostContent: {
     position: 'relative',
@@ -40,9 +39,9 @@ export default function MainFeaturedPost(props) {
   const { post } = props;
 
   return (
-    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
+    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})`, borderRadius: '10px' }}>
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>

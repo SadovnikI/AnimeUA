@@ -8,4 +8,5 @@ urlpatterns = [
     path('register', index),
     path('login', index),
     path('cabinet/<user>', index),
+    path('cabinet/settings/<user>', index),
 ]

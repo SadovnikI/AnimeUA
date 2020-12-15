@@ -12,7 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'poster', 'rating', 'url']
+        fields = ['id', 'title', 'poster', 'rating', 'url', 'genres', 'year']
 
 
 class ShadowMovieSerializer(serializers.ModelSerializer):

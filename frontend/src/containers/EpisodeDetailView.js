@@ -73,9 +73,9 @@ class EpisodeDetail extends React.Component {
             this.props.addcomment(newComment);
         }
         this.setState({
-      text: '',
+            text: '',
 
-    });
+        });
     };
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
@@ -109,23 +109,23 @@ class EpisodeDetail extends React.Component {
 
 
         return (
-            <React.Fragment>
-                <List/>
+                <React.Fragment>
+                    <List/>
 
-                <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
-                           post={this.state.movie}/>
+                    <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                               post={this.state.movie}/>
 
 
-                {this.props.auth.isAuthenticated ? <>
-                    <Container component="main" maxWidth="sm">
+                    {this.props.auth.isAuthenticated ? <>
+                        <Container component="main" maxWidth="sm">
 
-                        <CssBaseline/>
-                        <div className="col-md-6 m-auto">
-                            <div className="card card-body mt-5">
-                                <h2 className="text-center">Leave comment</h2>
-                                <form onSubmit={this.onSubmit}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
+                            <CssBaseline/>
+                            <div className="col-md-6 m-auto">
+                                <div className="card card-body mt-5">
+                                    <h2 className="text-center">Leave comment</h2>
+                                    <form onSubmit={this.onSubmit}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
                                     <textarea style={{
                                         display: 'block',
                                         width: '100%',
@@ -148,31 +148,31 @@ class EpisodeDetail extends React.Component {
                                               onChange={this.onChange}
                                               value={text}
                                     />
-                                            {
+                                                {
 
-                                            }
+                                                }
+                                            </Grid>
+                                            <div className="form-group">
+                                                <Button style={{margin: 'theme.spacing(1)',}}
+                                                        type="submit"
+                                                        fullWidth
+                                                        variant="contained"
+                                                        color="secondary"
+
+
+                                                >
+                                                    Send
+                                                </Button>
+                                            </div>
+
                                         </Grid>
-                                        <div className="form-group">
-                                            <Button style={{margin: 'theme.spacing(1)',}}
-                                                    type="submit"
-                                                    fullWidth
-                                                    variant="contained"
-                                                    color="secondary"
 
-
-                                            >
-                                                Send
-                                            </Button>
-                                        </div>
-
-                                    </Grid>
-
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </Container>
-                </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
-            </React.Fragment>
+                        </Container>
+                    </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
+                </React.Fragment>
         )
     }
 }

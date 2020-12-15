@@ -1,10 +1,8 @@
 import React, {Component} from "react";
-import {TextField, Button, Grid, Typography} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import {Button, Grid, Typography, ButtonGroup} from "@material-ui/core";
 import axios from "axios";
 import Header from "../../containers/Header";
 import SettingsIcon from '@material-ui/icons/Settings';
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 
@@ -30,11 +28,16 @@ export default class UserCabinet extends Component {
         auth: PropTypes.object.isRequired,
     };
 
+
+    sections = [
+        {title: 'Дивлюсь', url: '/home'},
+        {title: 'Подивився', url: '/home'},
+        {title: 'Заплановано', url: '/home'},
+    ];
+
     render() {
         return (
-            <Grid style={{
-                background: '#F1F2F2',
-            }}>
+            <Grid>
                 <Grid container
                       spacing={1}
                       direction="column"
@@ -42,18 +45,19 @@ export default class UserCabinet extends Component {
                           minHeight: '100vh',
                           align: 'center',
                           margin: 'auto',
-                          width: '81.5%',
-                          background: 'white',
+                          width: '70%',
+                          borderRadius: "7px"
                       }}>
                     <Header style={{
                         background: '#FBCEB5',
                     }}/>
                     <Grid item xs={12} style={{
                         display: 'flex',
-                        padding: '5%'
+                        padding: '5%',
                     }}>
                         {this.state.user.map(user => (
-                            <img src={user.avatar} alt="avatar" width="130px" height="130"/>
+                            <img src={user.avatar} alt="avatar" width="130px" height="130"
+                                 style={{borderRadius: "50%"}}/>
                         ))}
                         <Grid container style={{
                             width: '130px',
@@ -72,7 +76,9 @@ export default class UserCabinet extends Component {
                             marginLeft: 'auto',
                             marginTop: '10px'
                         }}>
-                            <Button fullWidth={true} variant="outlined" href={'/settings'}
+                            <Button fullWidth={true} variant="outlined"
+                                    href={`/cabinet/settings/${this.state.user.map(user => (
+                                        user.user.id))}`}
                                     style={{
                                         maxWidth: '40px',
                                         maxHeight: '40px',
@@ -87,7 +93,17 @@ export default class UserCabinet extends Component {
                         </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                        Anime list
+                        <div>
+                            <ButtonGroup component="nav" variant="dense" size={"large"}>
+                                {this.sections.map((section) => (
+                                    <Button
+                                        href={section.url}
+                                    >
+                                        {section.title}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+                        </div>
                     </Grid>
                 </Grid>
             </Grid>

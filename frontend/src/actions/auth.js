@@ -138,7 +138,7 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
   axios
     .post('/api/auth/addcomment', body,  tokenConfig(getState))
     .then((res) => {
-      dispatch(createMessage({ addLead: 'Lead Added' }));
+      dispatch(createMessage({ addLead: 'Comment Added' }));
       dispatch({
         type: ADD_LEAD,
         payload: res.data,

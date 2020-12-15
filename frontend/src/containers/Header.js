@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import {connect} from "react-redux";
 import {logout} from '../actions/auth';
-import {MuiThemeProvider} from '@material-ui/core/styles';
-import {createMuiTheme} from '@material-ui/core/styles';
 import * as MaterialUI from "@material-ui/core";
 import {ButtonGroup} from "@material-ui/core";
 
@@ -24,7 +18,6 @@ const useStyles = MaterialUI.withStyles((theme) => ({
     toolbarSecondary: {
         justifyContent: 'space-between',
         overflowX: 'auto',
-        backgroundColor: theme.palette.grey[200],
     },
     toolbarLink: {
         padding: theme.spacing(1),
@@ -54,10 +47,10 @@ const Header = useStyles(class extends React.Component {
             <div>
                 <strong>{user ? <a href={`/cabinet/${user.id}`} style={{
                     textDecoration: 'none',
-                    color: 'black',
+                    color: 'white',
                     margin: '0 20px 0 0'
                 }}>Welcome, {user.username}!</a> : ''}</strong>
-                <Button onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
+                <Button onClick={this.props.logout} variant="outlined" size="small" style={{color:"white"}}>
                     Вийти
                 </Button>
             </div>

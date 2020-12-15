@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const modify_user = ({ id, username, avatar, password }) => (dispatch) => {
+export const modify_user = ({ id, username, password }) => (dispatch) => {
   // Headers
   const config = {
     headers: {
@@ -9,7 +9,7 @@ export const modify_user = ({ id, username, avatar, password }) => (dispatch) =>
   };
 
   // Request Body
-  const body = JSON.stringify({ id, username, password, avatar });
+  const body = JSON.stringify({ id, username, password });
 
   axios
     .put('/api/cabinet/modify_user', body, config)

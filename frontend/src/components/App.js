@@ -11,9 +11,8 @@ import {loadUser} from "../actions/auth";
 import ReactDOM from 'react-dom';
 
 
-import { Provider as AlertProvider } from 'react-alert';
+import {Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-
 
 
 import Login from './accounts/Login';
@@ -21,33 +20,36 @@ import Register from './accounts/Register';
 import PrivateRoute from './common/PrivateRoute';
 import Alerts from "../containers/Alerts";
 
-
+import styles from "../components/cabinet/mystyle.module.css"
 
 // Alert Options
 const alertOptions = {
-  timeout: 3000,
-  position: 'top center',
+    timeout: 3000,
+    position: 'top center',
 };
 export default class App extends Component {
     constructor(props) {
         super(props);
     }
+
     componentDidMount() {
         store.dispatch(loadUser());
     }
 
     render() {
         return (
-            <Provider store={store}>
-                <AlertProvider template={AlertTemplate} {...alertOptions}>
-                <div>
-                <Router>
-                      <Alerts />
-                    <BaseRouter />
-                </Router>
-            </div>
+            <div className={styles.test}>
+                <Provider store={store}>
+                    <AlertProvider template={AlertTemplate} {...alertOptions}>
+                        <div>
+                            <Router>
+                                <Alerts/>
+                                <BaseRouter/>
+                            </Router>
+                        </div>
                     </AlertProvider>
-            </Provider>
+                </Provider>
+            </div>
 
         );
     }

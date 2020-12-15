@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "antd": "^4.8.5",
+    "css-loader": "^5.0.1",
     "date-fns": "^2.16.1",
     "markdown-to-jsx": "^7.1.0",
     "moment": "^2.29.1",
@@ -15,7 +16,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "simple-react-comments": "^1.1.0"
+    "simple-react-comments": "^1.1.0",
+    "style-loader": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
