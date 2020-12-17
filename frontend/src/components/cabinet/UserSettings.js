@@ -43,44 +43,45 @@ const useStyles = MaterialUI.withStyles((theme) => ({
 
 const UserSettings = useStyles(class extends React.Component {
     state = {
-            user: [],
-            username: '',
-            old_password: '',
-            password1: '',
-            new_password: '',
-        }
+        user: [],
+        username: '',
+        old_password: '',
+        password1: '',
+        new_password: '',
+    }
 
 
     onSubmit = (e) => {
         console.log(this.props.user.id);
-    e.preventDefault();
-    const { username, old_password, password1, new_password } = this.state;
-    const id=this.props.user.id;
-    if (password1 !== new_password) {
-      this.props.createMessage({ passwordNotMatch: 'Passwords do not match' });
-    } else {
-      const newUser = {
-        id,
-        username,
-        old_password,
-        new_password,
-      };
-      this.props.updateuser(newUser);
-    }
-    this.refreshPage()
- this.setState({
-     username: '',
+        e.preventDefault();
+        const {username, old_password, password1, new_password} = this.state;
+        const id = this.props.user.id;
+        if (password1 !== new_password) {
+            this.props.createMessage({passwordNotMatch: 'Passwords do not match'});
+        } else {
+            const newUser = {
+                id,
+                username,
+                old_password,
+                new_password,
+            };
+            this.props.updateuser(newUser);
+        }
+        this.refreshPage()
+        this.setState({
+            username: '',
             old_password: '',
             password1: '',
             new_password: '',
- })
+        })
 
-  };
+    };
 
-    refreshPage  (){
-     window.location.reload();
-  }
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+    refreshPage() {
+        window.location.reload();
+    }
+
+    onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
     componentDidMount() {
         const user_id = this.props.match.params.userID;
@@ -109,7 +110,7 @@ const UserSettings = useStyles(class extends React.Component {
     ];
 
     render() {
-        const { username, old_password, password1, new_password } = this.state;
+        const {username, old_password, password1, new_password} = this.state;
         const {classes} = this.props
         return (
             <Grid className={classes.main}>
@@ -168,105 +169,105 @@ const UserSettings = useStyles(class extends React.Component {
                         <Typography variant='h5' style={{marginBottom: '30px', fontWeight: "800"}}>
                             Налаштування
                         </Typography>
-                                  <form onSubmit={this.onSubmit}>
+                        <form onSubmit={this.onSubmit}>
 
-                        <Grid>
-                            <Grid style={{display: 'flex'}}>
-                                <Typography style={{
-                                    fontSize: '20px',
-                                    textAlign: 'left',
-                                    paddingTop: '4px',
-                                    marginRight: '10px',
-                                    width: '80px'
-                                }}>
-                                    Введіть пароль:
-                                </Typography>
-                                <TextField
-                                    style={{
-                                        marginTop: '15px'
-                                    }}
-                                    name="old_password"
-                                    required
-                                    autoFocus
-                                    variant="outlined"
-                                    size='small'
-                                    label="Пароль"
-                                    id="old_password"
-                                    onChange={this.onChange}
-                                    value={old_password}
-                                    >
-                                    </TextField>
-                            </Grid>
-                            <Divider style={{margin: '30px 0'}}/>
-                            <Grid style={{display: 'flex'}}>
-                                <Typography style={{
-                                    fontSize: '20px',
-                                    textAlign: 'left',
-                                    paddingTop: '4px',
-                                    marginRight: '10px',
-                                    width: '80px'
-                                }}>
-                                    Логін:
-                                </Typography>
-                                <TextField
-                                    name="username"
-                                    variant="outlined"
-                                    size='small'
-                                    label='Новий логін'
-                                    id="username"
-                                    onChange={this.onChange}
-                                    value={username}
-                                >
-                                </TextField>
-                            </Grid>
-                            <Divider style={{margin: '30px 0'}}/>
-                            <Grid style={{display: 'flex'}}>
-                                <Typography style={{
-                                    fontSize: '20px',
-                                    textAlign: 'left',
-                                    paddingTop: '4px',
-                                    marginRight: '10px',
-                                    width: '80px'
-                                }}>
-                                    Пароль:
-                                </Typography>
-                                <Grid>
+                            <Grid>
+                                <Grid style={{display: 'flex'}}>
+                                    <Typography style={{
+                                        fontSize: '20px',
+                                        textAlign: 'left',
+                                        paddingTop: '4px',
+                                        marginRight: '10px',
+                                        width: '80px'
+                                    }}>
+                                        Введіть пароль:
+                                    </Typography>
                                     <TextField
-                                        name="password1"
-                                        variant="outlined"
-                                        size='small'
-                                        label="Новий пароль"
-                                        id="password1"
-                                        onChange={this.onChange}
-
-                                        value={password1}
-                                    >
-                                    </TextField>
-                                    <br/>
-                                    <TextField
-                                        name="new_password"
-                                        variant="outlined"
-                                        size='small'
                                         style={{
                                             marginTop: '15px'
                                         }}
-                                        id="new_password"
-                                        label="Підтвердіть пароль"
+                                        name="old_password"
+                                        required
+                                        autoFocus
+                                        variant="outlined"
+                                        size='small'
+                                        label="Пароль"
+                                        id="old_password"
                                         onChange={this.onChange}
-                                        value={new_password}
+                                        value={old_password}
                                     >
                                     </TextField>
                                 </Grid>
+                                <Divider style={{margin: '30px 0'}}/>
+                                <Grid style={{display: 'flex'}}>
+                                    <Typography style={{
+                                        fontSize: '20px',
+                                        textAlign: 'left',
+                                        paddingTop: '4px',
+                                        marginRight: '10px',
+                                        width: '80px'
+                                    }}>
+                                        Логін:
+                                    </Typography>
+                                    <TextField
+                                        name="username"
+                                        variant="outlined"
+                                        size='small'
+                                        label='Новий логін'
+                                        id="username"
+                                        onChange={this.onChange}
+                                        value={username}
+                                    >
+                                    </TextField>
+                                </Grid>
+                                <Divider style={{margin: '30px 0'}}/>
+                                <Grid style={{display: 'flex'}}>
+                                    <Typography style={{
+                                        fontSize: '20px',
+                                        textAlign: 'left',
+                                        paddingTop: '4px',
+                                        marginRight: '10px',
+                                        width: '80px'
+                                    }}>
+                                        Пароль:
+                                    </Typography>
+                                    <Grid>
+                                        <TextField
+                                            name="password1"
+                                            variant="outlined"
+                                            size='small'
+                                            label="Новий пароль"
+                                            id="password1"
+                                            onChange={this.onChange}
+
+                                            value={password1}
+                                        >
+                                        </TextField>
+                                        <br/>
+                                        <TextField
+                                            name="new_password"
+                                            variant="outlined"
+                                            size='small'
+                                            style={{
+                                                marginTop: '15px'
+                                            }}
+                                            id="new_password"
+                                            label="Підтвердіть пароль"
+                                            onChange={this.onChange}
+                                            value={new_password}
+                                        >
+                                        </TextField>
+                                    </Grid>
+                                </Grid>
+                                <Grid style={{marginTop: '30px'}}>
+                                    <Button variant="filled"
+                                            type="submit"
+                                            style={{fontSize: '15px', background: '#41B619', color: 'white'}}>
+                                        Підтвердити
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Grid style={{marginTop: '30px'}}>
-                                <Button variant="filled"
-                                        type="submit"
-                                        style={{fontSize: '15px', background: '#41B619', color: 'white'}}>
-                                    Підтвердити
-                                </Button>
-                            </Grid>
-                        </Grid>
-                                  </form>
+                        </form>
                     </Grid>
                 </Grid> : <h1 align="center">Oops, Something Went Wrong</h1>}</>}
                 <Footer title="Про нас" description="Усі права захищені Богом!"/>
@@ -281,4 +282,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 
 });
-export default connect(mapStateToProps,{updateuser, createMessage})(UserSettings);
+export default connect(mapStateToProps, {updateuser, createMessage})(UserSettings);

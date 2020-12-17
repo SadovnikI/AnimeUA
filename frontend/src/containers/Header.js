@@ -14,6 +14,7 @@ import {createMuiTheme} from '@material-ui/core/styles';
 import * as MaterialUI from "@material-ui/core";
 import {ButtonGroup} from "@material-ui/core";
 import axios from "axios";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = MaterialUI.withStyles((theme) => ({
     toolbar: {
@@ -88,21 +89,20 @@ const Header = useStyles(class extends React.Component {
         const {classes} = this.props
 
         const authLinks = (
-            <div >
-                <strong>{user ? <a style={{
+            <Grid>
+                {user ? <a style={{
                     textDecoration: 'none',
                     color: 'black',
-                    margin: '0 20px 0 0'
-                }} href={`/cabinet/${user.id}`}><img height={ 50} width={50} src={this.state.user.map(item=>(
+                    textAlign: 'center',
+                    marginRight: '20px',
+                }} href={`/cabinet/${user.id}`}><img style={{marginTop: '11px'}} height={ 50} width={50} src={this.state.user.map(item=>(
                     item.avatar
-                ))}/></a> : ''}</strong>
+                ))}/></a> : ''}
 
-                <Button onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
+                <Button style={{margin: 'none!', textAlign: 'none!'}} onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
                     Вийти
                 </Button>
-
-
-            </div>
+            </Grid>
         );
 
         const guestLinks = (

@@ -13,8 +13,9 @@ from rest_framework.views import APIView
 class MovieDetailView(APIView):
     def get(self, request, pk):
         movie = Movie.objects.get(url=pk)
+
         genre_array = [genre for genre in movie.genres.all()]
-        link_array = [create_presigned_url1(str(video.bucket_id), str(video.name)) for video in
+        link_array = [create_presigned_url1(str(video.bucket_id), str(video.video.name)) for video in
                       movie.video.all()]
 
         shadow = ShadowMovie(id=1, title=movie.title, description=movie.description, poster=movie.poster,

@@ -798,7 +798,7 @@ false Zulu
     <database id="4" parent="1" name="project">
       <ObjectId>19025</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>3399</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3524</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <role id="5" parent="1" name="pg_execute_server_program">
@@ -850,7 +850,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>3400</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3525</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="17" parent="4" name="heap">

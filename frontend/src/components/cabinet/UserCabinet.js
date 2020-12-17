@@ -11,7 +11,7 @@ import * as MaterialUI from "@material-ui/core";
 
 const useStyles = MaterialUI.withStyles((theme) => ({
     main: {
-        background: 'linear-gradient(-45deg, #852EBA, #7303c0, #56ccf2, #2f80ed)',
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
         backgroundSize: '400% 400%',
         animation: '$gradient 15s ease infinite'
     },

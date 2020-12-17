@@ -34,3 +34,9 @@ class ShadowMovieSerializer(serializers.ModelSerializer):
             'title', 'description', 'poster', 'year', 'country',
             'genres', 'category', 'url', 'rating', 'video_urls', 'movie_id'
         ]
+
+
+class CabinetMovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ['id', 'title', 'poster', 'rating', 'url', 'year', 'description']

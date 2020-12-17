@@ -54,11 +54,11 @@ class Comments extends React.Component {
     };
 
     onEnterPress = (e) => {
-  if(e.keyCode == 13 && e.shiftKey == false) {
-    e.preventDefault();
-    this.onSubmit();
-  }
-}
+        if (e.keyCode == 13 && e.shiftKey == false) {
+            e.preventDefault();
+            this.onSubmit();
+        }
+    }
     onSubmit = (e) => {
         e.preventDefault();
         const {text} = this.state;
@@ -84,16 +84,19 @@ class Comments extends React.Component {
         });
     };
 
+
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
+
     componentDidMount() {
         this.getLeads();
     }
 
-    something=(event)=> {
+    something = (event) => {
         if (event.keyCode === 13) {
             console.log('enter')
         }
     }
+
     render() {
         const {text} = this.state;
         return (
@@ -114,6 +117,7 @@ class Comments extends React.Component {
                                         <Avatars userid={comment.user_id.id}/>
                                     </ListItemAvatar>
                                     <ListItemText
+
                                         primary={
                                             <Box display="flex">
                                                 <Typography style={{fontWeight: "bold"}}>
@@ -125,8 +129,11 @@ class Comments extends React.Component {
                                             </Box>
                                         }
                                         secondary={
-                                            <div>
-                                                {comment.text}
+                                            <div >
+                                                <Typography style={{
+                                                maxWidth:100
+                                            }}>{comment.text}</Typography>
+
                                             </div>
                                         }
                                     />
@@ -171,15 +178,15 @@ class Comments extends React.Component {
                     }
                 )}
                 {this.props.auth.isAuthenticated ? <>
-                        <Container component="main" maxWidth="sm">
+                    <Container component="main" maxWidth="sm">
 
-                            <CssBaseline/>
-                            <div className="col-md-6 m-auto">
-                                <div className="card card-body mt-5">
-                                    <h2 style={{marginLeft:10}} className="text-center">Leave comment</h2>
-                                    <form onSubmit={this.onSubmit}>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12}>
+                        <CssBaseline/>
+                        <div className="col-md-6 m-auto">
+                            <div className="card card-body mt-5">
+                                <h2 style={{marginLeft: 10}} className="text-center">Leave comment</h2>
+                                <form onSubmit={this.onSubmit}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
                                                 <textarea style={{
                                                     display: 'block',
                                                     width: '100%',
@@ -187,12 +194,29 @@ class Comments extends React.Component {
                                                     marginBottom: '10px',
                                                     background: '#E9EFF6',
                                                     lineHeight: '40px',
-                                                    borderWidth: '0',
+                                                    elevation: 0,
                                                     borderRadius: '20px',
                                                     fontFamily: 'Roboto',
                                                     resize: 'none',
+                                                    borderDecoration: 'none',
+                                                    border: 'none ',
+                                                    borderWidth: 0,
+                                                    dateInput: {borderWidth: 0},
+
+                                                    overflow: 'auto',
+                                                    outline: 'none',
+
 
                                                 }}
+                                                          onKeyPress={(ev) => {
+
+                                                              if (ev.key === 'Enter') {
+                                                                  // Do code here
+                                                                  this.btn.click();
+
+                                                                  ev.preventDefault();
+                                                              }
+                                                          }}
 
                                                           placeholder="Comment..." rows="3"
                                                           name="text"
@@ -201,27 +225,28 @@ class Comments extends React.Component {
                                                           onChange={this.onChange}
                                                           value={text}
                                                 />
-                                            </Grid >
-                                            <div style={{marginBottom:25, marginLeft:10}} className="form-group">
-                                                <Button style={{}}
-                                                        type="submit"
-                                                        fullWidth
-                                                        variant="contained"
-                                                        color="secondary"
-
-
-                                                >
-                                                    Send
-                                                </Button>
-                                            </div>
-
                                         </Grid>
+                                        <div style={{marginBottom: 25, marginLeft: 10}} className="form-group">
+                                            <Button style={{}}
+                                                    ref={node => (this.btn = node)}
+                                                    type="submit"
+                                                    fullWidth
+                                                    variant="contained"
+                                                    color="secondary"
 
-                                    </form>
-                                </div>
+
+                                            >
+                                                Send
+                                            </Button>
+                                        </div>
+
+                                    </Grid>
+
+                                </form>
                             </div>
-                        </Container>
-                    </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
+                        </div>
+                    </Container>
+                </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
             </dev>
         );
     };
@@ -233,6 +258,6 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps,{addcomment})(Comments);
+export default connect(mapStateToProps, {addcomment})(Comments);
 
 

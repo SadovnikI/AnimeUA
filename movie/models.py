@@ -27,12 +27,11 @@ class Category(models.Model):
 
 
 class Video(models.Model):
-    name = models.CharField("Name", max_length=160, default=None)
     bucket_id = models.ForeignKey(Bucket, on_delete=models.SET_NULL, null=True, default=None)
     video = models.FileField("Video", default=None)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.video.name}"
 
     class Meta:
         verbose_name = "Video"

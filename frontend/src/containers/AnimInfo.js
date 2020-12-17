@@ -131,7 +131,8 @@ export default function AnimeInfo(props) {
                                         flexDirection: 'column'
                                     }}>
 
-                                        <Typography style={{fontWeight: '800'}} component="h4" variant="h5">
+Батя Unfectum, [17.12.20 22:45]
+<Typography style={{fontWeight: '800'}} component="h4" variant="h5">
                                             {String(post.title).slice(0, 20)}
                                         </Typography>
                                         <br/>
@@ -192,7 +193,8 @@ export default function AnimeInfo(props) {
                                                 <StyledMenuItem>
                                                     <ListItemIcon>
 
-                                                    </ListItemIcon>
+Батя Unfectum, [17.12.20 22:45]
+</ListItemIcon>
                                                     <ListItemText primary="Drafts"/>
                                                 </StyledMenuItem>
                                                 <StyledMenuItem>
@@ -251,7 +253,8 @@ export default function AnimeInfo(props) {
                                                     </Typography>
                                                     <div>
                                                         <Button
-                                                            aria-controls="customized-menu"
+
+aria-controls="customized-menu"
                                                             aria-haspopup="true"
                                                             variant="contained"
                                                             color="primary"
@@ -298,7 +301,8 @@ export default function AnimeInfo(props) {
                                                         {post.title}
                                                     </Typography>
 
-                                                    <Typography component="h3" variant="h8 ">
+
+<Typography component="h3" variant="h8 ">
                                                         <span style={{color: 'grey'}}>країна:</span> {post.country}
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
@@ -351,7 +355,8 @@ export default function AnimeInfo(props) {
                                                             <StyledMenuItem>
                                                                 <ListItemIcon>
 
-                                                                </ListItemIcon>
+Батя Unfectum, [17.12.20 22:45]
+</ListItemIcon>
                                                                 <ListItemText primary="Drafts"/>
                                                             </StyledMenuItem>
                                                             <StyledMenuItem>
