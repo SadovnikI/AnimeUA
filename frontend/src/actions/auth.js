@@ -147,7 +147,7 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
     .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
 
 };
-export const updateuser = ({ username, password, }) => (dispatch, getState) => {
+export const updateuser = ({ id, username, old_password, new_password }) => (dispatch, getState) => {
   // Headers
   const config = {
     headers: {
@@ -156,16 +156,12 @@ export const updateuser = ({ username, password, }) => (dispatch, getState) => {
   };
 
   // Request Body
-  const body = JSON.stringify({ id, username, password });
+  const body = JSON.stringify({ id, username, old_password, new_password });
 
   axios
-    .post('/api/auth/addcomment', body,  tokenConfig(getState))
+    .put('/api/cabinet/modify_user', body,  tokenConfig(getState))
     .then((res) => {
-      dispatch(createMessage({ addLead: 'Comment Added' }));
-      dispatch({
-        type: ADD_LEAD,
-        payload: res.data,
-      });
+      dispatch(createMessage({ addLead: 'Updated' }));
     })
     .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
 
