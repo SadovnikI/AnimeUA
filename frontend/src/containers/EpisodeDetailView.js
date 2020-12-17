@@ -12,9 +12,37 @@ import {connect} from "react-redux";
 import {addcomment} from "../actions/auth";
 import {createMessage} from "../actions/messages";
 import {useAutocomplete} from "@material-ui/lab";
+import {makeStyles} from "@material-ui/core/styles";
+import * as MaterialUI from "@material-ui/core";
+import Header from './Header'
+import Footer from "./Footer";
+
+const useStyles = MaterialUI.withStyles((theme) => ({
+    main: {
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        animation: '$gradient 15s ease infinite'
+    },
+    movieBox: {
+        padding: theme.spacing(2),
+        background: 'rgba(255,255,255,0.65)',
+        marginBottom: theme.spacing(3)
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
+    },
+}));
 
 
-class EpisodeDetail extends React.Component {
+const EpisodeDetail = useStyles(class extends React.Component {
     state = {
         comments: [],
         isFetching: true,
@@ -83,6 +111,7 @@ class EpisodeDetail extends React.Component {
 
     render() {
 
+        const {classes} = this.props
         const {text} = this.state;
         const movieID = this.props.match.params.movieID;
         let Episode = String(this.state.movie.video_urls).split(",");
@@ -92,25 +121,41 @@ class EpisodeDetail extends React.Component {
             for (let i = 1; i <= Episode.length; i++) {
                 if (episodeID == i) {
                     rows.push(
-                        <Button href={`/home/${movieID}/${i}`} variant="outlined" color="primary" size="small">
-                            Episode {i}
+                        <Button style={{
+                            maxWidth: '40px',
+                            maxHeight: '40px',
+                            minWidth: '40px',
+                            minHeight: '40px',
+                            background: 'rgba(200,255,200,0.85)',
+                            marginRight: '2px',
+                        }} href={`/home/${movieID}/${i}`} variant="filled" size="small">
+                            {i}
                         </Button>
                     );
                 } else {
                     rows.push(
-                        <Button href={`/home/${movieID}/${i}`} variant="outlined" size="small">
-                            Episode {i}
+                        <Button style={{
+                            maxWidth: '40px',
+                            maxHeight: '40px',
+                            minWidth: '40px',
+                            minHeight: '40px',
+                            background: 'rgba(255,255,255,0.85)',
+                            marginRight: '2px',
+                        }} href={`/home/${movieID}/${i}`} variant="filled" size="small">
+                            {i}
                         </Button>
                     );
                 }
             }
         }
+
         const {user} = this.props.auth;
 
 
         return (
+            <div className={classes.main}>
                 <React.Fragment>
-                    <List/>
+                    <Header/>
 
                     <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
                                post={this.state.movie}/>
@@ -126,31 +171,25 @@ class EpisodeDetail extends React.Component {
                                     <form onSubmit={this.onSubmit}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={12}>
-                                    <textarea style={{
-                                        display: 'block',
-                                        width: '100%',
-                                        padding: '0 20px',
-                                        marginBottom: '10px',
-                                        background: '#E9EFF6',
-                                        lineHeight: '40px',
-                                        borderWidth: '0',
-                                        borderRadius: '20px',
-                                        fontFamily: 'Roboto',
-                                        resize: 'none',
-                                    }} placeholder="Comment..." rows="3"
-                                              name="text"
+                                                <textarea style={{
+                                                    display: 'block',
+                                                    width: '100%',
+                                                    padding: '0 20px',
+                                                    marginBottom: '10px',
+                                                    background: '#E9EFF6',
+                                                    lineHeight: '40px',
+                                                    borderWidth: '0',
+                                                    borderRadius: '20px',
+                                                    fontFamily: 'Roboto',
+                                                    resize: 'none',
 
-                                              required
-
-                                              id="text"
-
-                                              autoFocus
-                                              onChange={this.onChange}
-                                              value={text}
-                                    />
-                                                {
-
-                                                }
+                                                }} placeholder="Comment..." rows="3"
+                                                          name="text"
+                                                          required
+                                                          id="text"
+                                                          onChange={this.onChange}
+                                                          value={text}
+                                                />
                                             </Grid>
                                             <div className="form-group">
                                                 <Button style={{margin: 'theme.spacing(1)',}}
@@ -172,10 +211,12 @@ class EpisodeDetail extends React.Component {
                             </div>
                         </Container>
                     </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
+                    <Footer title="Про нас" description="Усі права захищені Богом!"/>
                 </React.Fragment>
+            </div>
         )
     }
-}
+});
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,

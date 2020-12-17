@@ -13,6 +13,7 @@ import {MuiThemeProvider} from '@material-ui/core/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
 import * as MaterialUI from "@material-ui/core";
 import {ButtonGroup} from "@material-ui/core";
+import axios from "axios";
 
 const useStyles = MaterialUI.withStyles((theme) => ({
     toolbar: {
@@ -50,7 +51,6 @@ const useStyles = MaterialUI.withStyles((theme) => ({
 
 
 const Header = useStyles(class extends React.Component {
-
     static propTypes = {
         auth: PropTypes.object.isRequired,
         logout: PropTypes.func.isRequired,

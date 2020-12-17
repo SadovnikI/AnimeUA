@@ -55,7 +55,7 @@ export default function FeaturedPost(props) {
                             </Typography>
 
                             <Box component="fieldset" borderColor="transparent">
-                                <Rating size="small" value={post.rating} precision={0.5} readOnly/>
+                                <Rating size="small" value={post.rating / 2} precision={0.5} readOnly/>
                                 <br/>
                                 <Typography variant="subtitle3" color="textSecondary">
                                     {post.genres.slice(0, 4).join(', ')}
