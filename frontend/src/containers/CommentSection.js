@@ -165,7 +165,7 @@ class Comments extends React.Component {
                             <CssBaseline/>
                             <div className="col-md-6 m-auto">
                                 <div className="card card-body mt-5">
-                                    <h2 className="text-center">Leave comment</h2>
+                                    <h2 style={{marginLeft:10}} className="text-center">Leave comment</h2>
                                     <form onSubmit={this.onSubmit}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={12}>
@@ -188,9 +188,9 @@ class Comments extends React.Component {
                                                           onChange={this.onChange}
                                                           value={text}
                                                 />
-                                            </Grid>
-                                            <div className="form-group">
-                                                <Button style={{margin: 'theme.spacing(1)',}}
+                                            </Grid >
+                                            <div style={{marginBottom:25, marginLeft:10}} className="form-group">
+                                                <Button style={{}}
                                                         type="submit"
                                                         fullWidth
                                                         variant="contained"
