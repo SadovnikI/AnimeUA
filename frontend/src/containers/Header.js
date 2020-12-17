@@ -60,22 +60,47 @@ const Header = useStyles(class extends React.Component {
         {title: 'Каталог', url: '/home'},
         {title: 'Новини', url: '/home'},
     ];
+    state={
+        user:[]
+    }
+    componentDidMount() {
+
+
+        if(this.props.auth.isAuthenticated){
+            const user_id = this.props.auth.user.id;
+            axios.get(`http://127.0.0.1:8000/api/cabinet/${user_id}`)
+            .then(res => {
+                this.setState({
+                    user: res.data
+                });
+            })
+
+        }
+    }
 
     render() {
         const {isAuthenticated, user} = this.props.auth;
+        if(isAuthenticated){
 
+            this.componentDidMount()
+        }
         const {classes} = this.props
 
         const authLinks = (
-            <div>
+            <div style={{}}>
                 <strong>{user ? <a style={{
                     textDecoration: 'none',
                     color: 'black',
                     margin: '0 20px 0 0'
-                }} href={`/cabinet/${user.id}`}>Welcome, {user.username}!</a> : ''}</strong>
+                }} href={`/cabinet/${user.id}`}><img height={ 50} width={50} src={this.state.user.map(item=>(
+                    item.avatar
+                ))}/></a> : ''}</strong>
+
                 <Button onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
                     Вийти
                 </Button>
+
+
             </div>
         );
 
@@ -118,6 +143,7 @@ const Header = useStyles(class extends React.Component {
                         ))}
                     </ButtonGroup>
                     {isAuthenticated ? authLinks : guestLinks}
+
                 </Toolbar>
                 <div className={classes.toolbarSecondary}>
 
