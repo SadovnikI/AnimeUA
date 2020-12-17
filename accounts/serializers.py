@@ -46,14 +46,16 @@ class LoginSerializer(serializers.Serializer):
 
 class ModifyUserSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    username = serializers.CharField()
-    password = serializers.CharField()
+    username = serializers.CharField(allow_blank=True)
+    old_password = serializers.CharField()
+    new_password = serializers.CharField(allow_blank=True)
     # avatar = serializers.FileField()
 
     def update(self, instance, validated_data):
         instance.id = validated_data.get('id', instance.id)
         instance.username = validated_data.get('username', instance.username)
-        instance.password = validated_data.get('password', instance.password)
+        instance.old_password = validated_data.get('old_password', instance.password)
+        instance.new_password = validated_data.get('new_password', instance.password)
         # instance.avatar = validated_data.get('avatar', instance.avatar)
 
         return instance
