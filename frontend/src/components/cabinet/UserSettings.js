@@ -1,13 +1,47 @@
 import React, {Component} from "react";
-import {TextField, Button, Grid, Typography, ButtonGroup} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import {Button, Grid, Typography, ButtonGroup} from "@material-ui/core";
 import axios from "axios";
 import Header from "../../containers/Header";
-import {connect} from "react-redux";
+import SettingsIcon from '@material-ui/icons/Settings';
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {addcomment} from "../../actions/auth";
+import {createMessage} from "../../actions/messages";
+import {Redirect} from "react-router-dom";
+import Footer from "../../containers/Footer";
+import * as MaterialUI from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Divider from "@material-ui/core/Divider";
 
 
-export default class UserSettings extends Component {
+const useStyles = MaterialUI.withStyles((theme) => ({
+    main: {
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        animation: '$gradient 15s ease infinite'
+    },
+    movieBox: {
+        padding: theme.spacing(2),
+        background: 'rgba(255,255,255,0.65)',
+        marginBottom: theme.spacing(3)
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
+    },
+}));
+
+
+const UserSettings = useStyles(class extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,55 +60,162 @@ export default class UserSettings extends Component {
     }
 
     static propTypes = {
+
+        isAuthenticated: PropTypes.bool,
         auth: PropTypes.object.isRequired,
+
     };
 
 
-    render() {
-        return (
-            <Grid>
-                <Grid container
-                      spacing={1}
-                      direction="column"
-                      style={{
-                          minHeight: '100vh',
-                          align: 'center',
-                          margin: 'auto',
-                          width: '70%',
-                      }}>
-                    <Header style={{
-                    }}/>
-                    <Grid item xs={12} style={{
-                        padding: '5%'
-                    }}>
-                        {this.state.user.map(user => (
-                            <img src={user.avatar} alt="avatar" width="130px" height="130" style={{borderRadius: "50%"}}/>
-                        ))}
-                        <Grid container style={{
-                            width: '130px',
-                            height: '130px',
-                            marginLeft: '15px'
-                        }}>
-                            <TextField
-                                xs={30}
-                                size="medium"
-                                label={this.state.user.map(user => (
-                                    user.user.username))}
-                                variant="outlined"
+    sections = [
+        {title: 'Дивлюсь', url: '/home'},
+        {title: 'Подивився', url: '/home'},
+        {title: 'Заплановано', url: '/home'},
+    ];
 
-                                style={{
-                                    color: "black",
-                                    marginTop: "15px",
-                                }}
-                            >
-                            </TextField>
+    render() {
+        const {classes} = this.props
+        return (
+            <Grid className={classes.main}>
+                <Header/>
+                {!this.props.auth.isAuthenticated ? <h1 align="center">Oops, Something Went
+                    Wrong</h1> : <>{this.props.auth.user.id == this.props.match.params.userID ? <Grid container
+                                                                                                      spacing={1}
+                                                                                                      direction="column"
+                                                                                                      style={{
+                                                                                                          minHeight: '100vh',
+                                                                                                          align: 'center',
+                                                                                                          margin: 'auto',
+                                                                                                          width: '70%',
+                                                                                                          borderRadius: "7px"
+                                                                                                      }}>
+                    <Grid justify="center" style={{
+                        background: 'rgba(255,255,255,0.80)',
+                        borderRadius: '5px',
+                        marginTop: '20px',
+                        padding: '20px 40px'
+                    }}>
+                        <Grid item xs={12} style={{
+                            display: 'flex',
+                        }}>
+                            {this.state.user.map(user => (
+                                <img src={user.avatar} alt="avatar" width="130px" height="130"
+                                     style={{borderRadius: "50%"}}/>
+                            ))}
+                            <Grid container style={{
+                                width: '130px',
+                                height: '130px',
+                                marginLeft: '15px'
+                            }}>
+                                <Typography style={{
+                                    fontSize: '30px',
+                                    marginLeft: '20px',
+                                    marginTop: '23px',
+                                    fontWeight: '800',
+                                }}>
+                                    {this.state.user.map(user => (
+                                        user.user.username))}
+                                    <div style={{fontWeight: '400', fontSize: '20px'}}>{this.state.user.map(user => (
+                                        user.user.email))}</div>
+                                </Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-
+                    <Grid style={{
+                        background: 'rgba(255,255,255,0.80)',
+                        borderRadius: '5px',
+                        marginTop: '20px',
+                        padding: '40px 40px',
+                        height: '380px'
+                    }}>
+                        <Typography variant='h5' style={{marginBottom: '30px', fontWeight: "800"}}>
+                            Налаштування
+                        </Typography>
+                        <Grid>
+                            <Grid style={{display: 'flex', marginTop: '50px',}}>
+                                <Typography style={{
+                                    fontSize: '20px',
+                                    textAlign: 'left',
+                                    paddingTop: '4px',
+                                    marginRight: '10px',
+                                    width: '80px'
+                                }}>
+                                    Логін:
+                                </Typography>
+                                <TextField
+                                    variant="outlined"
+                                    size='small'
+                                    style={{
+                                        borderWidth: '10px'
+                                    }}
+                                    label='Новий логін'
+                                >
+                                </TextField>
+                            </Grid>
+                            <Divider style={{margin: '30px 0'}}/>
+                            <Grid style={{display: 'flex'}}>
+                                <Typography style={{
+                                    fontSize: '20px',
+                                    textAlign: 'left',
+                                    paddingTop: '4px',
+                                    marginRight: '10px',
+                                    width: '80px'
+                                }}>
+                                    Пароль:
+                                </Typography>
+                                <Grid>
+                                    <TextField
+                                        variant="outlined"
+                                        size='small'
+                                        style={{
+                                            borderWidth: '10px'
+                                        }}
+                                        label="Старий пароль"
+                                    >
+                                    </TextField>
+                                    <br/>
+                                    <TextField
+                                        variant="outlined"
+                                        size='small'
+                                        style={{
+                                            borderWidth: '10px',
+                                            marginTop: '15px'
+                                        }}
+                                        label="Новий пароль"
+                                    >
+                                    </TextField>
+                                    <br/>
+                                    <TextField
+                                        variant="outlined"
+                                        size='small'
+                                        style={{
+                                            borderWidth: '10px',
+                                            marginTop: '15px'
+                                        }}
+                                        label="Підтвердіть пароль"
+                                    >
+                                    </TextField>
+                                </Grid>
+                            </Grid>
+                            <Grid style={{marginTop: '30px'}}>
+                                <Button variant="filled"
+                                        style={{fontSize: '15px', background: '#41B619', color: 'white'}}>
+                                    Підтвердити
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Grid> : <h1 align="center">Oops, Something Went Wrong</h1>}</>}
+                <Footer title="Про нас" description="Усі права захищені Богом!"/>
             </Grid>
         );
     }
-}
+});
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+    auth: state.auth,
+
+});
+export default connect(mapStateToProps)(UserSettings);
