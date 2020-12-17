@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     details: {
         display: 'flex',
         flexDirection: 'column',
+        maxHeight: 240
     },
     content: {
         flex: '1 0 auto',
@@ -29,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cover: {
         width: 180,
-        height: 240
-
+        height: 240,
     },
 }));
 
@@ -54,15 +54,19 @@ export default function FeaturedPost(props) {
                                 {post.title}
                             </Typography>
 
-                            <Box component="fieldset" mb={3} borderColor="transparent">
-                                <Rating size="small" value={post.rating} precision={0.5} readOnly/>
+                            <Box component="fieldset" borderColor="transparent">
+                                <Rating size="small" value={post.rating / 2} precision={0.5} readOnly/>
                                 <br/>
                                 <Typography variant="subtitle3" color="textSecondary">
-                                    Жанр, Жанр, Жанр
+                                    {post.genres.slice(0, 4).join(', ')}
+                                </Typography>
+                                <br/>
+                                <Typography variant="subtitle3" color="textSecondary">
+                                    Year: {post.year}
                                 </Typography>
                             </Box>
-                            <Typography variant="subtitle3" color="text">
-                                Діскріпшн який я не можу витягнути
+                            <Typography style={{fontSize: "11px"}}>
+                                {String(post.description).slice(0, 115)}...
                             </Typography>
                         </CardContent>
                     </div>

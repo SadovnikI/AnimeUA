@@ -13,17 +13,19 @@ import {MuiThemeProvider} from '@material-ui/core/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
 import * as MaterialUI from "@material-ui/core";
 import {ButtonGroup} from "@material-ui/core";
+import axios from "axios";
 
 const useStyles = MaterialUI.withStyles((theme) => ({
     toolbar: {
         backgroundColor: theme.palette.common.white,
     },
     toolbarTitle: {
-        backgroundImage: 'url(https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80)',
-        backgroundSize: '20% 100%',
-        backgroundClip: 'text',
-        color: 'transparent',
-        flex: 1,
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        animation: '$gradient 15s ease infinite'
+
     },
     toolbarSecondary: {
         justifyContent: 'space-between',
@@ -32,12 +34,23 @@ const useStyles = MaterialUI.withStyles((theme) => ({
     },
     toolbarLink: {
         marginLeft: theme.spacing(3),
+        flex: 1
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
     },
 }), {withTheme: true});
 
 
 const Header = useStyles(class extends React.Component {
-
     static propTypes = {
         auth: PropTypes.object.isRequired,
         logout: PropTypes.func.isRequired,
@@ -55,12 +68,15 @@ const Header = useStyles(class extends React.Component {
 
         const authLinks = (
             <div>
-                <strong>{user ? <>Welcome, <a href={`/cabinet/${user.id}`}>{user.username}!</a></> : ''} </strong>
+                <strong>{user ? <a style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                    margin: '0 20px 0 0'
+                }} href={`/cabinet/${user.id}`}>Welcome, {user.username}!</a> : ''}</strong>
                 <Button onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
                     Вийти
                 </Button>
             </div>
-
         );
 
         const guestLinks = (
@@ -89,18 +105,18 @@ const Header = useStyles(class extends React.Component {
                         className={classes.toolbarTitle}
                     >
                         Анімє-UA
-                        <ButtonGroup component="nav" variant="dense" size={"large"} className={classes.toolbarLink}>
-                            {this.sections.map((section) => (
-                                <Button
-                                    key={section.title}
-                                    href={section.url}
-                                >
-                                    {section.title}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </Typography>
 
+                    </Typography>
+                    <ButtonGroup component="nav" variant="dense" size={"large"} className={classes.toolbarLink}>
+                        {this.sections.map((section) => (
+                            <Button
+                                key={section.title}
+                                href={section.url}
+                            >
+                                {section.title}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
                     {isAuthenticated ? authLinks : guestLinks}
                 </Toolbar>
                 <div className={classes.toolbarSecondary}>

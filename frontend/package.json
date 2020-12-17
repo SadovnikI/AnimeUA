@@ -12,6 +12,7 @@
     "markdown-to-jsx": "^7.1.0",
     "moment": "^2.29.1",
     "react-alert-template-basic": "^1.0.0",
+    "react-media": "^1.10.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",

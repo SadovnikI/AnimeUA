@@ -7,10 +7,37 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {addcomment} from "../../actions/auth";
 import {createMessage} from "../../actions/messages";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import Footer from "../../containers/Footer";
+import * as MaterialUI from "@material-ui/core";
 
- class UserCabinet extends Component {
+
+const useStyles = MaterialUI.withStyles((theme) => ({
+    main: {
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        animation: '$gradient 15s ease infinite'
+    },
+    movieBox: {
+        padding: theme.spacing(2),
+        background: 'rgba(255,255,255,0.65)',
+        marginBottom: theme.spacing(3)
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
+    },
+}));
+
+
+const UserCabinet = useStyles(class extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,7 +55,7 @@ import Footer from "../../containers/Footer";
             })
     }
 
-     static propTypes = {
+    static propTypes = {
 
         isAuthenticated: PropTypes.bool,
         auth: PropTypes.object.isRequired,
@@ -43,19 +70,21 @@ import Footer from "../../containers/Footer";
     ];
 
     render() {
+        const {classes} = this.props
         return (
-            <Grid>
+            <Grid className={classes.main}>
                 <Header/>
-                {!this.props.auth.isAuthenticated ?<h1 align="center">Oops, Something Went Wrong</h1>:<>{this.props.auth.user.id==this.props.match.params.userID?<Grid container
-                      spacing={1}
-                      direction="column"
-                      style={{
-                          minHeight: '100vh',
-                          align: 'center',
-                          margin: 'auto',
-                          width: '70%',
-                          borderRadius: "7px"
-                      }}>
+                {!this.props.auth.isAuthenticated ? <h1 align="center">Oops, Something Went
+                    Wrong</h1> : <>{this.props.auth.user.id == this.props.match.params.userID ? <Grid container
+                                                                                                      spacing={1}
+                                                                                                      direction="column"
+                                                                                                      style={{
+                                                                                                          minHeight: '100vh',
+                                                                                                          align: 'center',
+                                                                                                          margin: 'auto',
+                                                                                                          width: '70%',
+                                                                                                          borderRadius: "7px"
+                                                                                                      }}>
 
                     <Grid item xs={12} style={{
                         display: 'flex',
@@ -111,13 +140,13 @@ import Footer from "../../containers/Footer";
                             </ButtonGroup>
                         </div>
                     </Grid>
-                </Grid>:<h1 align="center">Oops, Something Went Wrong</h1>}</>}
-                <div style={{marginTop:500}}></div>
-<Footer style={{marginTop:800}} title="Про нас" description="Усі права захищені Богом!"/>
+                </Grid> : <h1 align="center">Oops, Something Went Wrong</h1>}</>}
+                <Footer title="Про нас" description="Усі права захищені Богом!"/>
             </Grid>
         );
     }
-}
+});
+
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
