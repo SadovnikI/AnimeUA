@@ -63,6 +63,7 @@ const Header = useStyles(class extends React.Component {
     state={
         user:[]
     }
+    count=1;
     componentDidMount() {
 
 
@@ -80,14 +81,14 @@ const Header = useStyles(class extends React.Component {
 
     render() {
         const {isAuthenticated, user} = this.props.auth;
-        if(isAuthenticated){
-
+        if(isAuthenticated && this.count <2){
+            this.count+=1;
             this.componentDidMount()
         }
         const {classes} = this.props
 
         const authLinks = (
-            <div style={{}}>
+            <div >
                 <strong>{user ? <a style={{
                     textDecoration: 'none',
                     color: 'black',

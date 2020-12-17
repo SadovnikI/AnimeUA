@@ -233,7 +233,7 @@ export default function AnimeInfo(props) {
                                     </Grid>
                                     <video background-color={'black'} margin-top={'10px'} width={'800px'}
                                            src={props.episodeurl} controls/>
-                                    <Comments comments={props.comments}/>
+                                    <Comments movie={props.post} comments={props.comments}/>
                                 </div>) : (
                                 <div style={{width: 500, marginTop: 50}}>
 
@@ -244,7 +244,7 @@ export default function AnimeInfo(props) {
                                             {props.rows}
                                         </div>
                                     </Grid>
-                                    <Comments comments={props.comments}/>
+                                    <Comments movie={props.post} comments={props.comments}/>
                                 </div>
                             )}
                     </Media>

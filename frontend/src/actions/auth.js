@@ -147,3 +147,26 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
     .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
 
 };
+export const updateuser = ({ username, password, }) => (dispatch, getState) => {
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // Request Body
+  const body = JSON.stringify({ id, username, password });
+
+  axios
+    .post('/api/auth/addcomment', body,  tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: 'Comment Added' }));
+      dispatch({
+        type: ADD_LEAD,
+        payload: res.data,
+      });
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
+
+};

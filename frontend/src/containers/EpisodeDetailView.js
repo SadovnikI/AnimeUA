@@ -47,8 +47,6 @@ const EpisodeDetail = useStyles(class extends React.Component {
         comments: [],
         isFetching: true,
         movie: {},
-        video_id: 1,
-        text: '',
         cabinet: [],
     }
 
@@ -81,38 +79,12 @@ const EpisodeDetail = useStyles(class extends React.Component {
 
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        const {text} = this.state;
-        const movie_id = this.state.movie.movie_id;
-        const video_id = this.state.video_id;//this.props.match.params.episodeID;
-        const {user} = this.props.auth;
-        const date = new Date;
-        const user_id = user.id;
 
-        {
-            const newComment = {
-                user_id,
-                text,
-                date,
-                video_id,
-                movie_id
-            };
-            this.props.addcomment(newComment);
-        }
-        this.setState({
-            text: '',
-
-        });
-    };
-
-    onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
 
     render() {
 
         const {classes} = this.props
-        const {text} = this.state;
         const movieID = this.props.match.params.movieID;
         let Episode = String(this.state.movie.video_urls).split(",");
         var rows = [];
@@ -149,9 +121,6 @@ const EpisodeDetail = useStyles(class extends React.Component {
             }
         }
 
-        const {user} = this.props.auth;
-
-
         return (
             <div className={classes.main}>
                 <React.Fragment>
@@ -160,57 +129,6 @@ const EpisodeDetail = useStyles(class extends React.Component {
                     <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
                                post={this.state.movie}/>
 
-
-                    {this.props.auth.isAuthenticated ? <>
-                        <Container component="main" maxWidth="sm">
-
-                            <CssBaseline/>
-                            <div className="col-md-6 m-auto">
-                                <div className="card card-body mt-5">
-                                    <h2 className="text-center">Leave comment</h2>
-                                    <form onSubmit={this.onSubmit}>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12}>
-                                                <textarea style={{
-                                                    display: 'block',
-                                                    width: '100%',
-                                                    padding: '0 20px',
-                                                    marginBottom: '10px',
-                                                    background: '#E9EFF6',
-                                                    lineHeight: '40px',
-                                                    borderWidth: '0',
-                                                    borderRadius: '20px',
-                                                    fontFamily: 'Roboto',
-                                                    resize: 'none',
-
-                                                }} placeholder="Comment..." rows="3"
-                                                          name="text"
-                                                          required
-                                                          id="text"
-                                                          onChange={this.onChange}
-                                                          value={text}
-                                                />
-                                            </Grid>
-                                            <div className="form-group">
-                                                <Button style={{margin: 'theme.spacing(1)',}}
-                                                        type="submit"
-                                                        fullWidth
-                                                        variant="contained"
-                                                        color="secondary"
-
-
-                                                >
-                                                    Send
-                                                </Button>
-                                            </div>
-
-                                        </Grid>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </Container>
-                    </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
                     <Footer title="Про нас" description="Усі права захищені Богом!"/>
                 </React.Fragment>
             </div>
