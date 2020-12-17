@@ -126,13 +126,34 @@ const UserSettings = useStyles(class extends React.Component {
                         borderRadius: '5px',
                         marginTop: '20px',
                         padding: '40px 40px',
-                        height: '380px'
+                        height: '440px'
                     }}>
                         <Typography variant='h5' style={{marginBottom: '30px', fontWeight: "800"}}>
                             Налаштування
                         </Typography>
                         <Grid>
-                            <Grid style={{display: 'flex', marginTop: '50px',}}>
+                            <Grid style={{display: 'flex'}}>
+                                <Typography style={{
+                                    fontSize: '20px',
+                                    textAlign: 'left',
+                                    paddingTop: '4px',
+                                    marginRight: '10px',
+                                    width: '80px'
+                                }}>
+                                    Введіть пароль:
+                                </Typography>
+                                <TextField
+                                    style={{
+                                        marginTop: '15px'
+                                    }}
+                                        variant="outlined"
+                                        size='small'
+                                        label="Пароль"
+                                    >
+                                    </TextField>
+                            </Grid>
+                            <Divider style={{margin: '30px 0'}}/>
+                            <Grid style={{display: 'flex'}}>
                                 <Typography style={{
                                     fontSize: '20px',
                                     textAlign: 'left',
@@ -145,9 +166,6 @@ const UserSettings = useStyles(class extends React.Component {
                                 <TextField
                                     variant="outlined"
                                     size='small'
-                                    style={{
-                                        borderWidth: '10px'
-                                    }}
                                     label='Новий логін'
                                 >
                                 </TextField>
@@ -167,20 +185,6 @@ const UserSettings = useStyles(class extends React.Component {
                                     <TextField
                                         variant="outlined"
                                         size='small'
-                                        style={{
-                                            borderWidth: '10px'
-                                        }}
-                                        label="Старий пароль"
-                                    >
-                                    </TextField>
-                                    <br/>
-                                    <TextField
-                                        variant="outlined"
-                                        size='small'
-                                        style={{
-                                            borderWidth: '10px',
-                                            marginTop: '15px'
-                                        }}
                                         label="Новий пароль"
                                     >
                                     </TextField>
@@ -189,7 +193,6 @@ const UserSettings = useStyles(class extends React.Component {
                                         variant="outlined"
                                         size='small'
                                         style={{
-                                            borderWidth: '10px',
                                             marginTop: '15px'
                                         }}
                                         label="Підтвердіть пароль"
