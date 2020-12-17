@@ -62,7 +62,7 @@ class UserAPI(generics.RetrieveAPIView):
 class CabinetAPI(APIView):
     def get(self, request, pk):
         queryset = UserCabinet.objects.filter(id=pk)
-        print(queryset)
+
         serializer = CabinetSerializer(queryset, many=True)
         return Response(serializer.data)
 

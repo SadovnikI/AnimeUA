@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
 
         background: 'rgba(255,255,255,0.65)',    // marginTop: theme.spacing(8),
-    padding: theme.spacing(1, 0),
+    padding: theme.spacing(2, 0),
   },
 }));
 
