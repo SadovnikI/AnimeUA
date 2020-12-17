@@ -134,7 +134,6 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
 
   // Request Body
   const body = JSON.stringify({ user_id, text, date, video_id, movie_id });
-
   axios
     .post('/api/auth/addcomment', body,  tokenConfig(getState))
     .then((res) => {

@@ -131,8 +131,7 @@ export default function AnimeInfo(props) {
                                         flexDirection: 'column'
                                     }}>
 
-Батя Unfectum, [17.12.20 22:45]
-<Typography style={{fontWeight: '800'}} component="h4" variant="h5">
+                                        <Typography style={{fontWeight: '800'}} component="h4" variant="h5">
                                             {String(post.title).slice(0, 20)}
                                         </Typography>
                                         <br/>
@@ -165,46 +164,46 @@ export default function AnimeInfo(props) {
                                                     component="h3" variant="h8 ">
                                             <p style={{fontSize: 15, marginBottom: 10}}>{post.description}</p>
                                         </Typography>
-                                        {props.flag?
+                                        {props.flag ?
                                             <div>
-                                            <Button
-                                                aria-controls="customized-menu"
-                                                aria-haspopup="true"
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={handleClick}
-                                            >
-                                                Open Menu
-                                            </Button>
-                                            <StyledMenu
-                                                id="customized-menu"
-                                                anchorEl={anchorEl}
-                                                keepMounted
-                                                open={Boolean(anchorEl)}
-                                                onClick={handleClose}
-                                                onClose={handleClose}
-                                            >
-                                                <StyledMenuItem>
-                                                    <ListItemIcon>
+                                                <Button
+                                                    aria-controls="customized-menu"
+                                                    aria-haspopup="true"
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={handleClick}
+                                                >
+                                                    Open Menu
+                                                </Button>
+                                                <StyledMenu
+                                                    id="customized-menu"
+                                                    anchorEl={anchorEl}
+                                                    keepMounted
+                                                    open={Boolean(anchorEl)}
+                                                    onClick={handleClose}
+                                                    onClose={handleClose}
+                                                >
+                                                    <StyledMenuItem>
+                                                        <ListItemIcon>
 
-                                                    </ListItemIcon>
-                                                    <ListItemText primary="Sent mail"/>
-                                                </StyledMenuItem>
-                                                <StyledMenuItem>
-                                                    <ListItemIcon>
+                                                        </ListItemIcon>
+                                                        <ListItemText primary="Sent mail"/>
+                                                    </StyledMenuItem>
+                                                    <StyledMenuItem>
+                                                        <ListItemIcon>
 
-Батя Unfectum, [17.12.20 22:45]
-</ListItemIcon>
-                                                    <ListItemText primary="Drafts"/>
-                                                </StyledMenuItem>
-                                                <StyledMenuItem>
-                                                    <ListItemIcon>
 
-                                                    </ListItemIcon>
-                                                    <ListItemText primary="Inbox"/>
-                                                </StyledMenuItem>
-                                            </StyledMenu>
-                                        </div>
+                                                        </ListItemIcon>
+                                                        <ListItemText primary="Drafts"/>
+                                                    </StyledMenuItem>
+                                                    <StyledMenuItem>
+                                                        <ListItemIcon>
+
+                                                        </ListItemIcon>
+                                                        <ListItemText primary="Inbox"/>
+                                                    </StyledMenuItem>
+                                                </StyledMenu>
+                                            </div>
                                             :
                                             ''}
 
@@ -254,7 +253,7 @@ export default function AnimeInfo(props) {
                                                     <div>
                                                         <Button
 
-aria-controls="customized-menu"
+                                                            aria-controls="customized-menu"
                                                             aria-haspopup="true"
                                                             variant="contained"
                                                             color="primary"
@@ -302,7 +301,7 @@ aria-controls="customized-menu"
                                                     </Typography>
 
 
-<Typography component="h3" variant="h8 ">
+                                                    <Typography component="h3" variant="h8 ">
                                                         <span style={{color: 'grey'}}>країна:</span> {post.country}
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
@@ -354,9 +353,7 @@ aria-controls="customized-menu"
                                                             </StyledMenuItem>
                                                             <StyledMenuItem>
                                                                 <ListItemIcon>
-
-Батя Unfectum, [17.12.20 22:45]
-</ListItemIcon>
+                                                                </ListItemIcon>
                                                                 <ListItemText primary="Drafts"/>
                                                             </StyledMenuItem>
                                                             <StyledMenuItem>
