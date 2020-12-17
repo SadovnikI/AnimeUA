@@ -126,7 +126,7 @@ const EpisodeDetail = useStyles(class extends React.Component {
                 <React.Fragment>
                     <Header/>
 
-                    <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                    <AnimeInfo flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
                                post={this.state.movie}/>
 
                     <Footer title="Про нас" description="Усі права захищені Богом!"/>

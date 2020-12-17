@@ -53,6 +53,12 @@ class Comments extends React.Component {
             .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
     };
 
+    onEnterPress = (e) => {
+  if(e.keyCode == 13 && e.shiftKey == false) {
+    e.preventDefault();
+    this.onSubmit();
+  }
+}
     onSubmit = (e) => {
         e.preventDefault();
         const {text} = this.state;
@@ -83,6 +89,11 @@ class Comments extends React.Component {
         this.getLeads();
     }
 
+    something=(event)=> {
+        if (event.keyCode === 13) {
+            console.log('enter')
+        }
+    }
     render() {
         const {text} = this.state;
         return (
@@ -181,7 +192,9 @@ class Comments extends React.Component {
                                                     fontFamily: 'Roboto',
                                                     resize: 'none',
 
-                                                }} placeholder="Comment..." rows="3"
+                                                }}
+
+                                                          placeholder="Comment..." rows="3"
                                                           name="text"
                                                           required
                                                           id="text"
