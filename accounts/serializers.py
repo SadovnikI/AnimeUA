@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 from accounts.models import UserCabinet
+from movie.serializers import MovieSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,10 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CabinetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    watching = MovieSerializer()
+    planning = MovieSerializer()
+    completed = MovieSerializer()
+    dropped = MovieSerializer()
 
     class Meta:
         model = UserCabinet
-        fields = ('id', 'user', 'avatar')
+        fields = ('id', 'user', 'avatar', 'watching', 'planning', 'completed', 'dropped')
 
 
 # Register Serializer

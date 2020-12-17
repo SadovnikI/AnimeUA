@@ -5,6 +5,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
 
+from movie.models import Movie
 from .models import UserCabinet
 from rest_framework.views import APIView
 
@@ -61,7 +62,7 @@ class UserAPI(generics.RetrieveAPIView):
 class CabinetAPI(APIView):
     def get(self, request, pk):
         queryset = UserCabinet.objects.filter(id=pk)
-
+        print(queryset)
         serializer = CabinetSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -91,3 +92,88 @@ class ModifyUserAPI(generics.GenericAPIView):
         # UserCabinet.objects.filter(id=serializer.data['id']).update(avatar=serializer.data['avatar'])
 
         return Response('200OK')
+
+
+class WatchingAPI(APIView):
+    def put(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        if cabinet.planning.get(id=pk) != None:
+            return 404
+        if cabinet.commplited.get(id=pk) != None:
+            return 404
+        if cabinet.dropped.get(id=pk) != None:
+            return 404
+        cabinet.watching.add(Movie.objects.get(id=pk))
+
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+    def delete(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.watching.remove(Movie.objects.get(id=pk))
+
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+
+class PlanningAPI(APIView):
+    def put(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.planning.add(Movie.objects.get(id=pk))
+        if cabinet.watching.get(id=pk) is not None:
+            return 404
+        if cabinet.commplited.get(id=pk) is not None:
+            return 404
+        if cabinet.dropped.get(id=pk) is not None:
+            return 404
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+    def delete(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.planning.remove(Movie.objects.get(id=pk))
+
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+
+class CompletedAPI(APIView):
+    def put(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.completed.add(Movie.objects.get(id=pk))
+        if cabinet.watching.get(id=pk) is not None:
+            return 404
+        if cabinet.planning.get(id=pk) is not None:
+            return 404
+        if cabinet.dropped.get(id=pk) is not None:
+            return 404
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+    def delete(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.completed.remove(Movie.objects.get(id=pk))
+
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+
+class DroppedAPI(APIView):
+    def put(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.dropped.add(Movie.objects.get(id=pk))
+        if cabinet.watching.get(id=pk) is not None:
+            return 404
+        if cabinet.commplited.get(id=pk) is not None:
+            return 404
+        if cabinet.planning.get(id=pk) is not None:
+            return 404
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
+
+    def delete(self, request, pk, pk2):
+        cabinet = UserCabinet.objects.get(id=pk2)
+        cabinet.dropped.remove(Movie.objects.get(id=pk))
+
+        serializer = CabinetSerializer(cabinet)
+        return Response(serializer.data)
