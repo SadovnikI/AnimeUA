@@ -149,6 +149,7 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
 };
 export const updateuser = ({ id, username, old_password, new_password }) => (dispatch, getState) => {
   // Headers
+    console.log(old_password, id, new_password,username)
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -157,7 +158,7 @@ export const updateuser = ({ id, username, old_password, new_password }) => (dis
 
   // Request Body
   const body = JSON.stringify({ id, username, old_password, new_password });
-
+    console.log(body)
   axios
     .put('/api/cabinet/modify_user', body,  tokenConfig(getState))
     .then((res) => {

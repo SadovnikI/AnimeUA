@@ -5,7 +5,7 @@ import Header from "../../containers/Header";
 import SettingsIcon from '@material-ui/icons/Settings';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addcomment} from "../../actions/auth";
+import {addcomment, updateuser} from "../../actions/auth";
 import {createMessage} from "../../actions/messages";
 import {Redirect} from "react-router-dom";
 import Footer from "../../containers/Footer";
@@ -42,12 +42,45 @@ const useStyles = MaterialUI.withStyles((theme) => ({
 
 
 const UserSettings = useStyles(class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+    state = {
             user: [],
+            username: '',
+            old_password: '',
+            password1: '',
+            new_password: '',
         }
+
+
+    onSubmit = (e) => {
+        console.log(this.props.user.id);
+    e.preventDefault();
+    const { username, old_password, password1, new_password } = this.state;
+    const id=this.props.user.id;
+    if (password1 !== new_password) {
+      this.props.createMessage({ passwordNotMatch: 'Passwords do not match' });
+    } else {
+      const newUser = {
+        id,
+        username,
+        old_password,
+        new_password,
+      };
+      this.props.updateuser(newUser);
     }
+    this.refreshPage()
+ this.setState({
+     username: '',
+            old_password: '',
+            password1: '',
+            new_password: '',
+ })
+
+  };
+
+    refreshPage  (){
+     window.location.reload();
+  }
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
     componentDidMount() {
         const user_id = this.props.match.params.userID;
@@ -57,12 +90,14 @@ const UserSettings = useStyles(class extends React.Component {
                     user: res.data
                 });
             })
+        console.log(1)
     }
 
     static propTypes = {
 
         isAuthenticated: PropTypes.bool,
         auth: PropTypes.object.isRequired,
+        updateuser: PropTypes.func.isRequired,
 
     };
 
@@ -74,9 +109,11 @@ const UserSettings = useStyles(class extends React.Component {
     ];
 
     render() {
+        const { username, old_password, password1, new_password } = this.state;
         const {classes} = this.props
         return (
             <Grid className={classes.main}>
+
                 <Header/>
                 {!this.props.auth.isAuthenticated ? <h1 align="center">Oops, Something Went
                     Wrong</h1> : <>{this.props.auth.user.id == this.props.match.params.userID ? <Grid container
@@ -131,6 +168,8 @@ const UserSettings = useStyles(class extends React.Component {
                         <Typography variant='h5' style={{marginBottom: '30px', fontWeight: "800"}}>
                             Налаштування
                         </Typography>
+                                  <form onSubmit={this.onSubmit}>
+
                         <Grid>
                             <Grid style={{display: 'flex'}}>
                                 <Typography style={{
@@ -146,9 +185,15 @@ const UserSettings = useStyles(class extends React.Component {
                                     style={{
                                         marginTop: '15px'
                                     }}
-                                        variant="outlined"
-                                        size='small'
-                                        label="Пароль"
+                                    name="old_password"
+                                    required
+                                    autoFocus
+                                    variant="outlined"
+                                    size='small'
+                                    label="Пароль"
+                                    id="old_password"
+                                    onChange={this.onChange}
+                                    value={old_password}
                                     >
                                     </TextField>
                             </Grid>
@@ -164,9 +209,13 @@ const UserSettings = useStyles(class extends React.Component {
                                     Логін:
                                 </Typography>
                                 <TextField
+                                    name="username"
                                     variant="outlined"
                                     size='small'
                                     label='Новий логін'
+                                    id="username"
+                                    onChange={this.onChange}
+                                    value={username}
                                 >
                                 </TextField>
                             </Grid>
@@ -183,30 +232,41 @@ const UserSettings = useStyles(class extends React.Component {
                                 </Typography>
                                 <Grid>
                                     <TextField
+                                        name="password1"
                                         variant="outlined"
                                         size='small'
                                         label="Новий пароль"
+                                        id="password1"
+                                        onChange={this.onChange}
+
+                                        value={password1}
                                     >
                                     </TextField>
                                     <br/>
                                     <TextField
+                                        name="new_password"
                                         variant="outlined"
                                         size='small'
                                         style={{
                                             marginTop: '15px'
                                         }}
+                                        id="new_password"
                                         label="Підтвердіть пароль"
+                                        onChange={this.onChange}
+                                        value={new_password}
                                     >
                                     </TextField>
                                 </Grid>
                             </Grid>
                             <Grid style={{marginTop: '30px'}}>
                                 <Button variant="filled"
+                                        type="submit"
                                         style={{fontSize: '15px', background: '#41B619', color: 'white'}}>
                                     Підтвердити
                                 </Button>
                             </Grid>
                         </Grid>
+                                  </form>
                     </Grid>
                 </Grid> : <h1 align="center">Oops, Something Went Wrong</h1>}</>}
                 <Footer title="Про нас" description="Усі права захищені Богом!"/>
@@ -221,4 +281,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 
 });
-export default connect(mapStateToProps)(UserSettings);
+export default connect(mapStateToProps,{updateuser, createMessage})(UserSettings);
