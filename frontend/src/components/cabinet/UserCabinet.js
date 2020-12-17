@@ -4,9 +4,13 @@ import axios from "axios";
 import Header from "../../containers/Header";
 import SettingsIcon from '@material-ui/icons/Settings';
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {addcomment} from "../../actions/auth";
+import {createMessage} from "../../actions/messages";
+import { Redirect } from "react-router-dom";
+import Footer from "../../containers/Footer";
 
-
-export default class UserCabinet extends Component {
+ class UserCabinet extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,8 +28,11 @@ export default class UserCabinet extends Component {
             })
     }
 
-    static propTypes = {
+     static propTypes = {
+
+        isAuthenticated: PropTypes.bool,
         auth: PropTypes.object.isRequired,
+
     };
 
 
@@ -38,7 +45,8 @@ export default class UserCabinet extends Component {
     render() {
         return (
             <Grid>
-                <Grid container
+                <Header/>
+                {!this.props.auth.isAuthenticated ?<h1 align="center">Oops, Something Went Wrong</h1>:<>{this.props.auth.user.id==this.props.match.params.userID?<Grid container
                       spacing={1}
                       direction="column"
                       style={{
@@ -46,10 +54,9 @@ export default class UserCabinet extends Component {
                           align: 'center',
                           margin: 'auto',
                           width: '70%',
-                          borderRadius: "7px",
-                          background: 'white',
+                          borderRadius: "7px"
                       }}>
-                    <Header />
+
                     <Grid item xs={12} style={{
                         display: 'flex',
                         padding: '5%',
@@ -104,8 +111,17 @@ export default class UserCabinet extends Component {
                             </ButtonGroup>
                         </div>
                     </Grid>
-                </Grid>
+                </Grid>:<h1 align="center">Oops, Something Went Wrong</h1>}</>}
+                <div style={{marginTop:500}}></div>
+<Footer style={{marginTop:800}} title="Про нас" description="Усі права захищені Богом!"/>
             </Grid>
         );
     }
 }
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
+    auth: state.auth,
+
+});
+export default connect(mapStateToProps)(UserCabinet);

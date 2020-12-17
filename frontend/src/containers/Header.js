@@ -55,7 +55,7 @@ const Header = useStyles(class extends React.Component {
 
         const authLinks = (
             <div>
-                <strong>{user ? `Welcome, ${user.username}!` : ''} </strong>
+                <strong>{user ? <>Welcome, <a href={`/cabinet/${user.id}`}>{user.username}!</a></> : ''} </strong>
                 <Button onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
                     Вийти
                 </Button>
