@@ -17,6 +17,7 @@ import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = MaterialUI.withStyles((theme) => ({
+
     toolbar: {
         backgroundColor: theme.palette.common.white,
     },
@@ -48,10 +49,12 @@ const useStyles = MaterialUI.withStyles((theme) => ({
             backgroundPosition: '0% 50%'
         },
     },
+
 }), {withTheme: true});
 
 
 const Header = useStyles(class extends React.Component {
+
     static propTypes = {
         auth: PropTypes.object.isRequired,
         logout: PropTypes.func.isRequired,
@@ -94,14 +97,14 @@ const Header = useStyles(class extends React.Component {
                     textDecoration: 'none',
                     color: 'black',
                     textAlign: 'center',
-                    marginRight: '20px',
-                }} href={`/cabinet/${user.id}`}><img style={{marginTop: '11px'}} height={ 50} width={50} src={this.state.user.map(item=>(
+                    marginRight: '10px',
+                }} href={`/cabinet/${user.id}`}><img style={{marginTop: '5px'}} height={50} width={50} src={this.state.user.map(item=>(
                     item.avatar
                 ))}/></a> : ''}
 
-                <Button style={{margin: 'none!', textAlign: 'none!'}} onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">
-                    Вийти
-                </Button>
+                {/*<Button style={{margin: 'none!', textAlign: 'none!'}} onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">*/}
+                {/*    Вийти*/}
+                {/*</Button>*/}
             </Grid>
         );
 
