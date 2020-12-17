@@ -10,7 +10,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class GenresSerializer(serializers.RelatedField):
-
     def to_representation(self, value):
         return value.name
 
