@@ -24,14 +24,25 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: 240
     },
     content: {
-        flex: '1 0 auto',
         justifyContent: "center",
         width: 220,
     },
     cover: {
+        flex: '0 0 auto',
         width: 180,
         height: 240,
     },
+    fadeout : {
+        position: "absolute",
+        top: 0,
+        width: "100%",
+        margin: 0,
+        padding: '60px 0',
+        backgroundImage: 'linear-gradient(to bottom, transparent, white)'
+    },
+    section: {
+        position: "relative",
+    }
 }));
 
 export default function FeaturedPost(props) {
@@ -50,7 +61,7 @@ export default function FeaturedPost(props) {
                     />
                     <div className={classes.details}>
                         <CardContent className={classes.content}>
-                            <Typography component="h5" variant="h5">
+                            <Typography component="h6" variant="h6" noWrap>
                                 {post.title}
                             </Typography>
 
@@ -65,9 +76,12 @@ export default function FeaturedPost(props) {
                                     Year: {post.year}
                                 </Typography>
                             </Box>
-                            <Typography style={{fontSize: "11px"}}>
-                                {String(post.description).slice(0, 115)}...
+                            <div className={classes.section}>
+                            <Typography variant="body2">
+                                {post.description}
                             </Typography>
+                            <p className={classes.fadeout}></p>
+                            </div>
                         </CardContent>
                     </div>
                 </Card>
