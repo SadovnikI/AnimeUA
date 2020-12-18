@@ -54,6 +54,18 @@ export default function CustomizedMenus(props) {
     setAnchorEl(null);
   };
 
+  let is_watching = false;
+  let is_completed = false;
+  let is_planning = false;
+  let is_dropped = false;
+
+  function check() {
+    user_cabinet.watching.map(item => (item.id == movie_id ? is_watching = true : ''))
+    user_cabinet.completed.map(item => (item.id == movie_id ? is_completed = true : ''))
+    user_cabinet.planning.map(item => (item.id == movie_id ? is_planning = true : ''))
+    user_cabinet.dropped.map(item => (item.id == movie_id ? is_dropped = true : ''))
+  }
+
   return (
     <div>
       <Button
@@ -74,27 +86,27 @@ export default function CustomizedMenus(props) {
       >
         <StyledMenuItem>
           <ListItemIcon>
-            {/*{? <DoneIcon /> : ''}*/}
+            {is_watching ? <DoneIcon /> : ''}
           </ListItemIcon>
           <ListItemText primary="Дивлюсь" />
         </StyledMenuItem>
         <StyledMenuItem>
           <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+            {is_completed ? <DoneIcon /> : ''}
           </ListItemIcon>
           <ListItemText primary="Закінчено" />
         </StyledMenuItem>
         <StyledMenuItem>
           <ListItemIcon>
-            <InboxIcon fontSize="small" />
+            {is_planning ? <DoneIcon /> : ''}
           </ListItemIcon>
-          <ListItemText primary="Закинуто" />
+          <ListItemText primary="Заплановано" />
         </StyledMenuItem>
         <StyledMenuItem>
           <ListItemIcon>
-            <InboxIcon fontSize="small" />
+            {is_dropped ? <DoneIcon /> : ''}
           </ListItemIcon>
-          <ListItemText primary="Заплановано" />
+          <ListItemText primary="Закинуто" />
         </StyledMenuItem>
       </StyledMenu>
     </div>

@@ -75,14 +75,12 @@ const EpisodeDetail = useStyles(class extends React.Component {
                 });
             })
 
-
     }
 
 
 
 
     render() {
-
         const {classes} = this.props
         const movieID = this.props.match.params.movieID;
         let Episode = String(this.state.movie.video_urls).split(",");
@@ -124,7 +122,6 @@ const EpisodeDetail = useStyles(class extends React.Component {
             <div className={classes.main}>
                 <React.Fragment>
                     <Header/>
-
                     <AnimeInfo user_cabinet={this.state.cabinet} flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
                                post={this.state.movie}/>
 

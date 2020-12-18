@@ -138,6 +138,7 @@ export default function AnimeInfo(props) {
                                                 fontWeight: '400'
                                             }}>{post.description}</span></p>
                                         </Typography>
+                                        {console.log(props.user_cabinet)}
                                         <CustomizedAddMenu user_cabinet={props.user_cabinet} movie={post}/>
                                     </div>
                                 ) : (
