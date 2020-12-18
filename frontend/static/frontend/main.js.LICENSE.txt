@@ -716,6 +716,8 @@
 
 /*! export unstable_wrapCallback [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/scheduler/cjs/scheduler.production.min.js .unstable_wrapCallback */
 
+/*! export updateChoice [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export updateuser [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export useAlert [provided] [no usage info] [missing usage info prevents renaming] */
@@ -972,6 +974,10 @@
   !*** ./src/containers/Markdown.js ***!
   \************************************/
 
+/*!************************************!*\
+  !*** ./src/containers/Watching.js ***!
+  \************************************/
+
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
   \*************************************/
@@ -994,6 +1000,10 @@
 
 /*!***************************************!*\
   !*** ./node_modules/moment/moment.js ***!
+  \***************************************/
+
+/*!***************************************!*\
+  !*** ./src/containers/UserForDrop.js ***!
   \***************************************/
 
 /*!****************************************!*\

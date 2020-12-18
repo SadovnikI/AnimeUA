@@ -9,6 +9,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import AddIcon from '@material-ui/icons/Add';
 import DoneIcon from '@material-ui/icons/Done';
+import Watching from "./Watching";
 
 const StyledMenu = withStyles({
   paper: {
@@ -43,7 +44,9 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function CustomizedMenus(props) {
   const {user_cabinet, movie} = props;
-  const movie_id = movie.id;
+
+  const movie_id = movie.movie_id;
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -59,15 +62,24 @@ export default function CustomizedMenus(props) {
   let is_planning = false;
   let is_dropped = false;
 
+
   function check() {
-    user_cabinet.watching.map(item => (item.id == movie_id ? is_watching = true : ''))
-    user_cabinet.completed.map(item => (item.id == movie_id ? is_completed = true : ''))
-    user_cabinet.planning.map(item => (item.id == movie_id ? is_planning = true : ''))
-    user_cabinet.dropped.map(item => (item.id == movie_id ? is_dropped = true : ''))
+
+
+        user_cabinet.map(item=>(
+
+            item.watching.map(item => (item.id == movie_id ?  is_watching = true  : '')),
+            item.completed.map(item => (item.id == movie_id ? is_completed = true : '')),
+      item.planning.map(item => (item.id == movie_id ? is_planning = true : '')),
+      item.dropped.map(item => (item.id == movie_id ? is_dropped = true : ''))
+        ))
+
   }
+
 
   return (
     <div>
+        { user_cabinet.length?check():''}
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -84,12 +96,7 @@ export default function CustomizedMenus(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <ListItemIcon>
-            {is_watching ? <DoneIcon /> : ''}
-          </ListItemIcon>
-          <ListItemText primary="Дивлюсь" />
-        </StyledMenuItem>
+        <Watching type={'watching'} movie={movie} is_watching={is_watching}/>
         <StyledMenuItem>
           <ListItemIcon>
             {is_completed ? <DoneIcon /> : ''}

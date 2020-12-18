@@ -166,3 +166,19 @@ export const updateuser = ({ id, username, old_password, new_password }) => (dis
     .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
 
 };
+
+export const updateChoice  = ({ type, movie_url, cabinet_id }) => (dispatch, getState) => {
+  // Headers
+    console.log(movie_url, cabinet_id )
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  axios
+    .put(`/api/cabinet/${type}/${movie_url}/${cabinet_id}`, tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: '' }));
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
+};

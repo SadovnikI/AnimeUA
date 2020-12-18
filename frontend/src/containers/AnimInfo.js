@@ -12,6 +12,7 @@ import Comments from "./CommentSection";
 import Rating from "@material-ui/lab/Rating";
 import Media from 'react-media';
 import CustomizedAddMenu from './DropDownChoice';
+import UserForDrop from "./UserForDrop";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +64,7 @@ const posts = [];
 
 export default function AnimeInfo(props) {
     const classes = useStyles();
-    const {post} = props;
+    const {post, flag} = props;
     let Genre = String(post.genres).split(",");
 
     return (
@@ -138,8 +139,8 @@ export default function AnimeInfo(props) {
                                                 fontWeight: '400'
                                             }}>{post.description}</span></p>
                                         </Typography>
-                                        {console.log(props.user_cabinet)}
-                                        <CustomizedAddMenu user_cabinet={props.user_cabinet} movie={post}/>
+                                        {console.log(post,8)}
+                                        {flag?<UserForDrop movie={post}/>:''}
                                     </div>
                                 ) : (
                                     <Media query={{minWidth: 600}}>
