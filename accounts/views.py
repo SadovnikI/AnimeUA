@@ -61,9 +61,9 @@ class UserAPI(generics.RetrieveAPIView):
 
 class CabinetAPI(APIView):
     def get(self, request, pk):
-        queryset = UserCabinet.objects.filter(id=pk)
+        user_cabinet = UserCabinet.objects.filter(id=pk)
 
-        serializer = CabinetSerializer(queryset, many=True)
+        serializer = CabinetSerializer(user_cabinet, many=True)
         return Response(serializer.data)
 
 
@@ -103,6 +103,7 @@ class WatchingAPI(APIView):
             return 404
         if cabinet.dropped.get(id=pk) != None:
             return 404
+
         cabinet.watching.add(Movie.objects.get(id=pk))
 
         serializer = CabinetSerializer(cabinet)

@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+
 import {connect} from "react-redux";
 import {logout} from '../actions/auth';
-import {MuiThemeProvider} from '@material-ui/core/styles';
-import {createMuiTheme} from '@material-ui/core/styles';
+
 import * as MaterialUI from "@material-ui/core";
 import {ButtonGroup} from "@material-ui/core";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
+
+import CustomizedMenus from "./DropDawnAvatar";
+
 
 const useStyles = MaterialUI.withStyles((theme) => ({
 
@@ -64,47 +65,38 @@ const Header = useStyles(class extends React.Component {
         {title: 'Каталог', url: '/home'},
         {title: 'Новини', url: '/home'},
     ];
-    state={
-        user:[]
+    state = {
+        user: []
     }
-    count=1;
+    count = 1;
+
     componentDidMount() {
 
 
-        if(this.props.auth.isAuthenticated){
+        if (this.props.auth.isAuthenticated) {
             const user_id = this.props.auth.user.id;
             axios.get(`http://127.0.0.1:8000/api/cabinet/${user_id}`)
-            .then(res => {
-                this.setState({
-                    user: res.data
-                });
-            })
+                .then(res => {
+                    this.setState({
+                        user: res.data
+                    });
+                })
 
         }
     }
 
+
     render() {
         const {isAuthenticated, user} = this.props.auth;
-        if(isAuthenticated && this.count <2){
-            this.count+=1;
+        if (isAuthenticated && this.count < 2) {
+            this.count += 1;
             this.componentDidMount()
         }
         const {classes} = this.props
 
         const authLinks = (
             <Grid>
-                {user ? <a style={{
-                    textDecoration: 'none',
-                    color: 'black',
-                    textAlign: 'center',
-                    marginRight: '10px',
-                }} href={`/cabinet/${user.id}`}><img style={{marginTop: '5px'}} height={50} width={50} src={this.state.user.map(item=>(
-                    item.avatar
-                ))}/></a> : ''}
-
-                {/*<Button style={{margin: 'none!', textAlign: 'none!'}} onClick={this.props.logout} variant="outlined" color={"secondary"} size="small">*/}
-                {/*    Вийти*/}
-                {/*</Button>*/}
+                <CustomizedMenus user_cabinet={this.state.user} logout_user={this.props.logout} />
             </Grid>
         );
 

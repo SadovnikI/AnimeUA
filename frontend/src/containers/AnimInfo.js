@@ -10,14 +10,8 @@ import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Comments from "./CommentSection";
 import Rating from "@material-ui/lab/Rating";
-import Box from "@material-ui/core/Box";
 import Media from 'react-media';
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import withStyles from "@material-ui/core/styles/withStyles";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
+import CustomizedAddMenu from './DropDownChoice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
 
         display: 'flex',
         flexWrap: 'wrap',
-
+        marginLeft: 30,
         justifyContent: 'center',
         //flex: 1,
+        lineHeight:2,
         width: 1030,
         height: "100%",
         paddingTop: 20,
@@ -50,48 +45,19 @@ const useStyles = makeStyles((theme) => ({
 
     },
     cardMedia: {
-        marginLeft: 150,
-        marginTop: 20,
-        marginRight: 25,
+        marginLeft: 50,
+        backgroundSize:'cover',
+        marginRight: 10,
         borderRadius: '5px',
         width: 200,
-        height: 300,
+        height: 280,
         display: 'flex',
         flexWrap: 'wrap',
 
     },
 }));
 
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})((props) => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-        }}
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-        }}
-        {...props}
-    />
-));
 
-const StyledMenuItem = withStyles((theme) => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem);
 const posts = [];
 
 
@@ -99,15 +65,6 @@ export default function AnimeInfo(props) {
     const classes = useStyles();
     const {post} = props;
     let Genre = String(post.genres).split(",");
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     return (
         <Hidden xsDown>
@@ -131,7 +88,7 @@ export default function AnimeInfo(props) {
                                         flexDirection: 'column'
                                     }}>
 
-                                        <Typography style={{fontWeight: '800'}} component="h4" variant="h5">
+                                        <Typography style={{fontWeight: '600'}} component="h4" variant="h5">
                                             {String(post.title).slice(0, 20)}
                                         </Typography>
                                         <br/>
@@ -139,74 +96,50 @@ export default function AnimeInfo(props) {
                                         <Typography component="h3" variant="h8 ">
                                             <span style={{
                                                 color: 'black',
+                                                fontWeight: '600'
+                                            }}>Країна:</span> <span style={{
+                                                color: 'black',
                                                 fontWeight: '400'
-                                            }}>Країна:</span> {post.country}
+                                        }}>{post.country}</span>
                                         </Typography>
                                         <Typography component="h3" variant="h8 ">
-                                            <span style={{color: 'black', fontWeight: '400'}}> Рік: </span>{post.year}
+                                            <span style={{color: 'black', fontWeight: '600'}}> Рік: </span><span style={{
+                                                color: 'black',
+                                                fontWeight: '400'
+                                        }}>{post.year}</span>
                                         </Typography>
                                         <Typography component="h3" variant="h8 ">
                                             <span style={{
                                                 color: 'black',
+                                                fontWeight: '600'
+                                            }}> Рейтинг:</span><span style={{
+                                                color: 'black',
                                                 fontWeight: '400'
-                                            }}> Рейтинг:</span> {post.rating}
+                                        }}> {post.rating}</span>
                                             <Rating style={{marginLeft: '5px'}} size="small" value={post.rating / 2}
                                                     precision={0.5} readOnly/>
                                         </Typography>
                                         <Typography component="h3" variant="h8 ">
                                             <span style={{
                                                 color: 'black',
+                                                fontWeight: '600'
+                                            }}> Жанр:</span> <span style={{
+                                                color: 'black',
                                                 fontWeight: '400'
-                                            }}> Жанр:</span> {Genre.join(", ")}
+                                        }}>{Genre.join(", ")}</span>
                                         </Typography>
                                         <br/>
-                                        <Typography style={{width: 'inherit', display: 'flex', flexWrap: 'wrap'}}
+                                         <br/>
+
+                                        <Typography style={{width: '850px', display: 'flex', flexWrap: 'wrap'}}
                                                     component="h3" variant="h8 ">
-                                            <p style={{fontSize: 15, marginBottom: 10}}>{post.description}</p>
+                                            <p style={{fontSize: 15, marginBottom:30, lineHeight:1.5}}> <span style={{
+                                                color: 'black',
+                                                fontWeight: '400'
+                                            }}>{post.description}</span></p>
                                         </Typography>
-                                        {props.flag ?
-                                            <div>
-                                                <Button
-                                                    aria-controls="customized-menu"
-                                                    aria-haspopup="true"
-                                                    variant="contained"
-                                                    color="primary"
-                                                    onClick={handleClick}
-                                                >
-                                                    Open Menu
-                                                </Button>
-                                                <StyledMenu
-                                                    id="customized-menu"
-                                                    anchorEl={anchorEl}
-                                                    keepMounted
-                                                    open={Boolean(anchorEl)}
-                                                    onClick={handleClose}
-                                                    onClose={handleClose}
-                                                >
-                                                    <StyledMenuItem>
-                                                        <ListItemIcon>
-
-                                                        </ListItemIcon>
-                                                        <ListItemText primary="Sent mail"/>
-                                                    </StyledMenuItem>
-                                                    <StyledMenuItem>
-                                                        <ListItemIcon>
-
-
-                                                        </ListItemIcon>
-                                                        <ListItemText primary="Drafts"/>
-                                                    </StyledMenuItem>
-                                                    <StyledMenuItem>
-                                                        <ListItemIcon>
-
-                                                        </ListItemIcon>
-                                                        <ListItemText primary="Inbox"/>
-                                                    </StyledMenuItem>
-                                                </StyledMenu>
-                                            </div>
-                                            :
-                                            ''}
-
+                                        {console.log(props.user_cabinet)}
+                                        <CustomizedAddMenu user_cabinet={props.user_cabinet} movie={post}/>
                                     </div>
                                 ) : (
                                     <Media query={{minWidth: 600}}>
@@ -216,78 +149,65 @@ export default function AnimeInfo(props) {
                                                     width: 300,
                                                     height: 'inherit',
                                                     display: 'flex',
-                                                    flexDirection: 'column'
+                                                    flexDirection: 'column',
+                                                    marginRight:50
                                                 }}>
 
                                                     <Typography component="h2" variant="h5">
-                                                        {post.title}
+                                                          {String(post.title).slice(0, 20)}
                                                     </Typography>
 
                                                     <Typography component="h3" variant="h8 ">
-                                                        <span style={{color: 'grey'}}>країна:</span> {post.country}
+                                                        <span style={{   color: 'black',
+                                                                fontWeight: '600'}}>країна:</span>
+                                                        <span style={{
+                                                                                color: 'black',
+                                                                                fontWeight: '400'
+                                                        }}>{post.country}</span>
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
-                                                        <span style={{color: 'grey'}}> рік: </span>{post.year}
+                                                        <span style={{   color: 'black',
+                                                                fontWeight: '600'}}> рік: </span>
+                                                        <span style={{
+                                                                            color: 'black',
+                                                                            fontWeight: '400'
+                                                        }}>{post.year}</span>
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
-                                                        <span style={{color: 'grey'}}> рейтинг:</span> {post.rating}
+                                                        <span style={{   color: 'black',
+                                                                fontWeight: '600'}}> рейтинг:</span> <span style={{
+                                                                color: 'black',
+                                                                fontWeight: '400'
+                                                    }}>{post.rating}</span>
                                                         <Rating size="small" value={post.rating} precision={0.5}
                                                                 readOnly/>
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
                                                             <span
-                                                                style={{color: 'grey'}}> жанр:</span> {Genre.join(", ")}
+                                                                style={{   color: 'black',
+                                                                fontWeight: '600'}}> жанр:</span><span style={{
+                                                                                color: 'black',
+                                                                                fontWeight: '400'
+                                                    }}> {Genre.join(", ")}</span>
                                                     </Typography>
+                                                    <br/>
+                                                     <br/>
                                                     <Typography
                                                         style={{
-                                                            width: 'inherit',
+                                                            width: '600px',
                                                             display: 'flex',
                                                             flexWrap: 'wrap'
                                                         }}
                                                         component="h3" variant="h8 ">
                                                         <p style={{
                                                             fontSize: 15,
-                                                            marginBottom: 10
-                                                        }}>{post.description}</p>
+                                                            marginBottom: 10,
+                                                            lineHeight:1.5
+                                                        }}> <span style={{
+                                                color: 'black',
+                                                fontWeight: '400'
+                                                        }}>{post.description}</span></p>
                                                     </Typography>
-                                                    <div>
-                                                        <Button
-
-                                                            aria-controls="customized-menu"
-                                                            aria-haspopup="true"
-                                                            variant="contained"
-                                                            color="primary"
-                                                            onClick={handleClick}
-                                                        >
-                                                            Open Menu
-                                                        </Button>
-                                                        <StyledMenu
-                                                            id="customized-menu"
-                                                            anchorEl={anchorEl}
-                                                            keepMounted
-                                                            open={Boolean(anchorEl)}
-                                                            onClose={handleClose}
-                                                        >
-                                                            <StyledMenuItem>
-                                                                <ListItemIcon>
-
-                                                                </ListItemIcon>
-                                                                <ListItemText primary="Sent mail"/>
-                                                            </StyledMenuItem>
-                                                            <StyledMenuItem>
-                                                                <ListItemIcon>
-
-                                                                </ListItemIcon>
-                                                                <ListItemText primary="Drafts"/>
-                                                            </StyledMenuItem>
-                                                            <StyledMenuItem>
-                                                                <ListItemIcon>
-
-                                                                </ListItemIcon>
-                                                                <ListItemText primary="Inbox"/>
-                                                            </StyledMenuItem>
-                                                        </StyledMenu>
-                                                    </div>
                                                 </div>) : (
                                                 <div style={{
                                                     width: 250,
@@ -297,84 +217,70 @@ export default function AnimeInfo(props) {
                                                 }}>
 
                                                     <Typography component="h2" variant="h5">
-                                                        {post.title}
+                                                          {String(post.title).slice(0, 20)}
                                                     </Typography>
 
-
                                                     <Typography component="h3" variant="h8 ">
-                                                        <span style={{color: 'grey'}}>країна:</span> {post.country}
+                                                        <span style={{   color: 'black',
+                                                                fontWeight: '600'}}>країна:</span> <span style={{
+                                                                        color: 'black',
+                                                                        fontWeight: '400'
+                                                    }}>{post.country}</span>
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
-                                                        <span style={{color: 'grey'}}> рік: </span>{post.year}
+                                                        <span style={{   color: 'black',
+                                                                fontWeight: '600'}}> рік: </span><span style={{
+                                                                color: 'black',
+                                                                fontWeight: '400'
+                                                    }}>{post.year}</span>
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
-                                                        <span style={{color: 'grey'}}> рейтинг:</span> {post.rating}
+                                                        <span style={{   color: 'black',
+                                                                fontWeight: '600'}}> рейтинг:</span> <span style={{
+                                                                        color: 'black',
+                                                                        fontWeight: '400'
+                                                    }}>{post.rating}</span>
                                                         <Rating size="small" value={post.rating} precision={0.5}
                                                                 readOnly/>
                                                     </Typography>
                                                     <Typography component="h3" variant="h8 ">
                                                             <span
-                                                                style={{color: 'grey'}}> жанр:</span> {Genre.join(", ")}
+                                                                style={{   color: 'black',
+                                                                fontWeight: '600'}}> жанр:</span><span style={{
+                                                                        color: 'black',
+                                                                        fontWeight: '400'
+                                                    }}> {Genre.join(", ")}</span>
                                                     </Typography>
+                                                    <br/>
+                                         <br/>
                                                     <Typography
                                                         style={{
-                                                            width: 'inherit',
+                                                            width: '250px',
                                                             display: 'flex',
                                                             flexWrap: 'wrap'
                                                         }}
                                                         component="h3" variant="h8 ">
                                                         <p style={{
                                                             fontSize: 15,
-                                                            marginBottom: 10
-                                                        }}>{post.description}</p>
+                                                            marginBottom: 10,
+                                                            lineHeight:1.5
+                                                        }}> <span style={{
+                                                color: 'black',
+                                                fontWeight: '400'
+                                                        }}>{post.description}</span></p>
                                                     </Typography>
-                                                    <div>
-                                                        <Button
-                                                            aria-controls="customized-menu"
-                                                            aria-haspopup="true"
-                                                            variant="contained"
-                                                            color="primary"
-                                                            onClick={handleClick}
-                                                        >
-                                                            Open Menu
-                                                        </Button>
-                                                        <StyledMenu
-                                                            id="customized-menu"
-                                                            anchorEl={anchorEl}
-                                                            keepMounted
-                                                            open={Boolean(anchorEl)}
-                                                            onClose={handleClose}
-                                                        >
-                                                            <StyledMenuItem>
-                                                                <ListItemIcon>
-
-                                                                </ListItemIcon>
-                                                                <ListItemText primary="Sent mail"/>
-                                                            </StyledMenuItem>
-                                                            <StyledMenuItem>
-                                                                <ListItemIcon>
-                                                                </ListItemIcon>
-                                                                <ListItemText primary="Drafts"/>
-                                                            </StyledMenuItem>
-                                                            <StyledMenuItem>
-                                                                <ListItemIcon>
-
-                                                                </ListItemIcon>
-                                                                <ListItemText primary="Inbox"/>
-                                                            </StyledMenuItem>
-                                                        </StyledMenu>
-                                                    </div>
                                                 </div>
                                             )}
                                     </Media>
                                 )
                             }
                         </Media>
-                        <Media query={{minWidth: 800}}>
+                        <Media query={{minWidth: 1100}}>
                             {matches =>
                                 matches ? (
                                         <CardMedia className={classes.cardMedia} image={post.poster}/>) :
                                     (
+
                                         <CardMedia style={{width: 150, height: 250, marginLeft: 50, marginRight: 0}}
                                                    className={classes.cardMedia} image={post.poster}/>
                                     )
@@ -384,7 +290,7 @@ export default function AnimeInfo(props) {
                     <Media query={{minWidth: 800}}>
                         {matches =>
                             matches ? (
-                                <div style={{width: 800, marginTop: 50}}>
+                                <div style={{width: 800, marginTop: 50,marginRight:50}}>
                                     <Grid container style={{
                                         marginBottom: 10,
 
@@ -393,30 +299,28 @@ export default function AnimeInfo(props) {
                                             {props.rows}
                                         </div>
                                     </Grid>
-                                    <video background-color={'black'} margin-top={'10px'} width={'800px'}
+                                    <video background-color={'black'} margin-top={'10px'} style={{marginRight:180}} width={'855px'} height={'480px'}
                                            src={props.episodeurl} controls/>
                                     <Comments movie={props.post} comments={props.comments}/>
                                 </div>) : (
                                 <div style={{width: 500, marginTop: 50}}>
 
-                                    <video background-color={'black'} margin-top={'80px'} width={'500px'}
+                                    <video background-color={'black'} margin-top={'80px'} margin-right={'80px'} width={'500px'}
                                            src={props.episodeurl} controls/>
                                     <Grid container style={{marginBottom: 50}} justify="center">
                                         <div style={{height: '100%', width: 400}}>
                                             {props.rows}
                                         </div>
                                     </Grid>
-                                    <Comments movie={props.post} comments={props.comments}/>
                                 </div>
                             )}
                     </Media>
                 </div>
-
-
             </Card>
         </Hidden>
     );
 }
+
 FeaturedPost.propTypes = {
     post: PropTypes.object,
 };
