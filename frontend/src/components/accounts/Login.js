@@ -17,6 +17,7 @@ import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {login} from "../../actions/auth"
+import * as MaterialUI from "@material-ui/core";
 
 function Copyright() {
     return (
@@ -28,7 +29,32 @@ function Copyright() {
         </Typography>
     );
 }
-export class Login extends React.Component {
+const useStyles = MaterialUI.withStyles((theme) => ({
+    main: {
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        animation: '$gradient 15s ease infinite'
+    },
+    movieBox: {
+        padding: theme.spacing(2),
+        background: 'rgba(255,255,255,0.65)',
+        marginBottom: theme.spacing(3)
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
+    },
+}));
+
+const Login = useStyles(class extends React.Component {
+
     state = {
         username: '',
         password: '',
@@ -43,13 +69,16 @@ export class Login extends React.Component {
     }
     onChange = e => this.setState({[e.target.name]: e.target.value})
     render() {
+        const {classes} = this.props
         if (this.props.isAuthenticated) {
             return <Redirect to="/home"/>;
         }
         const {username, password} = this.state;
         return (
+            <React.Fragment>
+            <div >
             <Container component="main" maxWidth="xs">
-                <CssBaseline/>
+
                 <div>
                     <h2 className="text-center">Login</h2>
                     <form onSubmit={this.onSubmit} noValidate>
@@ -104,9 +133,11 @@ export class Login extends React.Component {
                     </form>
                 </div>
             </Container>
+            </div>
+            </React.Fragment>
         );
     }
-}
+})
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
