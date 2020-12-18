@@ -60,7 +60,6 @@ const EpisodeDetail = useStyles(class extends React.Component {
     componentDidMount() {
         const movieID = this.props.match.params.movieID;
         const movie_id = this.state.movie.movie_id;
-        const {user} = this.props.auth;
         axios.get(`http://127.0.0.1:8000/api/${movieID}`)
             .then(res => {
                 this.setState({
@@ -126,7 +125,7 @@ const EpisodeDetail = useStyles(class extends React.Component {
                 <React.Fragment>
                     <Header/>
 
-                    <AnimeInfo flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                    <AnimeInfo user_cabinet={this.state.cabinet} flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
                                post={this.state.movie}/>
 
                     <Footer title="Про нас" description="Усі права захищені Богом!"/>

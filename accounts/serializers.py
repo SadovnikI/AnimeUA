@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
 from accounts.models import UserCabinet
-from movie.serializers import MovieSerializer, CabinetMovieSerializer
+from movie.serializers import CabinetMovieSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,14 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CabinetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    watching = CabinetMovieSerializer()
-    planning = CabinetMovieSerializer()
-    completed = CabinetMovieSerializer()
-    dropped = CabinetMovieSerializer()
+    watching = CabinetMovieSerializer(many=True)
+    planning = CabinetMovieSerializer(many=True)
+    completed = CabinetMovieSerializer(many=True)
+    dropped = CabinetMovieSerializer(many=True)
 
     class Meta:
         model = UserCabinet
-        fields = ('id', 'user', 'avatar','watching','planning','completed','dropped')
+        fields = ('id', 'user', 'avatar', 'watching', 'planning', 'completed', 'dropped')
 
 
 # Register Serializer
@@ -54,6 +54,7 @@ class ModifyUserSerializer(serializers.Serializer):
     username = serializers.CharField(allow_blank=True)
     old_password = serializers.CharField()
     new_password = serializers.CharField(allow_blank=True)
+
     # avatar = serializers.FileField()
 
     def update(self, instance, validated_data):
@@ -64,4 +65,3 @@ class ModifyUserSerializer(serializers.Serializer):
         # instance.avatar = validated_data.get('avatar', instance.avatar)
 
         return instance
-

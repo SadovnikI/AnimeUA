@@ -40,3 +40,4 @@ class CabinetMovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = ['id', 'title', 'poster', 'rating', 'url', 'year', 'description']
+
