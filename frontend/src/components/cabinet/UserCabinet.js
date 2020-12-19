@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Footer from "../../containers/Footer";
 import * as MaterialUI from "@material-ui/core";
+import FullWidthTabs from "../../containers/CollLookingMenuZbs";
+
 
 
 const useStyles = MaterialUI.withStyles((theme) => ({
@@ -35,12 +37,6 @@ const useStyles = MaterialUI.withStyles((theme) => ({
 
 
 const UserCabinet = useStyles(class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: [],
-        }
-    }
 
     componentDidMount() {
         const user_id = this.props.match.params.userID;
@@ -52,12 +48,10 @@ const UserCabinet = useStyles(class extends React.Component {
             })
     }
 
-    getData(props) {
-        return(
-            <div style={{width:300, height:300}}>qqqqqqqqqqqqqqqqqqqqq
-            qqqqqqqqqqqqqqqqqqqqq</div>
-        );
-        }
+    state = {
+        user: [],
+    }
+
 
     static propTypes = {
 
@@ -77,7 +71,7 @@ const UserCabinet = useStyles(class extends React.Component {
                                                                                                       spacing={1}
                                                                                                       direction="column"
                                                                                                       style={{
-                                                                                                          minHeight: '100vh',
+                                                                                                          minHeight: '77vh',
                                                                                                           align: 'center',
                                                                                                           margin: 'auto',
                                                                                                           width: '70%',
@@ -134,34 +128,8 @@ const UserCabinet = useStyles(class extends React.Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid style={{
-                        background: 'rgba(255,255,255,0.65)',
-                        borderRadius: '5px',
-                        marginTop: '20px',
-                        padding: '20px 40px',
-                        height: '400px'
-                    }}>
-
-                        <Grid item xs={12}>
-                            <div>
-                                <Button onClick={() => this.getData(this.state.user.map(user => (
-                                            user.watching)))}>
-                                    Дивлюсь
-                                </Button>
-                                <Button onClick={() => this.getData(this.state.user.map(user => (
-                                            user.completed)))}>
-                                    Завершив
-                                </Button>
-                                <Button onClick={() => this.getData(this.state.user.map(user => (
-                                            user.planning)))}>
-                                    Заплановано
-                                </Button>
-                                <Button onClick={() => this.getData(this.state.user.map(user => (
-                                            user.dropped)))}>
-                                    Закинув
-                                </Button>
-                            </div>
-                        </Grid>
+                    <Grid item xs={12} style={{marginBottom: '20px'}}>
+                        <FullWidthTabs user={this.state.user}/>
                     </Grid>
                 </Grid> : <h1 align="center">Oops, Something Went Wrong</h1>}</>}
                 <Footer title="Про нас" description="Усі права захищені Богом!"/>

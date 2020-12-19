@@ -5,80 +5,10 @@ import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
-<<<<<<< HEAD
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import AddIcon from '@material-ui/icons/Add';
-import DoneIcon from '@material-ui/icons/Done';
-import Watching from "./Watching";
-
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-||||||| 10e2942e
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import AddIcon from '@material-ui/icons/Add';
-import DoneIcon from '@material-ui/icons/Done';
-import Watching from "./Watching";
-
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-=======
 import MenuList from '@material-ui/core/MenuList';
 import {makeStyles} from '@material-ui/core/styles';
 import DoneIcon from "@material-ui/icons/Done";
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -86,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         marginRight: theme.spacing(2),
->>>>>>> 0f381ecd122d6a7a8fa2c5a9c1a4f2b817295d00
     },
 }));
 let is_watching = false;
@@ -243,13 +172,13 @@ if (event == 'watching') {
             {check()}
             <div>
                 <Button
-
+                    size='small'
+                    style={{fontSize: '11px', background: '#41B619', color: 'white', marginTop: '20px'}}
                     ref={anchorRef}
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
-                >
-                    Toggle Menu Grow
+                >додати в закладки<AddIcon style={{marginLeft: '5px'}}/>
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({TransitionProps, placement}) => (

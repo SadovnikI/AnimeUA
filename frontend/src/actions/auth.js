@@ -104,7 +104,6 @@ export const logout = () => (dispatch, getState) => {
     });
 };
 
-
 // Setup config with token - helper function
 export const tokenConfig = (getState) => {
   // Get token from state

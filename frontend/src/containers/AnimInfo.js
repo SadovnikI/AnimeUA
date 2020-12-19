@@ -78,7 +78,7 @@ export default function AnimeInfo(props) {
                     <CardContent style={{
                         display: 'flex',
                         alignContent: 'flex-end',
-                        justifyItmes: 'space-between',
+                        justifyItems: 'space-between',
                         flexWrap: 'wrap'
                     }}>
                         <Media query={{minWidth: 1100}}>
@@ -92,10 +92,13 @@ export default function AnimeInfo(props) {
                                     }}>
 
                                         <Typography style={{fontWeight: '600'}} component="h4" variant="h5">
-                                            {String(post.title).slice(0, 20)}
+                                            {post.title}
                                         </Typography>
+                                        {flag?<Watching updateChoice={props.updateChoice} movie={post}/>:''}
                                         <br/>
                                         <br/>
+                                        <br/>
+
                                         <Typography component="h3" variant="h8 ">
                                             <span style={{
                                                 color: 'black',
@@ -115,21 +118,21 @@ export default function AnimeInfo(props) {
                                             <span style={{
                                                 color: 'black',
                                                 fontWeight: '600'
-                                            }}> Рейтинг:</span><span style={{
+                                            }}> Жанр:</span> <span style={{
                                                 color: 'black',
                                                 fontWeight: '400'
-                                        }}> {post.rating}</span>
-                                            <Rating style={{marginLeft: '5px'}} size="small" value={post.rating / 2}
-                                                    precision={0.5} readOnly/>
+                                        }}>{Genre.join(", ")}</span>
                                         </Typography>
                                         <Typography component="h3" variant="h8 ">
                                             <span style={{
                                                 color: 'black',
                                                 fontWeight: '600'
-                                            }}> Жанр:</span> <span style={{
+                                            }}> Рейтинг:</span><span style={{
                                                 color: 'black',
                                                 fontWeight: '400'
-                                        }}>{Genre.join(", ")}</span>
+                                        }}> {post.rating}</span>
+                                            <Rating style={{marginLeft: '5px', marginTop: '3px'}} size="small" value={post.rating / 2}
+                                                    precision={0.5} readOnly/>
                                         </Typography>
                                         <br/>
                                          <br/>
@@ -141,8 +144,6 @@ export default function AnimeInfo(props) {
                                                 fontWeight: '400'
                                             }}>{post.description}</span></p>
                                         </Typography>
-                                        {console.log(props.user_cabinet)}
-                                        {flag?<Watching updateChoice={props.updateChoice} movie={post}/>:''}
                                     </div>
                                 ) : (
                                     <Media query={{minWidth: 600}}>

@@ -226,6 +226,8 @@
 
 /*! export boxSizing [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export checkIndexBounds [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export cloneElement [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export cloneElement [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/react/cjs/react.production.min.js .cloneElement */
@@ -240,9 +242,13 @@
 
 /*! export composeWithDevTools [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export computeIndex [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export connect [provided] [no usage info] [missing usage info prevents renaming] -> ./node_modules/react-redux/es/connect/connect.js .default */
 
 /*! export connectAdvanced [provided] [no usage info] [missing usage info prevents renaming] -> ./node_modules/react-redux/es/components/connectAdvanced.js .default */
+
+/*! export constant [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export create [provided] [no usage info] [missing usage info prevents renaming] */
 
@@ -314,6 +320,8 @@
 
 /*! export deleteChoice [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export detectScrollType [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export devToolsEnhancer [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export displayPrint [provided] [no usage info] [missing usage info prevents renaming] */
@@ -331,6 +339,8 @@
 /*! export findDOMNode [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export findDOMNode [provided] [no usage info] [provision prevents renaming (no use info)] -> ./node_modules/react-dom/cjs/react-dom.production.min.js .findDOMNode */
+
+/*! export findNativeHandler [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export flex [provided] [no usage info] [missing usage info prevents renaming] */
 
@@ -372,6 +382,10 @@
 
 /*! export getDependsOnOwnProps [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export getDisplaySameSlide [provided] [no usage info] [missing usage info prevents renaming] */
+
+/*! export getDomTreeShapes [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export getDynamicStyles [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export getInitialChildMapping [provided] [no usage info] [missing usage info prevents renaming] */
@@ -379,6 +393,8 @@
 /*! export getLuminance [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export getNextChildMapping [provided] [no usage info] [missing usage info prevents renaming] */
+
+/*! export getNormalizedScrollLeft [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export getOffsetLeft [provided] [no usage info] [missing usage info prevents renaming] */
 
@@ -551,6 +567,8 @@
 /*! export minHeight [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export minWidth [provided] [no usage info] [missing usage info prevents renaming] */
+
+/*! export mod [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export order [provided] [no usage info] [missing usage info prevents renaming] */
 
@@ -1036,6 +1054,14 @@
 
 /*!*****************************************!*\
   !*** ./node_modules/scheduler/index.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/warning/warning.js ***!
+  \*****************************************/
+
+/*!*****************************************!*\
+  !*** ./src/containers/CabinetMovies.js ***!
   \*****************************************/
 
 /*!*****************************************!*\
@@ -1634,6 +1660,10 @@
   !*** ./node_modules/redux-thunk/es/index.js ***!
   \**********************************************/
 
+/*!**********************************************!*\
+  !*** ./src/containers/CollLookingMenuZbs.js ***!
+  \**********************************************/
+
 /*!***********************************************!*\
   !*** ./node_modules/axios/lib/core/settle.js ***!
   \***********************************************/
@@ -1653,6 +1683,10 @@
 /*!***********************************************!*\
   !*** ./src/components/common/PrivateRoute.js ***!
   \***********************************************/
+
+/*!************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Add.js ***!
+  \************************************************/
 
 /*!************************************************!*\
   !*** ./node_modules/axios/lib/adapters/xhr.js ***!
@@ -1803,6 +1837,10 @@
   \*******************************************************/
 
 /*!*******************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Tab/Tab.js ***!
+  \*******************************************************/
+
+/*!*******************************************************!*\
   !*** ./node_modules/@material-ui/system/esm/merge.js ***!
   \*******************************************************/
 
@@ -1883,6 +1921,10 @@
   \*********************************************************/
 
 /*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Tabs/Tabs.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
   !*** ./node_modules/@material-ui/system/esm/borders.js ***!
   \*********************************************************/
 
@@ -1916,6 +1958,10 @@
 
 /*!*********************************************************!*\
   !*** ./node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/react-swipeable-views/lib/index.js ***!
   \*********************************************************/
 
 /*!**********************************************************!*\
@@ -2035,8 +2081,16 @@
   \************************************************************/
 
 /*!************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/lib/mod.js ***!
+  \************************************************************/
+
+/*!************************************************************!*\
   !*** ./node_modules/tiny-warning/dist/tiny-warning.esm.js ***!
   \************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/AppBar/AppBar.js ***!
+  \*************************************************************/
 
 /*!*************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Avatar/Avatar.js ***!
@@ -2114,6 +2168,10 @@
   !*** ./node_modules/react-redux/es/hooks/useReduxContext.js ***!
   \**************************************************************/
 
+/*!**************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/lib/index.js ***!
+  \**************************************************************/
+
 /*!***************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Divider/Divider.js ***!
   \***************************************************************/
@@ -2179,7 +2237,15 @@
   \****************************************************************/
 
 /*!****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/animate.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/utils/capitalize.js ***!
+  \****************************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/utils/scrollLeft.js ***!
   \****************************************************************/
 
 /*!****************************************************************!*\
@@ -2231,6 +2297,10 @@
   \*****************************************************************/
 
 /*!*****************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Tabs/TabIndicator.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/makeStyles.js ***!
   \*****************************************************************/
 
@@ -2244,6 +2314,10 @@
 
 /*!*****************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/utils/ownerWindow.js ***!
+  \*****************************************************************/
+
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/lib/constant.js ***!
   \*****************************************************************/
 
 /*!******************************************************************!*\
@@ -2263,6 +2337,10 @@
   \******************************************************************/
 
 /*!******************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Tabs/ScrollbarSize.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/styles/transitions.js ***!
   \******************************************************************/
 
@@ -2276,6 +2354,10 @@
 
 /*!******************************************************************!*\
   !*** ./node_modules/react-redux/es/utils/reactBatchedUpdates.js ***!
+  \******************************************************************/
+
+/*!******************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/lib/SwipeableViews.js ***!
   \******************************************************************/
 
 /*!*******************************************************************!*\
@@ -2400,6 +2482,10 @@
 
 /*!*********************************************************************!*\
   !*** ./node_modules/@material-ui/styles/esm/jssPreset/jssPreset.js ***!
+  \*********************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/lib/computeIndex.js ***!
   \*********************************************************************/
 
 /*!**********************************************************************!*\
@@ -2530,6 +2616,10 @@
   !*** ./node_modules/@material-ui/styles/esm/makeStyles/indexCounter.js ***!
   \*************************************************************************/
 
+/*!*************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/lib/checkIndexBounds.js ***!
+  \*************************************************************************/
+
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js ***!
   \**************************************************************************/
@@ -2579,6 +2669,10 @@
   \****************************************************************************/
 
 /*!****************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/lib/getDisplaySameSlide.js ***!
+  \****************************************************************************/
+
+/*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
   \****************************************************************************/
 
@@ -2619,6 +2713,10 @@
   \*******************************************************************************/
 
 /*!*******************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/TabScrollButton/TabScrollButton.js ***!
+  \*******************************************************************************/
+
+/*!*******************************************************************************!*\
   !*** ./node_modules/@material-ui/styles/esm/StylesProvider/StylesProvider.js ***!
   \*******************************************************************************/
 
@@ -2650,8 +2748,16 @@
   !*** ./node_modules/@material-ui/styles/esm/getStylesCreator/getStylesCreator.js ***!
   \***********************************************************************************/
 
+/*!************************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/KeyboardArrowLeft.js ***!
+  \************************************************************************************/
+
 /*!*************************************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Unstable_TrapFocus/Unstable_TrapFocus.js ***!
+  \*************************************************************************************/
+
+/*!*************************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/internal/svg-icons/KeyboardArrowRight.js ***!
   \*************************************************************************************/
 
 /*!****************************************************************************************!*\
@@ -2666,6 +2772,22 @@
   !*** ./node_modules/css-loader/dist/cjs.js!./src/components/cabinet/mystyle.module.css ***!
   \*****************************************************************************************/
 
+/*!******************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/typeof.js ***!
+  \******************************************************************************************/
+
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/extends.js ***!
+  \*******************************************************************************************/
+
+/*!********************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/inherits.js ***!
+  \********************************************************************************************/
+
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/createClass.js ***!
+  \***********************************************************************************************/
+
 /*!************************************************************************************************!*\
   !*** ./node_modules/jss-plugin-rule-value-function/dist/jss-plugin-rule-value-function.esm.js ***!
   \************************************************************************************************/
@@ -2673,3 +2795,39 @@
 /*!*************************************************************************************************!*\
   !*** ./node_modules/@material-ui/styles/esm/createGenerateClassName/createGenerateClassName.js ***!
   \*************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/classCallCheck.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+  \**************************************************************************************************/
+
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \**************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+  \*********************************************************************************************************/
+
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \*********************************************************************************************************/
+
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
+  \***********************************************************************************************************/
+
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+  \*************************************************************************************************************/
+
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views-core/node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**************************************************************************************************************/
+
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/react-swipeable-views/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js ***!
+  \****************************************************************************************************************/
