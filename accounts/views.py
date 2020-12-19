@@ -99,12 +99,7 @@ class ModifyUserAPI(generics.GenericAPIView):
 class WatchingAPI(APIView):
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
-        if len(cabinet.planning.filter(url=pk)):
-            return Response(404)
-        if len(cabinet.completed.filter(url=pk)):
-            return Response(404)
-        if len(cabinet.dropped.filter(url=pk)):
-            return Response(404)
+
         cabinet.watching.add(Movie.objects.get(url=pk))
 
         serializer = CabinetSerializer(cabinet)
@@ -122,12 +117,7 @@ class PlanningAPI(APIView):
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
 
-        if len(cabinet.watching.filter(url=pk)):
-            return Response(404)
-        if len(cabinet.completed.filter(url=pk) ):
-            return Response(404)
-        if len(cabinet.dropped.filter(url=pk)):
-            return Response(404)
+
         cabinet.planning.add(Movie.objects.get(url=pk))
         serializer = CabinetSerializer(cabinet)
         return Response(serializer.data)
@@ -144,12 +134,7 @@ class CompletedAPI(APIView):
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
 
-        if len(cabinet.watching.filter(url=pk) ):
-            return Response(404)
-        if len(cabinet.planning.filter(url=pk) ):
-            return Response(404)
-        if len(cabinet.dropped.filter(url=pk) ):
-            return Response(404)
+
         cabinet.completed.add(Movie.objects.get(url=pk))
         serializer = CabinetSerializer(cabinet)
         return Response(serializer.data)
@@ -168,12 +153,7 @@ class DroppedAPI(APIView):
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
 
-        if len(cabinet.watching.filter(url=pk)) :
-            return Response(404)
-        if len(cabinet.completed.filter(url=pk) ):
-            return Response(404)
-        if len(cabinet.planning.filter(url=pk) ):
-            return Response(404)
+
         cabinet.dropped.add(Movie.objects.get(url=pk))
         serializer = CabinetSerializer(cabinet)
         return Response(serializer.data)
