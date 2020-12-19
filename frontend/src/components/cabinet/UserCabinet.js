@@ -52,6 +52,13 @@ const UserCabinet = useStyles(class extends React.Component {
             })
     }
 
+    getData(props) {
+        return(
+            <div style={{width:300, height:300}}>qqqqqqqqqqqqqqqqqqqqq
+            qqqqqqqqqqqqqqqqqqqqq</div>
+        );
+        }
+
     static propTypes = {
 
         isAuthenticated: PropTypes.bool,
@@ -59,15 +66,9 @@ const UserCabinet = useStyles(class extends React.Component {
 
     };
 
-
-    sections = [
-        {title: 'Дивлюсь', url: '/home'},
-        {title: 'Подивився', url: '/home'},
-        {title: 'Заплановано', url: '/home'},
-    ];
-
     render() {
         const {classes} = this.props
+
         return (
             <Grid className={classes.main}>
                 <Header/>
@@ -140,17 +141,25 @@ const UserCabinet = useStyles(class extends React.Component {
                         padding: '20px 40px',
                         height: '400px'
                     }}>
+
                         <Grid item xs={12}>
                             <div>
-                                <ButtonGroup component="nav" variant="dense" size={"large"}>
-                                    {this.sections.map((section) => (
-                                        <Button
-                                            href={section.url}
-                                        >
-                                            {section.title}
-                                        </Button>
-                                    ))}
-                                </ButtonGroup>
+                                <Button onClick={() => this.getData(this.state.user.map(user => (
+                                            user.watching)))}>
+                                    Дивлюсь
+                                </Button>
+                                <Button onClick={() => this.getData(this.state.user.map(user => (
+                                            user.completed)))}>
+                                    Завершив
+                                </Button>
+                                <Button onClick={() => this.getData(this.state.user.map(user => (
+                                            user.planning)))}>
+                                    Заплановано
+                                </Button>
+                                <Button onClick={() => this.getData(this.state.user.map(user => (
+                                            user.dropped)))}>
+                                    Закинув
+                                </Button>
                             </div>
                         </Grid>
                     </Grid>
