@@ -9,7 +9,7 @@ import AnimeInfo from "./AnimInfo";
 
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addcomment} from "../actions/auth";
+import {addcomment, updateChoice} from "../actions/auth";
 import {createMessage} from "../actions/messages";
 import {useAutocomplete} from "@material-ui/lab";
 import {makeStyles} from "@material-ui/core/styles";
@@ -122,7 +122,8 @@ const EpisodeDetail = useStyles(class extends React.Component {
             <div className={classes.main}>
                 <React.Fragment>
                     <Header/>
-                    <AnimeInfo user_cabinet={this.state.cabinet} flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                    {console.log(this.state.cabinet)}
+                    <AnimeInfo updateChoice={this.props.updateChoice}  flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
                                post={this.state.movie}/>
 
                     <Footer title="Про нас" description="Усі права захищені Богом!"/>
@@ -138,4 +139,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 
 });
-export default connect(mapStateToProps, {addcomment, createMessage})(EpisodeDetail);
+export default connect(mapStateToProps, {addcomment, updateChoice, createMessage})(EpisodeDetail);

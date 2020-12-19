@@ -13,6 +13,8 @@ import Rating from "@material-ui/lab/Rating";
 import Media from 'react-media';
 import CustomizedAddMenu from './DropDownChoice';
 import UserForDrop from "./UserForDrop";
+import MenuListComposition from "./DropDownChoice";
+import Watching from "./Watching";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -139,8 +141,8 @@ export default function AnimeInfo(props) {
                                                 fontWeight: '400'
                                             }}>{post.description}</span></p>
                                         </Typography>
-                                        {console.log(post,8)}
-                                        {flag?<UserForDrop movie={post}/>:''}
+                                        {console.log(props.user_cabinet)}
+                                        {flag?<Watching updateChoice={props.updateChoice} movie={post}/>:''}
                                     </div>
                                 ) : (
                                     <Media query={{minWidth: 600}}>

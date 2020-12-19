@@ -312,6 +312,8 @@
 
 /*! export defaultMergeProps [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export deleteChoice [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export devToolsEnhancer [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export displayPrint [provided] [no usage info] [missing usage info prevents renaming] */
@@ -851,6 +853,8 @@
 /*! runtime requirements: __webpack_exports__, __webpack_require__ */
 
 /*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.g, __webpack_require__.d, __webpack_require__.* */
 
 /*! runtime requirements: __webpack_require__, __webpack_exports__ */
 
@@ -1651,10 +1655,6 @@
   \***********************************************/
 
 /*!************************************************!*\
-  !*** ./node_modules/@material-ui/icons/Add.js ***!
-  \************************************************/
-
-/*!************************************************!*\
   !*** ./node_modules/axios/lib/adapters/xhr.js ***!
   \************************************************/
 
@@ -1712,6 +1712,10 @@
 
 /*!***************************************************!*\
   !*** ./node_modules/moment/locale/ sync ^\.\/.*$ ***!
+  \***************************************************/
+
+/*!***************************************************!*\
+  !*** ./node_modules/popper.js/dist/esm/popper.js ***!
   \***************************************************/
 
 /*!***************************************************!*\
@@ -2044,6 +2048,10 @@
 
 /*!*************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Hidden/Hidden.js ***!
+  \*************************************************************/
+
+/*!*************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/Popper/Popper.js ***!
   \*************************************************************/
 
 /*!*************************************************************!*\
@@ -2633,6 +2641,10 @@
 /*!**********************************************************************************!*\
   !*** ./node_modules/jss-plugin-default-unit/dist/jss-plugin-default-unit.esm.js ***!
   \**********************************************************************************/
+
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@material-ui/core/esm/ClickAwayListener/ClickAwayListener.js ***!
+  \***********************************************************************************/
 
 /*!***********************************************************************************!*\
   !*** ./node_modules/@material-ui/styles/esm/getStylesCreator/getStylesCreator.js ***!

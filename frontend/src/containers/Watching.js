@@ -9,7 +9,7 @@ import AnimeInfo from "./AnimInfo";
 
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addcomment, updateChoice} from "../actions/auth";
+import {addcomment, deleteChoice, updateChoice} from "../actions/auth";
 import {createMessage} from "../actions/messages";
 import {useAutocomplete} from "@material-ui/lab";
 import {makeStyles, withStyles} from "@material-ui/core/styles";
@@ -20,44 +20,36 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import DoneIcon from "@material-ui/icons/Done";
 import ListItemText from "@material-ui/core/ListItemText";
 import MenuItem from "@material-ui/core/MenuItem";
-
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
-
+import MenuListComposition from "./DropDownChoice";
 
 class Watching extends React.Component {
-    render() {
+    state={
+        user:[],
+        reload: false
+    }
+    refreshPage = () => {
+    this.setState(
+      {reload: true},
+      () => this.setState({reload: false})
+    )
+  }
+    componentDidMount() {
+        const user_id = this.props.auth.user.id;
+        console.log(user_id, "userid")
+        axios.get(`http://127.0.0.1:8000/api/cabinet/${user_id}`)
+            .then(res => {
+                this.setState({
+                    user: res.data
+                });
+            })
 
-        const movie_url = 'Url'//this.props.movie.url;
 
-        const cabinet_id = this.props.user.id;
-        const type = this.props.type;
+    }
 
-            const newWatching = {
-                type,
-                movie_url,
-                cabinet_id
-
-            };
-
-
+    render() {console.log(this.state.user)
         return (
-            <Button onClick={this.props.updateChoice(newWatching)}>
-          <ListItemIcon>
-              {console.log(6)}
-            {this.props.is_watching ? <DoneIcon /> : ''}
-          </ListItemIcon>
-          <ListItemText primary="Дивлюсь" />
-        </Button>
+
+            this.state.user.length?<MenuListComposition refreshPage={this.refreshPage} user_cabinet={this.state.user} updateChoice={this.props.updateChoice} deleteChoice={this.props.deleteChoice} movie={this.props.movie}/>:''
         )
     }
 }
@@ -68,4 +60,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 
 });
-export default connect(mapStateToProps, {updateChoice, createMessage})(Watching);
+export default connect(mapStateToProps, {updateChoice, deleteChoice, createMessage})(Watching);

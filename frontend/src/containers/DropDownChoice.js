@@ -1,8 +1,11 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
+<<<<<<< HEAD
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
@@ -36,84 +39,250 @@ const StyledMenuItem = withStyles((theme) => ({
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
         color: theme.palette.common.white,
       },
-    },
+||||||| 10e2942e
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import AddIcon from '@material-ui/icons/Add';
+import DoneIcon from '@material-ui/icons/Done';
+import Watching from "./Watching";
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
   },
-}))(MenuItem);
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
 
-export default function CustomizedMenus(props) {
-  const {user_cabinet, movie} = props;
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
+=======
+import MenuList from '@material-ui/core/MenuList';
+import {makeStyles} from '@material-ui/core/styles';
+import DoneIcon from "@material-ui/icons/Done";
 
-  const movie_id = movie.movie_id;
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  let is_watching = false;
-  let is_completed = false;
-  let is_planning = false;
-  let is_dropped = false;
-
-
-  function check() {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+    paper: {
+        marginRight: theme.spacing(2),
+>>>>>>> 0f381ecd122d6a7a8fa2c5a9c1a4f2b817295d00
+    },
+}));
+let is_watching = false;
+    let is_completed = false;
+    let is_planning = false;
+    let is_dropped = false;
+    let count =0;
+export default function MenuListComposition(props) {
+    const [ value, setValue] = useState();
 
 
-        user_cabinet.map(item=>(
+    const {user_cabinet, movie} = props;
 
-            item.watching.map(item => (item.id == movie_id ?  is_watching = true  : '')),
-            item.completed.map(item => (item.id == movie_id ? is_completed = true : '')),
-      item.planning.map(item => (item.id == movie_id ? is_planning = true : '')),
-      item.dropped.map(item => (item.id == movie_id ? is_dropped = true : ''))
+    const movie_id = movie.movie_id;
+
+
+
+
+    function check() {
+        console.log("check")
+        console.log(is_watching||is_completed||is_planning||is_dropped)
+
+if(!(is_watching||is_completed||is_planning||is_dropped)){
+    console.log("check vnutoi")
+    count +=1;
+        user_cabinet.map(item => (
+
+            item.watching.map(item => (item.id == movie_id ? is_watching = true : '')),
+                item.completed.map(item => (item.id == movie_id ? is_completed = true : '')),
+                item.planning.map(item => (item.id == movie_id ? is_planning = true : '')),
+                item.dropped.map(item => (item.id == movie_id ? is_dropped = true : ''))
+        ))}
+
+    }
+
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+        setValue({})
+        setOpen(false);
+    };
+    const handle = (event) => {
+        const movie_url = props.movie.url;
+        let cabinet_id = 0;
+        user_cabinet.map(item => (
+            cabinet_id = item.id
         ))
+        {
+            let flag = false
+            let type
+            if (is_watching && is_watching !== event) {
+                type = 'watching'
+                console.log('delete', type)
+                flag = true
+            } else if (is_planning && is_planning !== event) {
+                type = 'planning'
+                console.log('delete', type)
+                flag = true
+            } else if (is_dropped && is_dropped !== event) {
+                type = 'dropped'
+                console.log('delete', type)
+                flag = true
+            } else if (is_completed && is_completed !== event) {
+                type = 'completed'
+                console.log('delete', type)
+                flag = true
+            }
+            if (flag) {
+                flag = false
+                const newWatching = {
+                    type,
+                    movie_url,
+                    cabinet_id
+                };
+                props.deleteChoice(newWatching)
 
-  }
+            }
+        }
 
 
-  return (
-    <div>
-        { user_cabinet.length?check():''}
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Додати <AddIcon />
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <Watching type={'watching'} movie={movie} is_watching={is_watching}/>
-        <StyledMenuItem>
-          <ListItemIcon>
-            {is_completed ? <DoneIcon /> : ''}
-          </ListItemIcon>
-          <ListItemText primary="Закінчено" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            {is_planning ? <DoneIcon /> : ''}
-          </ListItemIcon>
-          <ListItemText primary="Заплановано" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            {is_dropped ? <DoneIcon /> : ''}
-          </ListItemIcon>
-          <ListItemText primary="Закинуто" />
-        </StyledMenuItem>
-      </StyledMenu>
-    </div>
-  );
+        const type = event
+
+        const newWatching = {
+            type,
+            movie_url,
+            cabinet_id
+        };
+        props.updateChoice(newWatching)
+        setOpen(false);
+if (event == 'watching') {
+            is_watching = true
+            is_completed = false
+            is_dropped = false
+            is_planning = false
+
+        }
+        if (event == 'completed') {
+            is_watching = false
+            is_completed = true
+            is_dropped = false
+            is_planning = false
+        }
+        if (event == 'dropped') {
+            is_watching = false
+            is_completed = false
+            is_dropped = true
+            is_planning = false
+        }
+        if (event == 'planning') {
+            is_watching = false
+            is_completed = false
+            is_dropped = false
+            is_planning = true
+        }
+
+
+        setValue({})
+        console.log("setValue")
+
+
+
+    };
+
+
+
+    function handleListKeyDown(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            setOpen(false);
+        }
+    }
+
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = React.useRef(open);
+    React.useEffect(() => {
+        if (prevOpen.current === true && open === false) {
+            anchorRef.current.focus();
+        }
+
+        prevOpen.current = open;
+    }, [open]);
+
+    return (
+        <div id={"reload"} className={classes.root}>
+            {check()}
+            <div>
+                <Button
+
+                    ref={anchorRef}
+                    aria-controls={open ? 'menu-list-grow' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                >
+                    Toggle Menu Grow
+                </Button>
+                <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                    {({TransitionProps, placement}) => (
+                        <Grow
+                            {...TransitionProps}
+                            style={{transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom'}}
+                        >
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                                        <MenuItem  onClick={() => handle('watching')}>
+                                            {is_watching ? <DoneIcon/> : ''}
+                                            watching
+                                        </MenuItem>
+                                        <MenuItem onClick={() => handle('completed')}>
+                                            {is_completed ? <DoneIcon/> : ''}
+                                            completed
+                                        </MenuItem>
+                                        <MenuItem onClick={() => handle('planning')}>
+                                            {is_planning ? <DoneIcon/> : ''}
+                                            planning
+                                        </MenuItem>
+                                        <MenuItem onClick={() => handle('dropped')}>
+                                            {is_dropped ? <DoneIcon/> : ''}
+                                            dropped
+                                        </MenuItem>
+                                    </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                        </Grow>
+                    )}
+                </Popper>
+            </div>
+        </div>
+    );
 }
