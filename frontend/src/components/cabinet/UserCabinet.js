@@ -75,13 +75,15 @@ const UserCabinet = useStyles(class extends React.Component {
                                                                                                           align: 'center',
                                                                                                           margin: 'auto',
                                                                                                           width: '70%',
-                                                                                                          borderRadius: "7px"
+                                                                                                          borderRadius: "7px",
                                                                                                       }}>
                     <Grid justify="center" style={{
                         background: 'rgba(255,255,255,0.65)',
                         borderRadius: '5px',
                         marginTop: '20px',
-                        padding: '20px 40px'
+                        marginLeft: '4px',
+                        padding: '20px 40px',
+                        marginRight: '4px',
                     }}>
                         <Grid item xs={12} style={{
                             display: 'flex',
@@ -93,7 +95,7 @@ const UserCabinet = useStyles(class extends React.Component {
                             <Grid container style={{
                                 width: '130px',
                                 height: '130px',
-                                marginLeft: '15px'
+                                marginLeft: '15px',
                             }}>
                                 <Typography style={{
                                     fontSize: '30px',
