@@ -59,7 +59,7 @@ const EpisodeDetail = useStyles(class extends React.Component {
 
     componentDidMount() {
         const movieID = this.props.match.params.movieID;
-        const movie_id = this.state.movie.movie_id;
+
         axios.get(`http://127.0.0.1:8000/api/${movieID}`)
             .then(res => {
                 this.setState({
@@ -80,49 +80,16 @@ const EpisodeDetail = useStyles(class extends React.Component {
 
     render() {
         const {classes} = this.props
-        const movieID = this.props.match.params.movieID;
-        let Episode = String(this.state.movie.video_urls).split(",");
-        var rows = [];
-        var episodeID = this.props.match.params.episodeID;
-        if (Episode.length > 1) {
-            for (let i = 1; i <= Episode.length; i++) {
-                if (episodeID == i) {
-                    rows.push(
-                        <Button style={{
-                            maxWidth: '40px',
-                            maxHeight: '40px',
-                            minWidth: '40px',
-                            minHeight: '40px',
-                            background: 'rgba(200,255,200,0.85)',
-                            marginRight: '2px',
-                        }} href={`/home/${movieID}/${i}`} variant="filled" size="small">
-                            {i}
-                        </Button>
-                    );
-                } else {
-                    rows.push(
-                        <Button style={{
-                            maxWidth: '40px',
-                            maxHeight: '40px',
-                            minWidth: '40px',
-                            minHeight: '40px',
-                            background: 'rgba(255,255,255,0.85)',
-                            marginRight: '2px',
-                        }} href={`/home/${movieID}/${i}`} variant="filled" size="small">
-                            {i}
-                        </Button>
-                    );
-                }
-            }
-        }
+
+
 
         return (
             <div className={classes.main}>
                 <React.Fragment>
                     <Header/>
 
-                        <AnimeInfo updateChoice={this.props.updateChoice} flag={this.props.isAuthenticated} rows={rows}
-                                   comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                        <AnimeInfo updateChoice={this.props.updateChoice} flag={this.props.isAuthenticated}
+                                   comments={this.state.comments}
                                    post={this.state.movie}/>
 
                     <Footer title="Про нас" description="Усі права захищені Богом!"/>
