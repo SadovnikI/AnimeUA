@@ -52,7 +52,7 @@ class LoginSerializer(serializers.Serializer):
 class ModifyUserSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     username = serializers.CharField(allow_blank=True)
-    old_password = serializers.CharField()
+    old_password = serializers.CharField(allow_blank=True)
     new_password = serializers.CharField(allow_blank=True)
 
     # avatar = serializers.FileField()

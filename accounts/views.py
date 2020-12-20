@@ -75,19 +75,20 @@ class ModifyUserAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        user = User.objects.get(id=serializer.data['id'])
-        if not check_password(serializer.data['old_password'], user.password):
-            return Response('Пароль невірний')
-        if serializer.data['new_password']:
-            user.set_password(serializer.data['new_password'])
-            user.save()
-
         user = User.objects.filter(id=serializer.data['id'])
         if serializer.data['username']:
             if User.objects.filter(username=serializer.data['username']):
                 return Response('Логін зайнято')
 
             user.update(username=serializer.data['username'])
+
+        user = User.objects.get(id=serializer.data['id'])
+        if serializer.data['new_password']:
+            if not check_password(serializer.data['old_password'], user.password):
+                return Response('Пароль невірний')
+
+            user.set_password(serializer.data['new_password'])
+            user.save()
 
         # UserCabinet.objects.filter(id=serializer.data['id']).update(avatar=serializer.data['avatar'])
 

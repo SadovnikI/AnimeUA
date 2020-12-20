@@ -1,18 +1,14 @@
-import React, {Component} from "react";
+import React from "react";
 import {Button, Grid, Typography, ButtonGroup} from "@material-ui/core";
 import axios from "axios";
 import Header from "../../containers/Header";
-import SettingsIcon from '@material-ui/icons/Settings';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addcomment, updateuser} from "../../actions/auth";
+import {updateuser} from "../../actions/auth";
 import {createMessage} from "../../actions/messages";
-import {Redirect} from "react-router-dom";
 import Footer from "../../containers/Footer";
 import * as MaterialUI from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
 import Divider from "@material-ui/core/Divider";
 
 
@@ -52,28 +48,31 @@ const UserSettings = useStyles(class extends React.Component {
 
 
     onSubmit = (e) => {
-        console.log(this.props.user.id);
         e.preventDefault();
         const {username, old_password, password1, new_password} = this.state;
         const id = this.props.user.id;
-        if (password1 !== new_password) {
+        if (password1 !== new_password){
             this.props.createMessage({passwordNotMatch: 'Passwords do not match'});
         } else {
-            const newUser = {
-                id,
-                username,
-                old_password,
-                new_password,
-            };
-            this.props.updateuser(newUser);
+            if (!old_password) {
+                this.props.createMessage({passwordNotMatch: 'Password empty'});
+            } else {
+                const newUser = {
+                    id,
+                    username,
+                    old_password,
+                    new_password,
+                };
+                this.props.updateuser(newUser);
+                this.setState({
+                    username: '',
+                    old_password: '',
+                    password1: '',
+                    new_password: '',
+                })
+                this.refreshPage()
+            }
         }
-        this.refreshPage()
-        this.setState({
-            username: '',
-            old_password: '',
-            password1: '',
-            new_password: '',
-        })
 
     };
 
@@ -91,7 +90,7 @@ const UserSettings = useStyles(class extends React.Component {
                     user: res.data
                 });
             })
-        console.log(1)
+
     }
 
     static propTypes = {
@@ -164,41 +163,14 @@ const UserSettings = useStyles(class extends React.Component {
                         borderRadius: '5px',
                         marginTop: '20px',
                         padding: '40px 40px',
-                        height: '440px'
+                        height: '100%'
                     }}>
                         <Typography variant='h5' style={{marginBottom: '30px', fontWeight: "800"}}>
                             Налаштування
                         </Typography>
-                        <form onSubmit={this.onSubmit}>
+                        <form onSubmit={this.onSubmit} style={{marginLeft: '20px'}}>
 
                             <Grid>
-                                <Grid style={{display: 'flex'}}>
-                                    <Typography style={{
-                                        fontSize: '20px',
-                                        textAlign: 'left',
-                                        paddingTop: '4px',
-                                        marginRight: '10px',
-                                        width: '80px'
-                                    }}>
-                                        Введіть пароль:
-                                    </Typography>
-                                    <TextField
-                                        style={{
-                                            marginTop: '15px'
-                                        }}
-                                        name="old_password"
-                                        required
-                                        autoFocus
-                                        variant="outlined"
-                                        size='small'
-                                        label="Пароль"
-                                        id="old_password"
-                                        onChange={this.onChange}
-                                        value={old_password}
-                                    >
-                                    </TextField>
-                                </Grid>
-                                <Divider style={{margin: '30px 0'}}/>
                                 <Grid style={{display: 'flex'}}>
                                     <Typography style={{
                                         fontSize: '20px',
@@ -233,6 +205,21 @@ const UserSettings = useStyles(class extends React.Component {
                                     </Typography>
                                     <Grid>
                                         <TextField
+                                            name="old_password"
+                                            autoFocus
+                                            variant="outlined"
+                                            size='small'
+                                            label="Пароль"
+                                            id="old_password"
+                                            onChange={this.onChange}
+                                            value={old_password}
+                                        >
+                                        </TextField>
+                                        <br/>
+                                        <TextField
+                                            style={{
+                                                marginTop: '15px'
+                                            }}
                                             name="password1"
                                             variant="outlined"
                                             size='small'
@@ -259,10 +246,16 @@ const UserSettings = useStyles(class extends React.Component {
                                         </TextField>
                                     </Grid>
                                 </Grid>
+                                <Divider style={{margin: '30px 0'}}/>
                                 <Grid style={{marginTop: '30px'}}>
                                     <Button variant="filled"
                                             type="submit"
-                                            style={{fontSize: '15px', background: '#41B619', color: 'white'}}>
+                                            style={{
+                                                fontSize: '15px',
+                                                background: '#41B619',
+                                                color: 'white',
+                                                marginLeft: '84%',
+                                            }}>
                                         Підтвердити
                                     </Button>
                                 </Grid>
