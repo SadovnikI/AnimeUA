@@ -78,8 +78,6 @@ const EpisodeDetail = useStyles(class extends React.Component {
     }
 
 
-
-
     render() {
         const {classes} = this.props
         const movieID = this.props.match.params.movieID;
@@ -122,9 +120,10 @@ const EpisodeDetail = useStyles(class extends React.Component {
             <div className={classes.main}>
                 <React.Fragment>
                     <Header/>
-                    {console.log(this.state.cabinet)}
-                    <AnimeInfo updateChoice={this.props.updateChoice}  flag={this.props.isAuthenticated} rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
-                               post={this.state.movie}/>
+
+                        <AnimeInfo updateChoice={this.props.updateChoice} flag={this.props.isAuthenticated} rows={rows}
+                                   comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
+                                   post={this.state.movie}/>
 
                     <Footer title="Про нас" description="Усі права захищені Богом!"/>
                 </React.Fragment>

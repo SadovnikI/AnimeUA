@@ -3,7 +3,10 @@ from rest_framework import serializers
 from movie.models import Category, ShadowMovie, Movie, Genre
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.RelatedField):
+    def to_representation(self, value):
+        return value.name
+
     class Meta:
         model = Category
         fields = ['name']
@@ -20,6 +23,7 @@ class GenresSerializer(serializers.RelatedField):
 class MovieSerializer(serializers.ModelSerializer):
     genres = GenresSerializer(read_only=True, many=True)
 
+
     class Meta:
         model = Movie
         fields = ['id', 'title', 'poster', 'rating', 'url', 'genres', 'year', 'description']
@@ -32,7 +36,8 @@ class ShadowMovieSerializer(serializers.ModelSerializer):
         model = ShadowMovie
         fields = [
             'title', 'description', 'poster', 'year', 'country',
-            'genres', 'category', 'url', 'rating', 'video_urls', 'movie_id'
+            'genres', 'category', 'url', 'rating', 'video_urls',
+            'movie_id', 'director', 'origin', 'original_name',
         ]
 
 

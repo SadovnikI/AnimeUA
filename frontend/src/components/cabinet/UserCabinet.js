@@ -130,7 +130,7 @@ const UserCabinet = useStyles(class extends React.Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} style={{marginBottom: '20px'}}>
+                    <Grid item xs={12} style={{marginBottom: '20px', marginTop: '20px'}}>
                         <FullWidthTabs user={this.state.user}/>
                     </Grid>
                 </Grid> : <h1 align="center">Oops, Something Went Wrong</h1>}</>}
