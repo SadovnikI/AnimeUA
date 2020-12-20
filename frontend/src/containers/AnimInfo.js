@@ -16,6 +16,7 @@ import UserForDrop from "./UserForDrop";
 import MenuListComposition from "./DropDownChoice";
 import Watching from "./Watching";
 import Divider from "@material-ui/core/Divider";
+import VideoPlayer from "./VideoPlayer";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -349,20 +350,8 @@ export default function AnimeInfo(props) {
                             {matches =>
                                 matches ? (
                                     <div style={{width: 800, marginTop: 50, marginRight: 50}}>
-                                        <Grid container style={{
-                                            marginBottom: 10,
-
-                                        }}>
-                                            <div style={{height: '100%'}}>
-                                                {props.rows}
-                                            </div>
-                                        </Grid>
-                                        <video background-color={'black'} margin-top={'10px'} style={{marginRight: 180}}
-                                               width={'855px'} height={'480px'}
-                                               src={props.episodeurl} controls/>
-                                               <br/>
-                                               <br/>
-                                               <Divider style={{width: '105%'}}/>
+                                        {console.log(post.video_urls)}
+                                        {post.video_urls?<VideoPlayer video_urls={post.video_urls} />:''}
                                         <Comments movie={props.post} comments={props.comments}/>
                                     </div>) : (
                                     <div style={{width: 500, marginTop: 50}}>

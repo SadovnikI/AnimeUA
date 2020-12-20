@@ -52,7 +52,7 @@ export default function CabinetMovie(props) {
 
     return (
         <Grid item xs={6} md={6}>
-            <CardActionArea component="a" href={`http://127.0.0.1:8000/home/${post.url}/1`}>
+            <CardActionArea component="a" href={`http://127.0.0.1:8000/home/${post.url}`}>
                 <Card className={classes.root}>
                     <CardMedia
                         className={classes.cover}
