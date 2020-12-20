@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 
 from rest_framework import generics, permissions
-
+from rest_framework import status
 from rest_framework.response import Response
 from knox.models import AuthToken
 
@@ -85,7 +85,7 @@ class ModifyUserAPI(generics.GenericAPIView):
         user = User.objects.get(id=serializer.data['id'])
         if serializer.data['new_password']:
             if not check_password(serializer.data['old_password'], user.password):
-                return Response('Пароль невірний')
+                return Response('Пароль невірний', status=status.HTTP_400_BAD_REQUEST)
 
             user.set_password(serializer.data['new_password'])
             user.save()

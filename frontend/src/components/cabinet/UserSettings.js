@@ -51,11 +51,26 @@ const UserSettings = useStyles(class extends React.Component {
         e.preventDefault();
         const {username, old_password, password1, new_password} = this.state;
         const id = this.props.user.id;
-        if (password1 !== new_password){
-            this.props.createMessage({passwordNotMatch: 'Passwords do not match'});
+        if ((!password1.length) && (!new_password.length) && (!old_password.length)) {
+            const newUser = {
+                id,
+                username,
+                old_password,
+                new_password,
+            };
+            this.props.updateuser(newUser);
+            this.setState({
+                username: '',
+                old_password: '',
+                password1: '',
+                new_password: '',
+            })
+            this.refreshPage()
         } else {
-            if (!old_password) {
-                this.props.createMessage({passwordNotMatch: 'Password empty'});
+            if (!(password1 == new_password && password1.length && old_password.length)) {
+
+                this.props.createMessage({passwordNotMatch: 'Passwords do not match'});
+
             } else {
                 const newUser = {
                     id,
@@ -70,9 +85,11 @@ const UserSettings = useStyles(class extends React.Component {
                     password1: '',
                     new_password: '',
                 })
-                this.refreshPage()
+
+
             }
         }
+
 
     };
 

@@ -9,7 +9,7 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL, ADD_LEAD,
+    REGISTER_FAIL, ADD_LEAD, UPDATE_FAIL,
 } from './types';
 
 // CHECK TOKEN & LOAD USER
@@ -163,7 +163,12 @@ export const updateuser = ({ id, username, old_password, new_password }) => (dis
     .then((res) => {
       dispatch(createMessage({ addLead: 'Updated' }));
     })
-    .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
+    .catch((err) => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch(createMessage({passwordNotMatch:'Invalid password'})
+        );
+    }
+    )
 
 };
 
