@@ -123,8 +123,8 @@ class Comments extends React.Component {
                                                 <Typography style={{fontWeight: "bold"}}>
                                                     {comment.user_id.username}
                                                 </Typography>
-                                                <div style={{marginLeft: "auto"}}>
-                                                    {Moment(comment.date).format('dd, mm, yyyy',)}
+                                                <div style={{marginLeft: "auto", fontSize: '14px'}}>
+                                                    {Moment(comment.date).format('DD-MM-YYYY, HH:mm',)}
                                                 </div>
                                             </Box>
                                         }
@@ -160,8 +160,8 @@ class Comments extends React.Component {
                                                 <Typography style={{fontWeight: "bold"}}>
                                                     {this.props.user.username}
                                                 </Typography>
-                                                <div style={{marginLeft: "auto"}}>
-                                                    {Moment(comment.date).format('dd, mm, yyyy',)}
+                                                <div style={{marginLeft: "auto", fontSize: '14px'}}>
+                                                    {Moment(comment.date).format('DD-MM-YYYY, HH:mm',)}
                                                 </div>
                                             </Box>
                                         }

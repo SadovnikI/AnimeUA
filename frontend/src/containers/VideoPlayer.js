@@ -81,14 +81,14 @@ const VideoPlayer = useStyles(class extends React.Component {
                 } else
                 {
                     rows.push(
-                        <Button onClick={()=>this.changeUrl(i)} style={{
+                        <Button variant='filled' onClick={()=>this.changeUrl(i)} style={{
                             maxWidth: '40px',
                             maxHeight: '40px',
                             minWidth: '40px',
                             minHeight: '40px',
-                            background: 'rgba(255,255,255,0.85)',
+                            background: '#F1F2F2',
                             marginRight: '2px',
-                        }}  variant="filled" size="small">
+                        }} size="small">
                             {i}
                         </Button>
                     );

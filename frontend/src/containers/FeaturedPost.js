@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
     cover: {
         flex: '0 0 auto',
         width: 180,
-        height: 240,
+        height: 250,
     },
     fadeout : {
         position: "absolute",
         top: 0,
         width: "100%",
         margin: 0,
-        padding: '60px 0',
+        padding: '70px 0',
         backgroundImage: 'linear-gradient(to bottom, transparent, white)'
     },
     section: {

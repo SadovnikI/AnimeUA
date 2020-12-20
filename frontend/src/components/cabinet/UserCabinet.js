@@ -71,7 +71,7 @@ const UserCabinet = useStyles(class extends React.Component {
                                                                                                       spacing={1}
                                                                                                       direction="column"
                                                                                                       style={{
-                                                                                                          minHeight: '77vh',
+                                                                                                          minHeight: '80vh',
                                                                                                           align: 'center',
                                                                                                           margin: 'auto',
                                                                                                           width: '70%',
