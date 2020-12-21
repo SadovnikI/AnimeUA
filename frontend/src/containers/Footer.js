@@ -38,7 +38,7 @@ export default function Footer(props) {
           {title}
         </Typography>
         <Typography variant="subtitle2"  color="textSecondary" component="p">
-          {description}
+          {description} Автор ідеї: МС Петя
         </Typography>
         <Copyright />
       </Container>

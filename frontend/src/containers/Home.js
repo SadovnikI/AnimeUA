@@ -48,7 +48,7 @@ const mainFeaturedPost = {
         "Відкрий для себе сотні нових тайтлів разом з Анімє-UA.",
     image: 'https://funart.pro/uploads/posts/2020-03/1584644653_21-p-foni-s-tyan-iz-anime-55.png',
     imgText: 'main image dedddscription',
-    linkText: 'Читати далі…',
+
 };
 
 const posts = [];
