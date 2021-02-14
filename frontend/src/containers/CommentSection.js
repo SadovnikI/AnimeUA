@@ -63,7 +63,6 @@ class Comments extends React.Component {
         e.preventDefault();
         const {text} = this.state;
         const movie_id = this.props.movie.movie_id;
-        const video_id = 1;//this.props.video_id;//this.props.match.params.episodeID;
         const user = this.props.auth.user;
         const date = new Date;
         const user_id = user.id;
@@ -73,9 +72,9 @@ class Comments extends React.Component {
                 user_id,
                 text,
                 date,
-                video_id,
                 movie_id
             };
+            console.log('test')
             this.props.addcomment(newComment);
         }
         this.setState({
@@ -123,8 +122,8 @@ class Comments extends React.Component {
                                                 <Typography style={{fontWeight: "bold"}}>
                                                     {comment.user_id.username}
                                                 </Typography>
-                                                <div style={{marginLeft: "auto"}}>
-                                                    {Moment(comment.date).format('dd, mm, yyyy',)}
+                                                <div style={{marginLeft: "auto", fontSize: '14px'}}>
+                                                    {Moment(comment.date).format('DD-MM-YYYY, HH:mm',)}
                                                 </div>
                                             </Box>
                                         }
@@ -160,8 +159,8 @@ class Comments extends React.Component {
                                                 <Typography style={{fontWeight: "bold"}}>
                                                     {this.props.user.username}
                                                 </Typography>
-                                                <div style={{marginLeft: "auto"}}>
-                                                    {Moment(comment.date).format('dd, mm, yyyy',)}
+                                                <div style={{marginLeft: "auto", fontSize: '14px'}}>
+                                                    {Moment(comment.date).format('DD-MM-YYYY, HH:mm',)}
                                                 </div>
                                             </Box>
                                         }

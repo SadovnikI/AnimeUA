@@ -124,7 +124,7 @@ export const tokenConfig = (getState) => {
   return config;
 };
 
-export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (dispatch, getState) => {
+export const addcomment = ({ user_id, text, date, movie_id }) => (dispatch, getState) => {
   // Headers
   const config = {
     headers: {
@@ -133,7 +133,7 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
   };
 
   // Request Body
-  const body = JSON.stringify({ user_id, text, date, video_id, movie_id });
+  const body = JSON.stringify({ user_id, text, date, movie_id });
   axios
     .post('/api/auth/addcomment', body,  tokenConfig(getState))
     .then((res) => {

@@ -87,7 +87,7 @@ const EpisodeDetail = useStyles(class extends React.Component {
             <div className={classes.main}>
                 <React.Fragment>
                     <Header/>
-
+                    {console.log('test love')}
                         <AnimeInfo updateChoice={this.props.updateChoice} flag={this.props.isAuthenticated}
                                    comments={this.state.comments}
                                    post={this.state.movie}/>

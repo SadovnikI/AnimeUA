@@ -66,6 +66,7 @@ export default function Home() {
                     <main>
                         <MainFeaturedPost post={mainFeaturedPost} className={classes.mainGrid}/>
                         <Paper elevation={0} className={classes.movieBox}>
+                            {console.log('love')}
                             <MovieList/>
                         </Paper>
                     </main>

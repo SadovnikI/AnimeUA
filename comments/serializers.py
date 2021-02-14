@@ -16,11 +16,11 @@ class CommentGetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'user_id', 'video_id', 'text', 'date', 'movie_id')
+        fields = ('id', 'user_id', 'text', 'date', 'movie_id')
 
 
 class CommentPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'user_id', 'video_id', 'text', 'date', 'movie_id')
+        fields = ('id', 'user_id', 'text', 'date', 'movie_id')
