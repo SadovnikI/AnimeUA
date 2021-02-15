@@ -19,5 +19,8 @@ class UserCabinet(models.Model):
     dropped = models.ManyToManyField(Movie, verbose_name="Dropped movie", default=None, related_name="dropped",
                                      blank=True)
 
+    tg_name = models.CharField("Telegram username", default=None, blank=True, max_length=20, null=True)
+    tg_id = models.PositiveIntegerField("Telegram id", default=None, blank=True, max_length=100, null=True)
+
     def str(self):
         return self.user.username + " Cabinet"
