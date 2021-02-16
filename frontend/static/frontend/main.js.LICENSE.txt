@@ -740,6 +740,8 @@
 
 /*! export updateChoice [provided] [no usage info] [missing usage info prevents renaming] */
 
+/*! export updatetg [provided] [no usage info] [missing usage info prevents renaming] */
+
 /*! export updateuser [provided] [no usage info] [missing usage info prevents renaming] */
 
 /*! export useAlert [provided] [no usage info] [missing usage info prevents renaming] */

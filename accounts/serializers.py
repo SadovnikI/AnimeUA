@@ -49,6 +49,16 @@ class LoginSerializer(serializers.Serializer):
         raise serializers.ValidationError("Incorrect Credentials")
 
 
+class ModifyTGSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    tg_name = serializers.CharField(allow_blank=True)
+
+    def update(self, instance, validated_data):
+        instance.id = validated_data.get('id', instance.id)
+        instance.tg_name = validated_data.get('tg_name', instance.tg_name)
+        return instance
+
+
 class ModifyUserSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     username = serializers.CharField(allow_blank=True)

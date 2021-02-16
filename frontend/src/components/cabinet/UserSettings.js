@@ -4,7 +4,7 @@ import axios from "axios";
 import Header from "../../containers/Header";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {updateuser} from "../../actions/auth";
+import {updateuser, updatetg} from "../../actions/auth";
 import {createMessage} from "../../actions/messages";
 import Footer from "../../containers/Footer";
 import * as MaterialUI from "@material-ui/core";
@@ -44,14 +44,27 @@ const UserSettings = useStyles(class extends React.Component {
         old_password: '',
         password1: '',
         new_password: '',
+        tg_name: ''
     }
 
 
     onSubmit = (e) => {
         e.preventDefault();
-        const {username, old_password, password1, new_password} = this.state;
+        const {username, tg_name, old_password, password1, new_password } = this.state;
         const id = this.props.user.id;
-        if ((!password1.length) && (!new_password.length) && (!old_password.length)) {
+        const id_tg = this.state.user[0].id
+        console.log('id: ', this.state.user[0].id)
+        if(tg_name.length){
+            const newTg = {
+                    id_tg,
+                    tg_name,
+                };
+            this.props.updatetg(newTg);
+            this.setState({
+                tg_name: ''
+            })
+        }
+        if ((!password1.length) && (!new_password.length) && (!old_password.length) && username.length) {
             const newUser = {
                 id,
                 username,
@@ -65,26 +78,28 @@ const UserSettings = useStyles(class extends React.Component {
                 password1: '',
                 new_password: '',
             })
-            this.refreshPage()
+            //this.refreshPage()
         } else {
-            if (!(password1 == new_password && password1.length && old_password.length)) {
+            if (!(password1 == new_password) && (password1.length)){
 
-                this.props.createMessage({passwordNotMatch: 'Passwords do not match'});
+                this.props.createMessage({passwordNotMatch: 'Passwords do not match.'});
 
             } else {
-                const newUser = {
-                    id,
-                    username,
-                    old_password,
-                    new_password,
-                };
-                this.props.updateuser(newUser);
-                this.setState({
-                    username: '',
-                    old_password: '',
-                    password1: '',
-                    new_password: '',
-                })
+                if(password1.length){
+                    const newUser = {
+                        id,
+                        username,
+                        old_password,
+                        new_password,
+                    };
+                    this.props.updateuser(newUser);
+                    this.setState({
+                        username: '',
+                        old_password: '',
+                        password1: '',
+                        new_password: '',
+                    })
+                }
 
 
             }
@@ -93,9 +108,9 @@ const UserSettings = useStyles(class extends React.Component {
 
     };
 
-    refreshPage() {
-        window.location.reload();
-    }
+    //refreshPage() {
+        //window.location.reload();
+    //}
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
@@ -125,8 +140,9 @@ const UserSettings = useStyles(class extends React.Component {
         {title: 'Заплановано', url: '/home'},
     ];
 
+
     render() {
-        const {username, old_password, password1, new_password} = this.state;
+        const {username, old_password, password1, new_password, tg_name} = this.state;
         const {classes} = this.props
         return (
             <Grid className={classes.main}>
@@ -152,6 +168,7 @@ const UserSettings = useStyles(class extends React.Component {
                         <Grid item xs={12} style={{
                             display: 'flex',
                         }}>
+                            {console.log(this.state.user.id)}
                             {this.state.user.map(user => (
                                 <img src={user.avatar} alt="avatar" width="130px" height="130"
                                      style={{borderRadius: "50%"}}/>
@@ -198,14 +215,24 @@ const UserSettings = useStyles(class extends React.Component {
                                     }}>
                                         Логін:
                                     </Typography>
-                                    <TextField
-                                        name="username"
+                                        <TextField
+                                            name="username"
+                                            variant="outlined"
+                                            size='small'
+                                            label='Новий логін'
+                                            id="username"
+                                            onChange={this.onChange}
+                                            value={username}
+                                            />
+                                            <br/>
+                                        <TextField
+                                        name="tg_name"
                                         variant="outlined"
                                         size='small'
-                                        label='Новий логін'
-                                        id="username"
+                                        label='Telegram id'
+                                        id="tg_name"
                                         onChange={this.onChange}
-                                        value={username}
+                                        value={tg_name}
                                     >
                                     </TextField>
                                 </Grid>
@@ -292,4 +319,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 
 });
-export default connect(mapStateToProps, {updateuser, createMessage})(UserSettings);
+export default connect(mapStateToProps, {updateuser, updatetg, createMessage})(UserSettings);
