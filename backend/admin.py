@@ -23,7 +23,7 @@ class MovieAdmin(admin.ModelAdmin):
                     try:
                         bot.sendPhoto(chat_id=user.tg_id,
                                       photo=create_presigned_url1('projectvideobacket', str(movie.poster)),
-                                      caption=f'\n.\n.\n{str(movie.title)}\nhttp://127.0.0.1:8000/home/{movie.url}')
+                                      caption=f'{str(movie.title)}\n.\n.\n[Tu Gay | {len(movie.video.all()) + 1} серія]\nhttp://127.0.0.1:8000/home/{movie.url}')
                     except:
                         pass
 

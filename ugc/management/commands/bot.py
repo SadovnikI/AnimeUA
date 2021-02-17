@@ -23,12 +23,6 @@ def log_errors(f):
 
 @log_errors
 def do_echo(update: Update, context: CallbackContext):
-<<<<<<< HEAD
-||||||| 4f699a8f
-    global switch
-=======
-
->>>>>>> 9a8e701c893b00775d49fdce4552d44d79564a15
     tg_user = update.message.from_user
     user = UserCabinet.objects.filter(tg_name=tg_user.username)
     if user:
@@ -58,13 +52,6 @@ class Command(BaseCommand):
             bot=bot,
             use_context=True,
         )
-
-<<<<<<< HEAD
-||||||| 4f699a8f
-        print(switch)
-=======
-
->>>>>>> 9a8e701c893b00775d49fdce4552d44d79564a15
 
         message_handler = MessageHandler(Filters.text, do_echo)
         updater.dispatcher.add_handler(message_handler)

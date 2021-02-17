@@ -54,7 +54,6 @@ class Movie(models.Model):
     origin = models.CharField("Origin", max_length=30, default=None)
     original_name = models.CharField("Original name", max_length=100, default=None)
 
-
     def __str__(self):
         return self.title
 
