@@ -23,7 +23,6 @@ def log_errors(f):
 
 @log_errors
 def do_echo(update: Update, context: CallbackContext):
-    global switch
     tg_user = update.message.from_user
     user = UserCabinet.objects.filter(tg_name=tg_user.username)
     if user:
@@ -54,7 +53,6 @@ class Command(BaseCommand):
             use_context=True,
         )
 
-        print(switch)
 
         message_handler = MessageHandler(Filters.text, do_echo)
         updater.dispatcher.add_handler(message_handler)

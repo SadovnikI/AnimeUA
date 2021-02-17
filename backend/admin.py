@@ -8,6 +8,8 @@ from comments.models import Comment
 from .bucket import create_presigned_url1
 from .models import Bucket
 
+bot = telegram.Bot(token=settings.TOKEN)
+
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -18,10 +20,12 @@ class MovieAdmin(admin.ModelAdmin):
         for user in users:
             for movie in user.watching.all():
                 if str(movie.title) == str(obj):
-                    bot = telegram.Bot(token=settings.TOKEN)
-                    bot.sendPhoto(chat_id=user.tg_id,
-                                  photo=create_presigned_url1('projectvideobacket', str(movie.poster)),
-                                  caption=str(movie.title) + '\n' + f'http://127.0.0.1:8000/home/{movie.url}')
+                    try:
+                        bot.sendPhoto(chat_id=user.tg_id,
+                                      photo=create_presigned_url1('projectvideobacket', str(movie.poster)),
+                                      caption=f'\n.\n.\n{str(movie.title)}\nhttp://127.0.0.1:8000/home/{movie.url}')
+                    except:
+                        pass
 
         super().save_model(request, obj, form, change)
 
