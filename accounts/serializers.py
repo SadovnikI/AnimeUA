@@ -21,7 +21,7 @@ class CabinetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserCabinet
-        fields = ('id', 'user', 'avatar', 'watching', 'planning', 'completed', 'dropped')
+        fields = ('id', 'user', 'avatar', 'watching', 'planning', 'completed', 'dropped', 'tg_name')
 
 
 # Register Serializer

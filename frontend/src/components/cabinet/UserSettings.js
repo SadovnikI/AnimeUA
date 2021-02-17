@@ -78,7 +78,7 @@ const UserSettings = useStyles(class extends React.Component {
                 password1: '',
                 new_password: '',
             })
-            //this.refreshPage()
+
         } else {
             if (!(password1 == new_password) && (password1.length)){
 
@@ -103,14 +103,14 @@ const UserSettings = useStyles(class extends React.Component {
 
 
             }
-        }
+        }this.refreshPage()
 
 
     };
 
-    //refreshPage() {
-        //window.location.reload();
-    //}
+    refreshPage() {
+        window.location.reload();
+    }
 
     onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
@@ -186,8 +186,11 @@ const UserSettings = useStyles(class extends React.Component {
                                 }}>
                                     {this.state.user.map(user => (
                                         user.user.username))}
-                                    <div style={{fontWeight: '400', fontSize: '20px'}}>{this.state.user.map(user => (
+                                    <div  style={{fontWeight: '400', fontSize: '20px'}}>{this.state.user.map(user => (
                                         user.user.email))}</div>
+
+                                    <div style={{fontWeight: '400', fontSize: '20px'}}>{this.state.user.map(user => (
+                                         user.tg_name ? '@' + user.tg_name :''))}</div>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -223,8 +226,23 @@ const UserSettings = useStyles(class extends React.Component {
                                             id="username"
                                             onChange={this.onChange}
                                             value={username}
-                                            />
+                                            >
+
+                                        </TextField>
+                                    </Grid>
+
                                             <br/>
+                                            <Grid style={{display: 'flex'}}>
+                                                <Typography style={{
+                                        fontSize: '20px',
+                                        textAlign: 'left',
+                                        paddingTop: '4px',
+                                        marginRight: '10px',
+                                        width: '80px'
+                                    }}>
+                                        Telegram:
+                                    </Typography>
+
                                         <TextField
                                         name="tg_name"
                                         variant="outlined"
