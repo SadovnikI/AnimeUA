@@ -21,7 +21,7 @@ class CabinetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserCabinet
-        fields = ('id', 'user', 'avatar', 'watching', 'planning', 'completed', 'dropped')
+        fields = ('id', 'user', 'avatar', 'watching', 'planning', 'completed', 'dropped', 'tg_name')
 
 
 # Register Serializer
@@ -47,6 +47,16 @@ class LoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Incorrect Credentials")
+
+
+class ModifyTGSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    tg_name = serializers.CharField(allow_blank=True)
+
+    def update(self, instance, validated_data):
+        instance.id = validated_data.get('id', instance.id)
+        instance.tg_name = validated_data.get('tg_name', instance.tg_name)
+        return instance
 
 
 class ModifyUserSerializer(serializers.Serializer):

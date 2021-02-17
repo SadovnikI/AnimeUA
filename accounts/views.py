@@ -9,7 +9,8 @@ from movie.models import Movie
 from .models import UserCabinet
 from rest_framework.views import APIView
 
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CabinetSerializer, ModifyUserSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, CabinetSerializer, ModifyUserSerializer, \
+    ModifyTGSerializer
 
 from django.contrib.auth.hashers import check_password
 
@@ -95,6 +96,19 @@ class ModifyUserAPI(generics.GenericAPIView):
         return Response('200OK')
 
 
+class ModifyTgAPI(generics.GenericAPIView):
+    serializer_class = ModifyTGSerializer
+
+    def put(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        cabinet = UserCabinet.objects.filter(id=serializer.data['id']).first()
+        print(cabinet.tg_name)
+        cabinet.tg_name = serializer.data['tg_name']
+        cabinet.save()
+        print(cabinet.tg_name)
+
+        return Response('200OK')
 
 
 class WatchingAPI(APIView):
@@ -118,7 +132,6 @@ class PlanningAPI(APIView):
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
 
-
         cabinet.planning.add(Movie.objects.get(url=pk))
         serializer = CabinetSerializer(cabinet)
         return Response(serializer.data)
@@ -135,7 +148,6 @@ class CompletedAPI(APIView):
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
 
-
         cabinet.completed.add(Movie.objects.get(url=pk))
         serializer = CabinetSerializer(cabinet)
         return Response(serializer.data)
@@ -150,10 +162,8 @@ class CompletedAPI(APIView):
 
 class DroppedAPI(APIView):
 
-
     def put(self, request, pk, pk2):
         cabinet = UserCabinet.objects.get(id=pk2)
-
 
         cabinet.dropped.add(Movie.objects.get(url=pk))
         serializer = CabinetSerializer(cabinet)

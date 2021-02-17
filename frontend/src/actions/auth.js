@@ -148,7 +148,7 @@ export const addcomment = ({ user_id, text, date, movie_id }) => (dispatch, getS
 };
 export const updateuser = ({ id, username, old_password, new_password }) => (dispatch, getState) => {
   // Headers
-    console.log(old_password, id, new_password,username)
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -157,11 +157,11 @@ export const updateuser = ({ id, username, old_password, new_password }) => (dis
 
   // Request Body
   const body = JSON.stringify({ id, username, old_password, new_password });
-    console.log(body)
+
   axios
     .put('/api/cabinet/modify_user', body,  tokenConfig(getState))
     .then((res) => {
-      dispatch(createMessage({ addLead: 'Updated' }));
+      dispatch(createMessage({ addLead: 'User Updated' }));
     })
     .catch((err) => {
         dispatch(returnErrors(err.response.data, err.response.status));
@@ -169,6 +169,24 @@ export const updateuser = ({ id, username, old_password, new_password }) => (dis
         );
     }
     )
+
+};
+
+export const updatetg = ({ id_tg, tg_name,}) => (dispatch, getState) => {
+  // Headers
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+    const tg = JSON.stringify({ id : id_tg, tg_name });
+
+    axios
+    .put('/api/cabinet/modify_tg', tg,  tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: 'TG Updated' }));
+    })
 
 };
 
