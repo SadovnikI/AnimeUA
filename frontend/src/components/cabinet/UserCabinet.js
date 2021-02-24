@@ -110,9 +110,13 @@ const UserCabinet = useStyles(class extends React.Component {
                                 </Typography>
                             </Grid>
                             <Grid style={{
+                                display: 'block',
                                 marginLeft: 'auto',
                                 marginTop: '10px'
                             }}>
+                                <Button height={40} width={40} href={'https://t.me/AnimeUaTestBot'}>
+                                    <img height={40} width={40} src = {'https://xn--80affa3aj0al.xn--80asehdb/img/logo_share.png'}/>
+                                </Button>
                                 <Button fullWidth={true} variant="outlined"
                                         href={`/cabinet/settings/${this.state.user.map(user => (
                                             user.user.id))}`}
@@ -127,6 +131,7 @@ const UserCabinet = useStyles(class extends React.Component {
                                         height: '30px',
                                     }}/>
                                 </Button>
+
                             </Grid>
                         </Grid>
                     </Grid>
