@@ -20,8 +20,7 @@ const BaseRouter=() =>(
         <Route exact path='/home' component={Home}/>
         <Route exact path='/register' component={Register}/>
         <Route exact path='/login' component={Login}/>
-        <Route exact path='/home/:movieID' component={MovieDetail}/>
-        <Route exact path='/home/:movieID/:episodeID' component={EpisodeDetail} />
+        <Route exact path='/home/:movieID' component={EpisodeDetail} />
         <Route exact path='/cabinet/:userID' component={UserCabinet} />
         <Route exact path='/cabinet/settings/:userID' component={UserSettings} />
     </div>

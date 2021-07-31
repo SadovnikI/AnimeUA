@@ -26,6 +26,7 @@ export class Register extends Component {
   };
 
   onSubmit = (e) => {
+
     e.preventDefault();
     const { username, email, password, password2 } = this.state;
     if (password !== password2) {

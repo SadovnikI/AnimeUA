@@ -38,7 +38,6 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className={styles.test}>
                 <Provider store={store}>
                     <AlertProvider template={AlertTemplate} {...alertOptions}>
                         <div>
@@ -49,7 +48,7 @@ export default class App extends Component {
                         </div>
                     </AlertProvider>
                 </Provider>
-            </div>
+
 
         );
     }

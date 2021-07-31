@@ -27,12 +27,11 @@ class Category(models.Model):
 
 
 class Video(models.Model):
-    name = models.CharField("Name", max_length=160, default=None)
     bucket_id = models.ForeignKey(Bucket, on_delete=models.SET_NULL, null=True, default=None)
     video = models.FileField("Video", default=None)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.video.name}"
 
     class Meta:
         verbose_name = "Video"
@@ -50,6 +49,10 @@ class Movie(models.Model):
     url = models.SlugField(max_length=130, unique=True, default=None)
     rating = models.FloatField("Rating", max_length=10, default=None)
     video = models.ManyToManyField(Video, verbose_name="Video", default=None)
+
+    director = models.CharField("Director", max_length=50, default=None)
+    origin = models.CharField("Origin", max_length=30, default=None)
+    original_name = models.CharField("Original name", max_length=100, default=None)
 
     def __str__(self):
         return self.title
@@ -71,6 +74,10 @@ class ShadowMovie(models.Model):
     rating = models.FloatField("Rating", max_length=10, default=None)
     video_urls = ArrayField(models.CharField(max_length=200, default=None), default=None)
     movie_id = models.IntegerField("Movie id", default=0)
+
+    director = models.CharField("Director", max_length=50, default=None)
+    origin = models.CharField("Origin", max_length=30, default=None)
+    original_name = models.CharField("Original name", max_length=100, default=None)
 
     def __str__(self):
         return self.title

@@ -21,17 +21,28 @@ const useStyles = makeStyles((theme) => ({
     details: {
         display: 'flex',
         flexDirection: 'column',
+        maxHeight: 240
     },
     content: {
-        flex: '1 0 auto',
         justifyContent: "center",
         width: 220,
     },
     cover: {
+        flex: '0 0 auto',
         width: 180,
-        height: 240
-
+        height: 250,
     },
+    fadeout : {
+        position: "absolute",
+        top: 0,
+        width: "100%",
+        margin: 0,
+        padding: '70px 0',
+        backgroundImage: 'linear-gradient(to bottom, transparent, white)'
+    },
+    section: {
+        position: "relative",
+    }
 }));
 
 export default function FeaturedPost(props) {
@@ -41,7 +52,7 @@ export default function FeaturedPost(props) {
 
     return (
         <Grid item xs={6} md={4}>
-            <CardActionArea component="a" href={`home/${post.url}/1`}>
+            <CardActionArea component="a" href={`home/${post.url}`}>
                 <Card className={classes.root}>
                     <CardMedia
                         className={classes.cover}
@@ -50,20 +61,27 @@ export default function FeaturedPost(props) {
                     />
                     <div className={classes.details}>
                         <CardContent className={classes.content}>
-                            <Typography component="h5" variant="h5">
+                            <Typography component="h6" variant="h6" noWrap>
                                 {post.title}
                             </Typography>
 
-                            <Box component="fieldset" mb={3} borderColor="transparent">
-                                <Rating size="small" value={post.rating} precision={0.5} readOnly/>
+                            <Box component="fieldset" borderColor="transparent">
+                                <Rating size="small" value={post.rating / 2} precision={0.5} readOnly/>
                                 <br/>
                                 <Typography variant="subtitle3" color="textSecondary">
-                                    Жанр, Жанр, Жанр
+                                    {post.genres.slice(0, 4).join(', ')}
+                                </Typography>
+                                <br/>
+                                <Typography variant="subtitle3" color="textSecondary">
+                                    Year: {post.year}
                                 </Typography>
                             </Box>
-                            <Typography variant="subtitle3" color="text">
-                                Діскріпшн який я не можу витягнути
+                            <div className={classes.section}>
+                            <Typography variant="body2">
+                                {post.description}
                             </Typography>
+                            <p className={classes.fadeout}/>
+                            </div>
                         </CardContent>
                     </div>
                 </Card>

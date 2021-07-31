@@ -9,18 +9,44 @@ import AnimeInfo from "./AnimInfo";
 
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {addcomment} from "../actions/auth";
+import {addcomment, updateChoice} from "../actions/auth";
 import {createMessage} from "../actions/messages";
 import {useAutocomplete} from "@material-ui/lab";
+import {makeStyles} from "@material-ui/core/styles";
+import * as MaterialUI from "@material-ui/core";
+import Header from './Header'
+import Footer from "./Footer";
+
+const useStyles = MaterialUI.withStyles((theme) => ({
+    main: {
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        animation: '$gradient 15s ease infinite'
+    },
+    movieBox: {
+        padding: theme.spacing(2),
+        background: 'rgba(255,255,255,0.65)',
+        marginBottom: theme.spacing(3)
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
+    },
+}));
 
 
-class EpisodeDetail extends React.Component {
+const EpisodeDetail = useStyles(class extends React.Component {
     state = {
         comments: [],
         isFetching: true,
         movie: {},
-        video_id: 1,
-        text: '',
         cabinet: [],
     }
 
@@ -33,8 +59,7 @@ class EpisodeDetail extends React.Component {
 
     componentDidMount() {
         const movieID = this.props.match.params.movieID;
-        const movie_id = this.state.movie.movie_id;
-        const {user} = this.props.auth;
+
         axios.get(`http://127.0.0.1:8000/api/${movieID}`)
             .then(res => {
                 this.setState({
@@ -50,132 +75,29 @@ class EpisodeDetail extends React.Component {
                 });
             })
 
-
     }
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        const {text} = this.state;
-        const movie_id = this.state.movie.movie_id;
-        const video_id = this.state.video_id;//this.props.match.params.episodeID;
-        const {user} = this.props.auth;
-        const date = new Date;
-        const user_id = user.id;
-
-        {
-            const newComment = {
-                user_id,
-                text,
-                date,
-                video_id,
-                movie_id
-            };
-            this.props.addcomment(newComment);
-        }
-        this.setState({
-            text: '',
-
-        });
-    };
-
-    onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
 
     render() {
+        const {classes} = this.props
 
-        const {text} = this.state;
-        const movieID = this.props.match.params.movieID;
-        let Episode = String(this.state.movie.video_urls).split(",");
-        var rows = [];
-        var episodeID = this.props.match.params.episodeID;
-        if (Episode.length > 1) {
-            for (let i = 1; i <= Episode.length; i++) {
-                if (episodeID == i) {
-                    rows.push(
-                        <Button href={`/home/${movieID}/${i}`} variant="outlined" color="primary" size="small">
-                            Episode {i}
-                        </Button>
-                    );
-                } else {
-                    rows.push(
-                        <Button href={`/home/${movieID}/${i}`} variant="outlined" size="small">
-                            Episode {i}
-                        </Button>
-                    );
-                }
-            }
-        }
-        const {user} = this.props.auth;
 
 
         return (
+            <div className={classes.main}>
                 <React.Fragment>
-                    <List/>
+                    <Header/>
+                    {console.log('test love')}
+                        <AnimeInfo updateChoice={this.props.updateChoice} flag={this.props.isAuthenticated}
+                                   comments={this.state.comments}
+                                   post={this.state.movie}/>
 
-                    <AnimeInfo rows={rows} comments={this.state.comments} episodeurl={Episode[episodeID - 1]}
-                               post={this.state.movie}/>
-
-
-                    {this.props.auth.isAuthenticated ? <>
-                        <Container component="main" maxWidth="sm">
-
-                            <CssBaseline/>
-                            <div className="col-md-6 m-auto">
-                                <div className="card card-body mt-5">
-                                    <h2 className="text-center">Leave comment</h2>
-                                    <form onSubmit={this.onSubmit}>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12}>
-                                    <textarea style={{
-                                        display: 'block',
-                                        width: '100%',
-                                        padding: '0 20px',
-                                        marginBottom: '10px',
-                                        background: '#E9EFF6',
-                                        lineHeight: '40px',
-                                        borderWidth: '0',
-                                        borderRadius: '20px',
-                                        fontFamily: 'Roboto',
-                                        resize: 'none',
-                                    }} placeholder="Comment..." rows="3"
-                                              name="text"
-
-                                              required
-
-                                              id="text"
-
-                                              autoFocus
-                                              onChange={this.onChange}
-                                              value={text}
-                                    />
-                                                {
-
-                                                }
-                                            </Grid>
-                                            <div className="form-group">
-                                                <Button style={{margin: 'theme.spacing(1)',}}
-                                                        type="submit"
-                                                        fullWidth
-                                                        variant="contained"
-                                                        color="secondary"
-
-
-                                                >
-                                                    Send
-                                                </Button>
-                                            </div>
-
-                                        </Grid>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </Container>
-                    </> : <p style={{textAlign: 'center'}}>Register to leave coments</p>}
+                    <Footer title="Про нас" description="Усі права захищені Богом!"/>
                 </React.Fragment>
+            </div>
         )
     }
-}
+});
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated,
@@ -183,4 +105,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth,
 
 });
-export default connect(mapStateToProps, {addcomment, createMessage})(EpisodeDetail);
+export default connect(mapStateToProps, {addcomment, updateChoice, createMessage})(EpisodeDetail);

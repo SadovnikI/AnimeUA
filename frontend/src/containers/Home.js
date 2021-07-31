@@ -17,16 +17,27 @@ import MovieList from "./MovieListView";
 import Paper from "@material-ui/core/Paper";
 
 
-
 const useStyles = makeStyles((theme) => ({
-    mainGrid: {
-        marginTop: theme.spacing(3),
-        borderRadius: "5px"
+    main: {
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        animation: '$gradient 15s ease infinite'
     },
-    mainBox: {
+    movieBox: {
         padding: theme.spacing(2),
-        marginBottom: theme.spacing(3),
-        background: 'transparent'
+        background: 'rgba(255,255,255,0.65)',
+        marginBottom: theme.spacing(3)
+    },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
     },
 }));
 
@@ -37,7 +48,7 @@ const mainFeaturedPost = {
         "Відкрий для себе сотні нових тайтлів разом з Анімє-UA.",
     image: 'https://funart.pro/uploads/posts/2020-03/1584644653_21-p-foni-s-tyan-iz-anime-55.png',
     imgText: 'main image dedddscription',
-    linkText: 'Читати далі…',
+
 };
 
 const posts = [];
@@ -47,18 +58,21 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-            <React.Fragment>
+        <React.Fragment>
+            <div className={classes.main}>
                 <CssBaseline/>
+                <Header/>
                 <Container maxWidth="lg">
-                    <Header/>
                     <main>
                         <MainFeaturedPost post={mainFeaturedPost} className={classes.mainGrid}/>
-                        <Paper elevation={0} className={classes.mainBox}>
+                        <Paper elevation={0} className={classes.movieBox}>
+                            {console.log('love')}
                             <MovieList/>
                         </Paper>
                     </main>
                 </Container>
                 <Footer title="Про нас" description="Усі права захищені Богом!"/>
-            </React.Fragment>
+            </div>
+        </React.Fragment>
     );
 }

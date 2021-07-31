@@ -29,7 +29,7 @@ class CommentAPI(generics.GenericAPIView):
                           user_id=User.objects.get(id=serializer.data['user_id']),
                           text=serializer.data['text'],
                           date=serializer.data['date'],
-                          video_id=Video.objects.get(id=serializer.data['video_id'], ))
+                          )
         comment.save()
         comment_serializer = CommentPostSerializer(comment)
         return Response(comment_serializer.data)

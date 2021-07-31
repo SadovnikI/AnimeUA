@@ -9,7 +9,7 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL, ADD_LEAD,
+    REGISTER_FAIL, ADD_LEAD, UPDATE_FAIL,
 } from './types';
 
 // CHECK TOKEN & LOAD USER
@@ -124,7 +124,7 @@ export const tokenConfig = (getState) => {
   return config;
 };
 
-export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (dispatch, getState) => {
+export const addcomment = ({ user_id, text, date, movie_id }) => (dispatch, getState) => {
   // Headers
   const config = {
     headers: {
@@ -133,8 +133,7 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
   };
 
   // Request Body
-  const body = JSON.stringify({ user_id, text, date, video_id, movie_id });
-
+  const body = JSON.stringify({ user_id, text, date, movie_id });
   axios
     .post('/api/auth/addcomment', body,  tokenConfig(getState))
     .then((res) => {
@@ -146,4 +145,78 @@ export const addcomment = ({ user_id, text, date, video_id, movie_id }) => (disp
     })
     .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
 
+};
+export const updateuser = ({ id, username, old_password, new_password }) => (dispatch, getState) => {
+  // Headers
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // Request Body
+  const body = JSON.stringify({ id, username, old_password, new_password });
+
+  axios
+    .put('/api/cabinet/modify_user', body,  tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: 'User Updated' }));
+    })
+    .catch((err) => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch(createMessage({passwordNotMatch:'Invalid password'})
+        );
+    }
+    )
+
+};
+
+export const updatetg = ({ id_tg, tg_name,}) => (dispatch, getState) => {
+  // Headers
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+    const tg = JSON.stringify({ id : id_tg, tg_name });
+
+    axios
+    .put('/api/cabinet/modify_tg', tg,  tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: 'TG Updated' }));
+    })
+
+};
+
+export const updateChoice  = ({ type, movie_url, cabinet_id }) => (dispatch, getState) => {
+  // Headers
+    console.log(movie_url, cabinet_id )
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  axios
+    .put(`/api/cabinet/${type}/${movie_url}/${cabinet_id}`, tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: '' }));
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
+};
+export const deleteChoice  = ({ type, movie_url, cabinet_id }) => (dispatch, getState) => {
+  // Headers
+    console.log(movie_url, cabinet_id )
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  axios
+    .delete(`/api/cabinet/${type}/${movie_url}/${cabinet_id}`, tokenConfig(getState))
+    .then((res) => {
+      dispatch(createMessage({ addLead: '' }));
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data, err.response.status)));
 };

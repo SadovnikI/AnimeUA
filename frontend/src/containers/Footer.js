@@ -21,8 +21,9 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    // marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
+
+        background: 'rgba(255,255,255,0.65)',    // marginTop: theme.spacing(8),
+    padding: theme.spacing(2, 0),
   },
 }));
 
@@ -33,11 +34,11 @@ export default function Footer(props) {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="subtitle1"  color="textSecondary" component="p">
-          {description}
+        <Typography variant="subtitle2"  color="textSecondary" component="p">
+          {description} Автор ідеї: МС Петя
         </Typography>
         <Copyright />
       </Container>

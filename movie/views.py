@@ -13,14 +13,16 @@ from rest_framework.views import APIView
 class MovieDetailView(APIView):
     def get(self, request, pk):
         movie = Movie.objects.get(url=pk)
+
         genre_array = [genre for genre in movie.genres.all()]
-        link_array = [create_presigned_url1(str(video.bucket_id), str(video.name)) for video in
+        link_array = [create_presigned_url1(str(video.bucket_id), str(video.video.name)) for video in
                       movie.video.all()]
 
         shadow = ShadowMovie(id=1, title=movie.title, description=movie.description, poster=movie.poster,
                              year=movie.year, country=movie.country, category=movie.category,
                              url=movie.url, rating=movie.rating, video_urls=link_array, genres=genre_array,
-                             movie_id=movie.id)
+                             movie_id=movie.id, director=movie.director,
+                             origin=movie.origin, original_name=movie.original_name)
 
         serializer = ShadowMovieSerializer(shadow)
         return Response(serializer.data)

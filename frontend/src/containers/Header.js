@@ -1,28 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+
 import Typography from '@material-ui/core/Typography';
+
 import {connect} from "react-redux";
 import {logout} from '../actions/auth';
+
 import * as MaterialUI from "@material-ui/core";
 import {ButtonGroup} from "@material-ui/core";
+import axios from "axios";
+import Grid from "@material-ui/core/Grid";
+
+import CustomizedMenus from "./DropDawnAvatar";
+
 
 const useStyles = MaterialUI.withStyles((theme) => ({
+
     toolbar: {
-        borderBottom: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.common.white,
     },
     toolbarTitle: {
-        flex: 1,
+        background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
+        backgroundSize: '400% 400%',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        animation: '$gradient 15s ease infinite'
+
     },
     toolbarSecondary: {
         justifyContent: 'space-between',
         overflowX: 'auto',
+        backgroundColor: theme.palette.grey[200],
     },
     toolbarLink: {
-        padding: theme.spacing(1),
-        flexShrink: 0,
+        marginLeft: theme.spacing(3),
+        flex: 1
     },
+    '@keyframes gradient': {
+        '0%': {
+            backgroundPosition: '0% 50%'
+        },
+        '50%': {
+            backgroundPosition: '100% 50%'
+        },
+        '100%': {
+            backgroundPosition: '0% 50%'
+        },
+    },
+
 }), {withTheme: true});
 
 
@@ -37,24 +65,39 @@ const Header = useStyles(class extends React.Component {
         {title: 'Каталог', url: '/home'},
         {title: 'Новини', url: '/home'},
     ];
+    state = {
+        user: []
+    }
+    count = 1;
+
+    componentDidMount() {
+
+
+        if (this.props.auth.isAuthenticated) {
+            const user_id = this.props.auth.user.id;
+            axios.get(`http://127.0.0.1:8000/api/cabinet/${user_id}`)
+                .then(res => {
+                    this.setState({
+                        user: res.data
+                    });
+                })
+
+        }
+    }
+
 
     render() {
         const {isAuthenticated, user} = this.props.auth;
-
+        if (isAuthenticated && this.count < 2) {
+            this.count += 1;
+            this.componentDidMount()
+        }
         const {classes} = this.props
 
         const authLinks = (
-            <div>
-                <strong>{user ? <a href={`/cabinet/${user.id}`} style={{
-                    textDecoration: 'none',
-                    color: 'white',
-                    margin: '0 20px 0 0'
-                }}>Welcome, {user.username}!</a> : ''}</strong>
-                <Button onClick={this.props.logout} variant="outlined" size="small" style={{color:"white"}}>
-                    Вийти
-                </Button>
-            </div>
-
+            <Grid>
+                <CustomizedMenus user_cabinet={this.state.user} logout_user={this.props.logout} />
+            </Grid>
         );
 
         const guestLinks = (
@@ -83,21 +126,23 @@ const Header = useStyles(class extends React.Component {
                         className={classes.toolbarTitle}
                     >
                         Анімє-UA
+
                     </Typography>
-                    {isAuthenticated ? authLinks : guestLinks}
-                </Toolbar>
-                <div className={classes.toolbarSecondary}>
-                    <ButtonGroup component="nav" variant="dense" size={"large"}>
+                    <ButtonGroup component="nav" variant="dense" size={"large"} className={classes.toolbarLink}>
                         {this.sections.map((section) => (
                             <Button
                                 key={section.title}
                                 href={section.url}
-                                className={classes.toolbarLink}
                             >
                                 {section.title}
                             </Button>
                         ))}
                     </ButtonGroup>
+                    {isAuthenticated ? authLinks : guestLinks}
+
+                </Toolbar>
+                <div className={classes.toolbarSecondary}>
+
                 </div>
             </React.Fragment>
         );

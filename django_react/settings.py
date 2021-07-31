@@ -24,7 +24,7 @@ SECRET_KEY = 'k47tm-)4_cip5li9a!75%&&w)7($)-3i!5ne$=+oux!d*-%b&t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'comments',
     'movie',
+    'ugc',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
@@ -136,3 +137,10 @@ AWS_S3_REGION_NAME = 'eu-central-1'
 # ==============Bucket=================
 
 # AUTH_USER_MODEL = 'backend.SiteUser'
+
+
+
+# Telegram Bot
+
+TOKEN = '1688699751:AAFJ3qDZcdtFXE_q65JARno3MnagjLVdRks'
+PROXY_URL = 'https://telegg.ru/orig/bot'
